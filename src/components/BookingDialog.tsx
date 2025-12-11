@@ -37,6 +37,7 @@ const formSchema = z.object({
   vehicleType: z.string().min(1, "Please select a vehicle type"),
   package: z.string().min(1, "Please select a service package"),
   message: z.string().optional(),
+  address: z.string().optional(),
 });
 
 interface BookingDialogProps {
@@ -57,6 +58,7 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
       vehicleType: "",
       package: "",
       message: "",
+      address: "",
     },
   });
 
@@ -177,6 +179,23 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
                 )}
               />
             </div>
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Your Address (Optional)</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="address where the service will be performed"
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="message"

@@ -92,7 +92,7 @@ const Testimonial = () => {
                     "{testimonial.quote}"
                   </blockquote>
                   <div className="mt-6 text-center">
-                    <p className="font-semibold text-foreground">— {testimonial.name}</p>
+                    <p className="font-semibold text-foreground"> {testimonial.name}</p>
                   </div>
                 </div>
               ))}

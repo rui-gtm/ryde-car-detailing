@@ -6,12 +6,14 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <img
-              src={logo}
-              alt="Ryde Car Detailing logo"
-              className="h-8 w-auto md:h-9 object-contain"
-              loading="lazy"
-            />
+            <div className="relative h-8 w-8 md:h-9 md:w-9 overflow-hidden rounded-full">
+              <img
+                src={logo}
+                alt="Ryde Car Detailing logo"
+                className="absolute inset-0 h-full w-full object-cover origin-center scale-[2]"
+                loading="lazy"
+              />
+            </div>
             <span className="font-semibold text-foreground">Ryde Car Detailing</span>
           </div>
           <p className="text-sm text-muted-foreground">

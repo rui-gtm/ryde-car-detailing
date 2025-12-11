@@ -18,7 +18,7 @@ const FAQ = () => {
     },
     {
       q: "What payment methods do you accept?",
-      a: "Card, Apple Pay, Google Pay.",
+      a: "Cash and PayID accepted. Credit card payments coming soon.",
     },
     {
       q: "Do you remove stains and pet hair?",

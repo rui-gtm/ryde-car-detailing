@@ -29,12 +29,14 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo (non-clickable) */}
           <div className="flex items-center gap-2" aria-label="Ryde Car Detailing logo">
-            <img
-              src={logo}
-              alt="Ryde Car Detailing logo"
-              className="h-10 w-auto md:h-12 object-contain"
-              loading="eager"
-            />
+            <div className="relative h-10 w-10 md:h-12 md:w-12 overflow-hidden rounded-full">
+              <img
+                src={logo}
+                alt="Ryde Car Detailing logo"
+                className="absolute inset-0 h-full w-full object-cover origin-center scale-[2]"
+                loading="eager"
+              />
+            </div>
           </div>
 
           {/* Desktop Navigation */}
