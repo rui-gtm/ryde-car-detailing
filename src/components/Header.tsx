@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/ryde-logo-Bh-MidXe.jpg";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,12 +26,16 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">RYDE</span>
-            </div>
-          </a>
+          {/* Logo (non-clickable) */}
+          <div className="flex items-center gap-2" aria-label="Ryde Car Detailing logo">
+            <img
+              src={logo}
+              alt="Ryde Car Detailing logo"
+              className="h-10 w-auto md:h-12 object-contain"
+              loading="eager"
+              fetchPriority="high"
+            />
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">

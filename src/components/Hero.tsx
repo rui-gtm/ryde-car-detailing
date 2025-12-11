@@ -27,13 +27,11 @@ const Hero = () => {
         <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 animate-fade-in-up [animation-delay:0.1s] max-w-3xl mx-auto">
           Get a showroom shine at your home or office. Trusted by Ryde locals for fast, professional, high-quality detailing.
         </p>
-        <p className="text-sm md:text-base animate-fade-in-up [animation-delay:0.15s] mx-auto max-w-2xl border border-transparent bg-black/30 backdrop-blur-sm text-white/95 rounded-md px-6 py-4 italic">
-          “ ⭐️⭐️⭐️⭐️⭐️ 200+ Cars Detailed Across Ryde, North Ryde & Meadowbank ”
-        </p>
+
         
         {/* Why Choose Us */}
-        <div className="mx-auto max-w-4xl text-center animate-fade-in-up [animation-delay:0.25s] mb-12 md:mb-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Why Choose Ryde Car Detailing</h3>
+        <div className="mx-auto max-w-4xl text-center animate-fade-in-up [animation-delay:0.25s] mt-6 md:mt-8 mb-12 md:mb-16">
+          <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Why Choose Our Detailing</h3>
           <div className="flex flex-wrap items-center justify-center gap-4 mx-auto max-w-4xl px-2">
             <span className="flex items-center gap-2">
               <Check className="w-5 h-5 text-primary shrink-0" />
@@ -56,9 +54,9 @@ const Hero = () => {
               <span className="text-sm md:text-base text-foreground">Clear pricing with no surprises</span>
             </span>
           </div>
-          <div className="mt-6 md:mt-8">
-            <p className="inline-block border border-primary/40 bg-primary/10 text-foreground rounded-md px-4 py-2 font-semibold">100% Satisfaction Guarantee</p>
-          </div>
+          <p className="text-sm md:text-base animate-fade-in-up [animation-delay:0.15s] mx-auto max-w-2xl border border-transparent   text-black/90 rounded-md px-6 py-4 italic mt-6 md:mt-8">
+          “ ⭐️⭐️⭐️⭐️⭐️ 200+ Cars Detailed Across Ryde, North Ryde & Meadowbank ”
+          </p>
         </div>
 
         {/* Animated Arrow */}
