@@ -10,7 +10,7 @@ const FAQ = () => {
     },
     {
       q: "Do I need to supply water or power?",
-      a: "No, we are fully self-sufficient.",
+      a: "No. Please ensure water and power are available and easily accessible.",
     },
     {
       q: "What areas do you service?",
