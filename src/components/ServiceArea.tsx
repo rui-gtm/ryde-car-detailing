@@ -12,7 +12,7 @@ import {
 import BookingDialog from "@/components/BookingDialog";
 const ServiceArea = () => {
   return (
-    <section className="py-20 bg-secondary/30">
+    <section className="py-20 bg-secondary/30 scroll-mt-15" id="service-area">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Service Area</h2>
@@ -105,7 +105,7 @@ const ServiceArea = () => {
               </div>
             </div>
 
-            <div className="bg-card rounded-xl border border-border p-6" id="contact">
+            <div className="bg-card rounded-xl border border-border p-6 scroll-mt-28" id="contact">
               <h3 className="text-xl font-bold text-foreground mb-2">Contact Us</h3>
               <p className="text-muted-foreground mb-6">
                 Not sure if we serve your area? Give us a call! We're happy to answer any questions.
