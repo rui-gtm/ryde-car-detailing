@@ -82,6 +82,12 @@ const ServiceArea = () => {
 
           {/* Zone Info & Contact */}
           <div className="space-y-6">
+            {/* Local SEO: service suburbs */}
+            <div className="bg-card rounded-xl border border-border p-6">
+              <p className="text-sm md:text-base text-muted-foreground">
+                We proudly service Ryde, North Ryde, Parramatta, Gladesville, Meadowbank, Hunters Hill, and surrounding suburbs.
+              </p>
+            </div>
             <div className="flex gap-6">
               <div className="flex items-center gap-3 p-4 bg-card rounded-lg border border-border flex-1">
                 <div className="w-4 h-4 rounded-full bg-green-500" />

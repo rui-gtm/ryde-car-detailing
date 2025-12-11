@@ -15,13 +15,15 @@ const Hero = () => {
       <div className="absolute inset-0 z-0 pointer-events-none bg-[hsl(var(--hero-overlay))]" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center space-y-8 md:space-y-10 pb-16 md:pb-20 pt-6 md:pt-10">
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-4 animate-fade-in-up">
-          Premium Mobile Car Detailing in Ryde
-          <span className="ml-3 align-middle inline-flex items-center gap-2 text-base md:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-primary via-pink-500 to-purple-500 text-transparent bg-clip-text px-3 py-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
-            — We Come to You
-          </span>
-        </h1>
+      <div className="relative z-10 container mx-auto px-4 text-center space-y-6 md:space-y-8 pb-12 md:pb-16 pt-4 md:pt-8">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-2 md:mb-3 animate-fade-in-up">
+            Mobile Car Detailing in Ryde
+          </h1>
+          <div className="animate-fade-in-up [animation-delay:0.05s]">
+            <span className="inline-flex items-center gap-2 text-base md:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-primary via-pink-500 to-purple-500 text-transparent bg-clip-text px-3 py-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
+              — We Come to You
+            </span>
+          </div>
         <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 animate-fade-in-up [animation-delay:0.1s] max-w-3xl mx-auto">
           Get a showroom shine at your home or office. Trusted by Ryde locals for fast, professional, high-quality detailing.
         </p>
@@ -60,7 +62,7 @@ const Hero = () => {
         </div>
 
         {/* Animated Arrow */}
-        <div className="animate-bounce-slow my-8 md:my-10">
+        <div className="animate-bounce-slow my-0 md:my-1">
           <ChevronDown className="w-8 h-8 mx-auto text-primary" />
         </div>
 
