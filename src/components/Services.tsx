@@ -37,7 +37,6 @@ const services = [
       "Best Value Package",
       "Additional Services",
     ],
-    highlighted: true,
   },
   {
     title: "Ceramic Coating",
@@ -67,9 +66,7 @@ const Services = () => {
           {services.map((service, index) => (
             <Card
               key={service.title}
-              className={`relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
-                service.highlighted ? "ring-2 ring-primary" : ""
-              }`}
+              className={`relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardHeader>
@@ -77,7 +74,7 @@ const Services = () => {
                 <p className="text-muted-foreground text-sm">{service.description}</p>
                 <p className="text-2xl font-bold text-primary mt-2">{service.price}</p>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1">
                 <ul className="space-y-3">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
@@ -87,7 +84,7 @@ const Services = () => {
                   ))}
                 </ul>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="mt-auto">
                 <Button className="w-full" asChild>
                   <a href="#contact">Book Now</a>
                 </Button>
