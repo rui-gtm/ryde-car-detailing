@@ -1,5 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Phone, MessageCircle, MapPin } from "lucide-react";
+import { Phone, MessageCircle, MapPin, ZoomIn, X } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 const ServiceArea = () => {
   return (
@@ -13,13 +22,62 @@ const ServiceArea = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Map placeholder */}
-          <div className="bg-card rounded-xl border border-border p-8 h-80 flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="w-16 h-16 mx-auto text-primary mb-4" />
-              <h3 className="font-semibold text-foreground mb-2">Service Area Map</h3>
-              <p className="text-muted-foreground text-sm">We service the greater metropolitan area</p>
-            </div>
+          {/* Service area map */}
+          <div className="space-y-6">
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  className="relative rounded-lg overflow-hidden border border-border/50 cursor-pointer group hover:border-primary transition-all w-full"
+                  aria-label="Expand Service Area Map"
+                >
+                  <img
+                    src="https://rydecardetailing.lovable.app/assets/service-area-map-CaQxbS4g.png"
+                    alt="RYDE Car Detailing Service Area Map"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                  {/* Hover overlay with scope icon */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center">
+                    <div className="bg-primary text-primary-foreground rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ZoomIn className="w-6 h-6" />
+                    </div>
+                  </div>
+                </button>
+              </DialogTrigger>
+              <DialogContent className="fixed left-[50%] top-[50%] z-50 grid translate-x-[-50%] translate-y-[-50%] gap-4 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg max-w-7xl w-full p-0 bg-transparent border-0">
+                <DialogClose asChild>
+                  <button
+                    type="button"
+                    aria-label="Close"
+                    className="absolute right-4 top-4 z-50 rounded-full bg-background/80 p-2 hover:bg-background transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </DialogClose>
+                <DialogHeader className="sr-only">
+                  <DialogTitle>Service Area Map</DialogTitle>
+                  <DialogDescription>Expanded view of the service area</DialogDescription>
+                </DialogHeader>
+                <div className="relative w-full h-full flex flex-col items-center justify-center p-4 gap-4">
+                  <img
+                    src="https://rydecardetailing.lovable.app/assets/service-area-map-CaQxbS4g.png"
+                    alt="RYDE Car Detailing Service Area Map - Expanded View"
+                    className="max-h-[80vh] w-auto max-w-full object-contain rounded-lg"
+                  />
+                  <div className="flex gap-4 bg-background/90 backdrop-blur-sm rounded-lg p-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded-full bg-green-600" />
+                      <span className="text-sm font-semibold">Green Zone = No outcall fee</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded-full bg-red-600" />
+                      <span className="text-sm font-semibold">Red Zone = $30 outcall fee</span>
+                    </div>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
 
           {/* Zone Info & Contact */}
