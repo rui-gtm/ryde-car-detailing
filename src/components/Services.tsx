@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import BookingDialog from "@/components/BookingDialog";
 
 const services = [
   {
@@ -86,9 +87,11 @@ const Services = () => {
                 </ul>
               </CardContent>
               <CardFooter className="mt-auto">
-                <Button className="w-full" asChild>
-                  <a href="#contact">Book Now</a>
-                </Button>
+                <BookingDialog>
+                  <Button className="w-full">
+                    Book Now
+                  </Button>
+                </BookingDialog>
               </CardFooter>
             </Card>
           ))}

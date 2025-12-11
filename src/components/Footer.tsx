@@ -11,7 +11,6 @@ const Footer = () => {
               alt="Ryde Car Detailing logo"
               className="h-8 w-auto md:h-9 object-contain"
               loading="lazy"
-              fetchPriority="low"
             />
             <span className="font-semibold text-foreground">Ryde Car Detailing</span>
           </div>

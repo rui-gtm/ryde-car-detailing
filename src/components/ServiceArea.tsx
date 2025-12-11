@@ -9,7 +9,7 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
-
+import BookingDialog from "@/components/BookingDialog";
 const ServiceArea = () => {
   return (
     <section className="py-20 bg-secondary/30">
@@ -117,12 +117,12 @@ const ServiceArea = () => {
                     Call Us Now
                   </a>
                 </Button>
-                <Button variant="outline" className="flex-1" asChild>
-                  <a href="#contact">
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Get a Quote
-                  </a>
-                </Button>
+                  <BookingDialog>
+                    <Button variant="outline" className="flex-1">
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Get a Quote
+                    </Button>
+                  </BookingDialog>
               </div>
             </div>
           </div>

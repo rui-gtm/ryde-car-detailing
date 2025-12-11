@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Award, ThumbsUp } from "lucide-react";
+import BookingDialog from "@/components/BookingDialog";
 
 const benefits = [
   { icon: Calendar, text: "Flexible scheduling options" },
@@ -24,14 +25,15 @@ const CTA = () => {
           ))}
         </div>
 
-        <Button
-          size="lg"
-          variant="secondary"
-          className="text-lg px-8"
-          asChild
-        >
-          <a href="#contact">Book Your Detail Today</a>
-        </Button>
+        <BookingDialog>
+          <Button
+            size="lg"
+            variant="secondary"
+            className="text-lg px-8"
+          >
+            Book Your Detail Today
+          </Button>
+        </BookingDialog>
       </div>
     </section>
   );

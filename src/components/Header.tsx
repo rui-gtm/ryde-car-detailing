@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/ryde-logo-Bh-MidXe.jpg";
+import BookingDialog from "@/components/BookingDialog";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,7 +23,7 @@ const Header = () => {
 
   return (
     <header
-      className={"fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-md shadow-sm"}
+      className={"fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-sm"}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -33,7 +34,6 @@ const Header = () => {
               alt="Ryde Car Detailing logo"
               className="h-10 w-auto md:h-12 object-contain"
               loading="eager"
-              fetchPriority="high"
             />
           </div>
 
@@ -48,9 +48,11 @@ const Header = () => {
                 {link.label}
               </a>
             ))}
-            <Button asChild>
-              <a href="#contact">Book Now</a>
-            </Button>
+            <BookingDialog>
+              <Button>
+                Book Now
+              </Button>
+            </BookingDialog>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -69,7 +71,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border bg-background/95 backdrop-blur-md">
+          <nav className="md:hidden py-4 border-t border-border bg-white">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -80,11 +82,11 @@ const Header = () => {
                 {link.label}
               </a>
             ))}
-            <Button asChild className="w-full mt-4">
-              <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+            <BookingDialog>
+              <Button className="w-full mt-4">
                 Book Now
-              </a>
-            </Button>
+              </Button>
+            </BookingDialog>
           </nav>
         )}
       </div>
