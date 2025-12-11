@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import FAQ from "@/components/FAQ";
 import ExtraServices from "@/components/ExtraServices";
 import ServiceArea from "@/components/ServiceArea";
 import Gallery from "@/components/Gallery";
@@ -19,6 +20,7 @@ const Index = () => {
       <Gallery />
       <Testimonial />
       <CTA />
+      <FAQ />
       <Footer />
     </div>
   );
