@@ -83,13 +83,8 @@ const Services = () => {
                 </p>
               </CardHeader>
               <CardContent className="flex-1 pt-0">
-                <div className="flex items-center justify-between border-t border-border/60 pt-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    What&apos;s included
-                  </p>
-                  <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-1.5 text-base font-bold text-primary-foreground shadow-md">
-                    {service.price}
-                  </span>
+                <div className="border-t border-border/60 pt-4">
+                  <p className="text-2xl font-bold text-primary">{service.price}</p>
                 </div>
                 <ul className="space-y-2.5 mt-3">
                   {service.features.map((feature) => (
