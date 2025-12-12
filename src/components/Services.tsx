@@ -18,8 +18,8 @@ const services = [
   },
   {
     title: "Premium Full Detail",
-    description: "The complete inside-and-out transformation. Our signature service.(Includes every service from both Interior & Exterior packages.)",
-    price: "from $189",
+    description: "The complete inside-and-out transformation. Our signature service.",
+    price: "from $149",
     features: [
       "Full interior deep clean",
       "Complete exterior wash + wheel clean",
@@ -32,7 +32,7 @@ const services = [
   {
     title: "Interior Deep Clean",
     description: "Restore your cabin to a pristine, hygienic, like-new condition.",
-    price: "from $159",
+    price: "from $129",
     features: [
       "Full interior vacuum (seats, carpets, mats & boot)",
       "Interior scrub + deep decontamination",
@@ -74,19 +74,19 @@ const Services = () => {
               className="relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardHeader className="space-y-3">
+              <CardHeader className="flex flex-col p-6 space-y-3">
                 <CardTitle className="text-lg font-semibold leading-snug text-foreground">
                   {service.title}
                 </CardTitle>
-                <p className="text-sm leading-relaxed text-muted-foreground mt-1 min-h-[160px] sm:min-h-[140px] md:min-h-[120px] lg:min-h-[150px] xl:min-h-[110px] 2xl:min-h-[96px]">
+                <p className="text-sm leading-relaxed text-muted-foreground mt-1">
                   {service.description}
                 </p>
               </CardHeader>
-              <CardContent className="flex-1 pt-0">
-                <div className="border-t border-border/60 pt-4">
+              <CardContent className="flex-1 px-6 pt-0 pb-6">
+                <div className="border-t border-border/60 pt-1">
                   <p className="text-2xl font-bold text-primary">{service.price}</p>
                 </div>
-                <ul className="space-y-2.5 mt-3">
+                <ul className="space-y-2.5 mt-2.5">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
                       <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
