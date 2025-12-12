@@ -87,7 +87,7 @@ const Services = () => {
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     What&apos;s included
                   </p>
-                  <span className="inline-flex items-center rounded-full bg-primary px-4 py-1.5 text-base font-bold text-primary-foreground shadow-md">
+                  <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-1.5 text-base font-bold text-primary-foreground shadow-md">
                     {service.price}
                   </span>
                 </div>
