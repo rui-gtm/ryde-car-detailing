@@ -3,7 +3,7 @@ import logo from "@/assets/ryde-logo-Bh-MidXe.jpg";
 const Footer = () => {
   return (
     <footer className="py-8 bg-background border-t border-border">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="relative h-10 w-10 md:h-12 md:w-12 overflow-hidden rounded-full">

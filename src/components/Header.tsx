@@ -7,6 +7,10 @@ import BookingDialog from "@/components/BookingDialog";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const handleLogoClick = () => {
+    setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +31,14 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo (non-clickable) */}
-          <div className="flex items-center gap-2" aria-label="Ryde Car Detailing logo">
+          {/* Logo (clickable) */}
+          {/* When clicked, return to the top of the page */}
+          <button
+            type="button"
+            onClick={handleLogoClick}
+            className="flex items-center gap-2 focus:outline-none"
+            aria-label="Ryde Car Detailing logo"
+          >
             <div className="relative h-10 w-10 md:h-12 md:w-12 overflow-hidden rounded-full">
               <img
                 src={logo}
@@ -37,7 +47,7 @@ const Header = () => {
                 loading="eager"
               />
             </div>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
