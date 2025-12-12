@@ -16,17 +16,19 @@ const Hero = () => {
       <div className="absolute inset-0 z-0 pointer-events-none bg-[hsl(var(--hero-overlay))]" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center space-y-8 md:space-y-12 pb-12 md:pb-16 pt-4 md:pt-8 flex flex-col">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-8 md:mt-12 mb-6 md:mb-8 animate-fade-in-up flex-none">
-            Mobile Car Detailing in Ryde
-          </h1>
-          <div className="animate-fade-in-up [animation-delay:0.05s] flex-none mt-2 md:mt-3">
-            <span className="inline-flex items-center gap-2 text-lg md:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-primary via-pink-500 to-purple-500 text-transparent bg-clip-text px-3 py-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
-               We Come to You
-            </span>
-          </div>
+        <div className="relative z-10 container mx-auto px-4 text-center space-y-8 md:space-y-12 pb-12 md:pb-16 pt-2 md:pt-6 flex flex-col">
+            <div className="flex flex-col items-center gap-4 md:gap-5 animate-fade-in-up flex-none">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-2 md:mt-6">
+                Mobile Car Detailing in Ryde
+              </h1>
+              <span className="inline-flex items-center gap-2 text-lg md:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-primary via-pink-500 to-purple-500 text-transparent bg-clip-text px-3 pt-0 pb-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
+                 We Come to You
+              </span>
+            </div>
         <p className="text-lg md:text-xl text-muted-foreground mb-14 md:mb-24 animate-fade-in-up [animation-delay:0.1s] max-w-3xl mx-auto flex-none">
-          Get a showroom shine at your home or office. Trusted by Ryde locals for fast, professional, high-quality detailing.
+          Get a showroom shine at your home or office.
+          <br />
+          Trusted by Ryde locals for fast, professional, high-quality detailing.
         </p>
 
         
