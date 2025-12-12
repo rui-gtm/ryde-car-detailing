@@ -6,49 +6,52 @@ import BookingDialog from "@/components/BookingDialog";
 const services = [
   {
     title: "Basic Exterior Wash",
-    description: "Perfect for regular upkeep.",
+    description: "Essential exterior care, finished to a premium standard.",
     price: "from $79",
     features: [
-      "Hand wash & dry",
-      "Wheel & tyre clean",
-      "Windows exterior",
-      "Tyre shine",
+      "Hand contact wash for a gentle, swirl-free clean",
+      "Dirt, grime & brake-dust removal",
+      "Wheel & tyre cleanse",
+      "Streak-free exterior windows",
+      "Quick-dry, polished finish",
     ],
   },
   {
     title: "Premium Full Detail",
-    description: "Our most popular option.",
+    description: "The complete inside-and-out transformation. Our signature service.(Includes every service from both Interior & Exterior packages.)",
     price: "from $189",
     features: [
-      "Full exterior wash + wax",
-      "Interior vacuum",
-      "Dash, doors & trims",
-      "Windows inside & out",
-      "Wheel deep clean",
-      "Deodorise",
+      "Full interior deep clean",
+      "Complete exterior wash + wheel clean",
+      "Streak-free interior & exterior windows",
+      "Interior scrub, stain removal & decontamination",
+      "Tyre shine for a refined finish",
+      "Full-vehicle vacuum throughout",
     ],
   },
   {
     title: "Interior Deep Clean",
-    description: "For families, pets & rideshare vehicles.",
+    description: "Restore your cabin to a pristine, hygienic, like-new condition.",
     price: "from $159",
     features: [
-      "Full interior vacuum",
-      "Carpet & seat shampoo",
-      "Leather clean & condition",
-      "Stain removal",
-      "Pet hair removal (optional add-on)",
+      "Full interior vacuum (seats, carpets, mats & boot)",
+      "Interior scrub + deep decontamination",
+      "Dirt & stain extraction",
+      "Dash, console & trim detailing",
+      "Crystal-clear, streakless windows",
     ],
   },
   {
     title: "Ceramic Coating",
-    description: "Long-lasting protection & gloss.",
+    description: "Elite paint protection with a superior gloss finish.",
     price: "from $499",
     features: [
-      "Paint decontamination",
-      "Clay bar treatment",
-      "Ceramic coating application",
-      "6–12 months protection",
+      "Paint decontamination & professional surface prep",
+      "High-gloss, mirror-like finish",
+      "UV & chemical resistance",
+      "Hydrophobic water-beading performance",
+      "10H hardness formula for long-term durability",
+      "1-year or 7-year protection kit options",
     ],
   },
 ];
@@ -68,20 +71,33 @@ const Services = () => {
           {services.map((service, index) => (
             <Card
               key={service.title}
-              className={`relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col`}
+              className="relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardHeader>
-                <CardTitle className="text-xl">{service.title}</CardTitle>
-                <p className="text-muted-foreground text-sm">{service.description}</p>
-                <p className="text-2xl font-bold text-primary mt-2">{service.price}</p>
+              <CardHeader className="space-y-3">
+                <CardTitle className="text-lg font-semibold leading-snug text-foreground">
+                  {service.title}
+                </CardTitle>
+                <p className="text-sm leading-relaxed text-muted-foreground mt-1 min-h-[72px] md:min-h-[88px]">
+                  {service.description}
+                </p>
               </CardHeader>
-              <CardContent className="flex-1">
-                <ul className="space-y-3">
+              <CardContent className="flex-1 pt-0">
+                <div className="flex items-center justify-between border-t border-border/60 pt-4">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    What&apos;s included
+                  </p>
+                  <span className="inline-flex items-center rounded-full bg-primary px-4 py-1.5 text-base font-bold text-primary-foreground shadow-md">
+                    {service.price}
+                  </span>
+                </div>
+                <ul className="space-y-2.5 mt-3">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
-                      <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm text-muted-foreground">{feature}</span>
+                      <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
+                      <span className="text-sm leading-snug text-foreground">
+                        {feature}
+                      </span>
                     </li>
                   ))}
                 </ul>
