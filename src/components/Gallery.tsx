@@ -1,10 +1,17 @@
+import gallery1 from "@/assets/gallery-1-BfCGAQQG.jpg";
+import gallery2 from "@/assets/gallery-2-CSb4CooV.jpg";
+import gallery3 from "@/assets/gallery-3-D_A9cLu2.jpg";
+import gallery4 from "@/assets/gallery-4-1oP2hfxk.jpg";
+import gallery5 from "@/assets/gallery-5-BqR452Xb.jpg";
+import gallery6 from "@/assets/gallery-6-DXkgh_Vm.jpg";
+
 const galleryImages = [
-  { src: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600", alt: "Clean car interior detailing" },
-  { src: "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?w=600", alt: "Luxury car interior" },
-  { src: "https://images.unsplash.com/photo-1600712242805-5f78671b24da?w=600", alt: "White SUV exterior" },
-  { src: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600", alt: "Car exterior polished" },
-  { src: "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600", alt: "Professional interior cleaning" },
-  { src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600", alt: "Detailed exterior finish" },
+  { src: gallery1, alt: "Clean car interior detailing" },
+  { src: gallery2, alt: "Luxury car interior" },
+  { src: gallery3, alt: "White SUV exterior" },
+  { src: gallery4, alt: "Car exterior polished" },
+  { src: gallery5, alt: "Professional interior cleaning" },
+  { src: gallery6, alt: "Detailed exterior finish" },
 ];
 
 const Gallery = () => {

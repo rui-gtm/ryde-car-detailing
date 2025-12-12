@@ -18,22 +18,23 @@ const Hero = () => {
       {/* Content */}
         <div className="relative z-10 container mx-auto px-4 text-center space-y-6 md:space-y-10 pb-8 md:pb-12 pt-1 md:pt-4 flex flex-col">
             <div className="flex flex-col items-center gap-3 md:gap-4 animate-fade-in-up flex-none">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-1 md:mt-4">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-0.5 md:mt-3 [@media(max-height:900px)_and_(min-width:768px)]:mt-12">
                 Mobile Car Detailing in Ryde
               </h1>
               <span className="inline-flex items-center gap-2 text-lg md:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-primary via-pink-500 to-purple-500 text-transparent bg-clip-text px-3 pt-0 pb-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
                  We Come to You
               </span>
+              <p className="text-lg md:text-xl text-muted-foreground mt-0.5 md:mt-2 mb-1 md:mb-2 animate-fade-in-up [animation-delay:0.1s] max-w-3xl mx-auto flex-none [@media(max-height:900px)_and_(min-width:768px)]:mt-7">
+              Get a showroom shine at your home or office.
+              <br />
+              Trusted by Ryde locals for fast, professional, high-quality detailing.
+              </p>
             </div>
-        <p className="text-lg md:text-xl text-muted-foreground mb-10 md:mb-16 animate-fade-in-up [animation-delay:0.1s] max-w-3xl mx-auto flex-none">
-          Get a showroom shine at your home or office.
-          <br />
-          Trusted by Ryde locals for fast, professional, high-quality detailing.
-        </p>
+
 
         
         {/* Why Choose Us */}
-        <div className="mx-auto max-w-4xl text-center animate-fade-in-up [animation-delay:0.25s] mt-14 md:mt-16 mb-8 md:mb-12 flex-none">
+        <div className="mx-auto max-w-4xl text-center animate-fade-in-up [animation-delay:0.25s] mt-6 md:mt-8 mb-8 md:mb-12 flex-none">
           <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Why Choose Us</h3>
           <div className="flex flex-wrap items-center justify-center gap-4 mx-auto max-w-4xl px-2">
             <span className="flex items-center gap-2">
