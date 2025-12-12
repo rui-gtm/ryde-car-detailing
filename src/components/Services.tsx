@@ -78,7 +78,7 @@ const Services = () => {
                 <CardTitle className="text-lg font-semibold leading-snug text-foreground">
                   {service.title}
                 </CardTitle>
-                <p className="text-sm leading-relaxed text-muted-foreground mt-1">
+                <p className="text-sm leading-relaxed text-muted-foreground mt-1 min-h-[78px]">
                   {service.description}
                 </p>
               </CardHeader>
