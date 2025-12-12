@@ -74,17 +74,17 @@ const Services = () => {
               className="relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardHeader className="flex flex-col p-6 space-y-3">
+              <CardHeader className="flex flex-col px-6 pt-6 pb-4 space-y-3">
                 <CardTitle className="text-lg font-semibold leading-snug text-foreground">
                   {service.title}
                 </CardTitle>
-                <p className="text-sm leading-relaxed text-muted-foreground mt-1 min-h-[78px]">
+                <p className="text-sm leading-relaxed text-muted-foreground mt-0.5 min-h-[68px]">
                   {service.description}
                 </p>
               </CardHeader>
               <CardContent className="flex-1 px-6 pt-0 pb-6">
                 <div className="border-t border-border/60 pt-1">
-                  <p className="text-2xl font-bold text-primary">{service.price}</p>
+                  <p className="text-2xl font-bold text-primary mt-1">{service.price}</p>
                 </div>
                 <ul className="space-y-2.5 mt-2.5">
                   {service.features.map((feature) => (
