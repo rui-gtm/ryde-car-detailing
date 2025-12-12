@@ -13,6 +13,18 @@ const testimonials = [
     quote: "Interior detail removed all pet hair. Amazing!",
     name: "Alex P.",
   },
+  {
+    quote: "Great car cleaning service! Got an interior and exterior clean and the car looks fantastic. Super easy to organise and highly recommended. Big thanks for the clean and will be using Ryde Car Detailing again!",
+    name: "Deb R",
+  },
+  {
+    quote: "Great communication, service- and job well done. Would recommend!",
+    name: "Saarang J",
+  },
+  {
+    quote: "Jared did SUCH a good job. It was such short notice but he was super professional and attentive, spending over 90 minutes to make sure he did a 5* job. Would really recommend- thank you!",
+    name: "Sarah C",
+  }
 ];
 
 const trustBadges = [
