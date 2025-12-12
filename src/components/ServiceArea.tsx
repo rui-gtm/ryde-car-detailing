@@ -114,7 +114,7 @@ const ServiceArea = () => {
                 <Button className="flex-1" asChild>
                   <a href="tel:+1234567890">
                     <Phone className="w-4 h-4 mr-2" />
-                    Call Us Now
+                    Call 0411 666 174
                   </a>
                 </Button>
                   <BookingDialog>
