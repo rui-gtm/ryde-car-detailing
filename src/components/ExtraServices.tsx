@@ -1,13 +1,14 @@
-import { 
-  Dog, 
-  Sparkles, 
-  Paintbrush, 
-  Lightbulb, 
-  Shield, 
-  Cog, 
-  Eraser, 
+import {
+  Dog,
+  Sparkles,
+  Paintbrush,
+  Lightbulb,
+  Shield,
+  Cog,
+  Eraser,
   Layers,
-  Droplets
+  Droplets,
+  Armchair
 } from "lucide-react";
 
 const extraServices = [
@@ -20,6 +21,7 @@ const extraServices = [
   { icon: Eraser, label: "Step 1 Paint Correction" },
   { icon: Layers, label: "Step 2 Paint Correction" },
   { icon: Droplets, label: "Deep Steam Clean" },
+  { icon: Armchair, label: "Deep Seat Extraction" },
 ];
 
 const ExtraServices = () => {

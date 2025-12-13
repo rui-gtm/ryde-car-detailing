@@ -17,6 +17,18 @@ const services = [
     ],
   },
   {
+    title: "Interior Deep Clean",
+    description: "Restore your cabin to a pristine, hygienic, like-new condition.",
+    price: "from $129",
+    features: [
+      "Full interior vacuum (seats, carpets, mats & boot)",
+      "Interior scrub + deep decontamination",
+      "Dirt & stain extraction",
+      "Dash, console & trim detailing",
+      "Crystal-clear, streakless windows",
+    ],
+  },
+  {
     title: "Premium Full Detail",
     description: "The complete inside-and-out transformation. Our signature service.",
     price: "from $149",
@@ -27,18 +39,6 @@ const services = [
       "Interior scrub, stain removal & decontamination",
       "Tyre shine for a refined finish",
       "Full-vehicle vacuum throughout",
-    ],
-  },
-  {
-    title: "Interior Deep Clean",
-    description: "Restore your cabin to a pristine, hygienic, like-new condition.",
-    price: "from $129",
-    features: [
-      "Full interior vacuum (seats, carpets, mats & boot)",
-      "Interior scrub + deep decontamination",
-      "Dirt & stain extraction",
-      "Dash, console & trim detailing",
-      "Crystal-clear, streakless windows",
     ],
   },
   {
