@@ -10,6 +10,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import BookingDialog from "@/components/BookingDialog";
+import ServiceAreaMap from "@/assets/service-area-map-CaQxbS4g.png";
 const ServiceArea = () => {
   return (
     <section className="py-20 bg-secondary/30 scroll-mt-15" id="service-area">
@@ -32,7 +33,7 @@ const ServiceArea = () => {
                   aria-label="Expand Service Area Map"
                 >
                   <img
-                    src="https://rydecardetailing.lovable.app/assets/service-area-map-CaQxbS4g.png"
+                    src={ ServiceAreaMap}
                     alt="RYDE Car Detailing Service Area Map"
                     className="w-full h-auto"
                     loading="lazy"
@@ -61,7 +62,7 @@ const ServiceArea = () => {
                 </DialogHeader>
                 <div className="relative w-full h-full flex flex-col items-center justify-center p-4 gap-4">
                   <img
-                    src="https://rydecardetailing.lovable.app/assets/service-area-map-CaQxbS4g.png"
+                    src= {ServiceAreaMap}
                     alt="RYDE Car Detailing Service Area Map - Expanded View"
                     className="max-h-[80vh] w-auto max-w-full object-contain rounded-lg"
                   />
@@ -112,7 +113,7 @@ const ServiceArea = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="flex-1" asChild>
-                  <a href="tel:+1234567890">
+                  <a href="tel:+61411666174">
                     <Phone className="w-4 h-4 mr-2" />
                     Call 0411 666 174
                   </a>

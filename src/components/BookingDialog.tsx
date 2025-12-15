@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -36,8 +37,8 @@ const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   vehicleType: z.string().min(1, "Please select a vehicle type"),
   package: z.string().min(1, "Please select a service package"),
-  message: z.string().optional(),
   address: z.string().optional(),
+  message: z.string().optional(),
 });
 
 interface BookingDialogProps {
@@ -47,7 +48,9 @@ interface BookingDialogProps {
 
 const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
   const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const EMAILJS_PUBLIC_KEY = "s7eO8WmCwgwIcRDUi";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -57,8 +60,8 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
       email: "",
       vehicleType: "",
       package: "",
-      message: "",
       address: "",
+      message: "",
     },
   });
 
@@ -67,15 +70,27 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
     onOpenChange?.(nextOpen);
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Booking Request Sent!",
-      description: "We'll get back to you shortly to confirm your appointment.",
-    });
-    handleOpenChange(false);
-    form.reset();
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsSubmitting(true);
+      await emailjs.send("service_93eq1mx", "template_3pt4akc", values, EMAILJS_PUBLIC_KEY);
+      toast({
+        title: "Booking Request Sent!",
+        description: "We'll get back to you shortly to confirm your appointment.",
+      });
+      handleOpenChange(false);
+      form.reset();
+    } catch (error) {
+      console.error("Failed to send booking request via EmailJS", error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -213,8 +228,8 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Submit Booking Request
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Submit Booking Request"}
             </Button>
           </form>
         </Form>
