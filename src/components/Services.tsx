@@ -18,6 +18,19 @@ const services = [
     ],
   },
   {
+    title: "Interior Deep Clean",
+    packageValue: "basic",
+    description: "Restore your cabin to a pristine, hygienic, like-new condition.",
+    price: "from $129",
+    features: [
+      "Full interior vacuum (seats, carpets, mats & boot)",
+      "Interior scrub + deep decontamination",
+      "Dirt & stain extraction",
+      "Dash, console & trim detailing",
+      "Crystal-clear, streakless windows",
+    ],
+  },
+  {
     title: "Premium Full Detail",
     packageValue: "premium",
     description: "The complete inside-and-out transformation. Our signature service.",
@@ -29,19 +42,6 @@ const services = [
       "Interior scrub, stain removal & decontamination",
       "Tyre shine for a refined finish",
       "Full-vehicle vacuum throughout",
-    ],
-  },
-  {
-    title: "Interior Deep Clean",
-    packageValue: "interior",
-    description: "Restore your cabin to a pristine, hygienic, like-new condition.",
-    price: "from $129",
-    features: [
-      "Full interior vacuum (seats, carpets, mats & boot)",
-      "Interior scrub + deep decontamination",
-      "Dirt & stain extraction",
-      "Dash, console & trim detailing",
-      "Crystal-clear, streakless windows",
     ],
   },
   {
@@ -75,14 +75,30 @@ const Services = () => {
           {services.map((service, index) => (
             <Card
               key={service.title}
-              className="relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col"
+              className={
+                `relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col${
+                  service.title === "Premium Full Detail" ? " bg-sky-50" : ""
+                }`
+              }
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardHeader className="flex flex-col px-6 pt-6 pb-4 space-y-3">
+              <CardHeader className="relative flex flex-col px-6 pt-6 pb-4 gap-3">
+                {service.title === "Premium Full Detail" ? (
+                  <span className="self-start rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-sky-700">
+                    MOST POPULAR
+                  </span>
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="self-start rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide opacity-0"
+                  >
+                    MOST POPULAR
+                  </span>
+                )}
                 <CardTitle className="text-lg font-semibold leading-snug text-foreground">
                   {service.title}
                 </CardTitle>
-                <p className="text-sm leading-relaxed text-muted-foreground mt-0.5 min-h-[68px]">
+                <p className="text-sm leading-relaxed text-muted-foreground min-h-[56px]">
                   {service.description}
                 </p>
               </CardHeader>
