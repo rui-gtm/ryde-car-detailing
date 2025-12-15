@@ -1,5 +1,4 @@
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -31,26 +30,65 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
-const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
-  email: z.string().email("Please enter a valid email address"),
-  vehicleType: z.string().min(1, "Please select a vehicle type"),
-  package: z.string().min(1, "Please select a service package"),
-  address: z.string().optional(),
-  message: z.string().optional(),
-});
+const formSchema = z
+  .object({
+    name: z.string().trim().max(100, "Name cannot exceed 100 characters").optional(),
+    phone: z
+      .string()
+      .trim()
+      .optional()
+      .refine(
+        (value) => !value || value.length === 0 || value.replace(/\D/g, "").length >= 10,
+        "Please enter a valid phone number",
+      ),
+    email: z
+      .string()
+      .trim()
+      .optional()
+      .refine(
+        (value) => !value || value.length === 0 || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        "Please enter a valid email address",
+      ),
+    vehicleType: z.string().trim().optional(),
+    package: z.string().trim().optional(),
+    address: z
+      .string()
+      .max(200, "Address cannot exceed 200 characters")
+      .optional(),
+    message: z
+      .string()
+      .max(2000, "Message cannot exceed 2000 characters")
+      .optional(),
+  })
+  .superRefine((data, ctx) => {
+    const hasPhone = !!data.phone && data.phone.trim().length > 0;
+    const hasEmail = !!data.email && data.email.trim().length > 0;
+
+    if (!hasPhone && !hasEmail) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["phone"],
+        message: "Please provide a phone number or an email address.",
+      });
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["email"],
+        message: "Please provide a phone number or an email address.",
+      });
+    }
+  });
 
 interface BookingDialogProps {
   children: React.ReactNode;
   onOpenChange?: (open: boolean) => void;
+  defaultPackage?: string;
 }
 
-const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
+const BookingDialog = ({ children, onOpenChange, defaultPackage }: BookingDialogProps) => {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const EMAILJS_PUBLIC_KEY = "s7eO8WmCwgwIcRDUi";
+  const d2f9f94d_8345_46ae_9684_e0a629cb2cf2 = "88e97baa5d7f5ccb3421e709774efa24e8817251a86a62075892d156b92baacc";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,7 +97,7 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
       phone: "",
       email: "",
       vehicleType: "",
-      package: "",
+      package: defaultPackage ?? "",
       address: "",
       message: "",
     },
@@ -73,15 +111,36 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsSubmitting(true);
-      await emailjs.send("service_93eq1mx", "template_3pt4akc", values, EMAILJS_PUBLIC_KEY);
+
+      const response = await fetch("https://jade-mandazi-77ee90.netlify.app/.netlify/functions/quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": d2f9f94d_8345_46ae_9684_e0a629cb2cf2,
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
       toast({
         title: "Booking Request Sent!",
         description: "We'll get back to you shortly to confirm your appointment.",
       });
       handleOpenChange(false);
-      form.reset();
+      form.reset({
+        name: "",
+        phone: "",
+        email: "",
+        vehicleType: "",
+        package: defaultPackage ?? "",
+        address: "",
+        message: "",
+      });
     } catch (error) {
-      console.error("Failed to send booking request via EmailJS", error);
+      console.error("Failed to send booking request to Netlify function", error);
       toast({
         title: "Something went wrong",
         description: "Please try again or contact us directly.",
@@ -111,7 +170,7 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your full name" {...field} />
+                    <Input placeholder="Name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -125,7 +184,7 @@ const BookingDialog = ({ children, onOpenChange }: BookingDialogProps) => {
                   <FormItem>
                     <FormLabel>Phone</FormLabel>
                     <FormControl>
-                      <Input placeholder="0411 666 174" {...field} />
+                      <Input placeholder="0400 000 000" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
