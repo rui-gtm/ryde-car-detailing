@@ -10,7 +10,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import BookingDialog from "@/components/BookingDialog";
-import ServiceAreaMap from "@/assets/service-area-map-CaQxbS4g.png";
+import ServiceAreaMap from "@/assets/service-area-map.png";
 const ServiceArea = () => {
   return (
     <section className="py-20 bg-secondary/30 scroll-mt-15" id="service-area">
