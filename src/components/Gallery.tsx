@@ -6,17 +6,17 @@ import gallery5 from "@/assets/gallery-5-BqR452Xb.jpg";
 import gallery6 from "@/assets/gallery-6-DXkgh_Vm.jpg";
 
 const galleryImages = [
-  { src: gallery1, alt: "Clean car interior detailing" },
-  { src: gallery2, alt: "Luxury car interior" },
-  { src: gallery3, alt: "White SUV exterior" },
-  { src: gallery4, alt: "Car exterior polished" },
-  { src: gallery5, alt: "Professional interior cleaning" },
-  { src: gallery6, alt: "Detailed exterior finish" },
+  { src: gallery1, alt: "Mobile car detailing in Ryde NSW – deep-cleaned car interior" },
+  { src: gallery2, alt: "Ryde car detailing – luxury car interior cleaned and refreshed" },
+  { src: gallery3, alt: "Exterior wash and detail in Ryde NSW – white SUV cleaned" },
+  { src: gallery4, alt: "Car exterior polished finish – professional detailing results in Ryde NSW" },
+  { src: gallery5, alt: "Interior deep clean – seats and carpets professionally detailed in Ryde NSW" },
+  { src: gallery6, alt: "Premium exterior detail – glossy, streak-free finish in Ryde NSW" },
 ];
 
 const Gallery = () => {
   return (
-    <section className="py-20 bg-background">
+    <section id="gallery" className="py-20 bg-background scroll-mt-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">See the Difference</h2>
@@ -36,6 +36,7 @@ const Gallery = () => {
                 alt={image.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-300" />
             </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/ryde-logo-Bh-MidXe.jpg";
+import logo from "@/assets/ryde-logo-Bh-MidXe-removebg-preview.png";
 import BookingDialog from "@/components/BookingDialog";
 
 const Header = () => {
@@ -43,8 +43,9 @@ const Header = () => {
               <img
                 src={logo}
                 alt="Ryde Car Detailing logo"
-                className="absolute inset-0 h-full w-full object-cover origin-center scale-[2]"
+                className="h-full w-full object-contain"
                 loading="eager"
+                decoding="async"
               />
             </div>
           </button>

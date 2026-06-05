@@ -10,10 +10,11 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import BookingDialog from "@/components/BookingDialog";
-import ServiceAreaMap from "@/assets/service-area-map.png";
+import ServiceAreaMapPng from "@/assets/service-area-map.png";
+import ServiceAreaMapWebp from "@/assets/service-area-map.webp";
 const ServiceArea = () => {
   return (
-    <section className="py-20 bg-secondary/30 scroll-mt-15" id="service-area">
+    <section id="service-area" className="py-20 bg-secondary/30 scroll-mt-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Service Area</h2>
@@ -32,12 +33,16 @@ const ServiceArea = () => {
                   className="relative rounded-lg overflow-hidden border border-border/50 cursor-pointer group hover:border-primary transition-all w-full"
                   aria-label="Expand Service Area Map"
                 >
-                  <img
-                    src={ ServiceAreaMap}
-                    alt="RYDE Car Detailing Service Area Map"
-                    className="w-full h-auto"
-                    loading="lazy"
-                  />
+                  <picture>
+                    <source type="image/webp" srcSet={ServiceAreaMapWebp} />
+                    <img
+                      src={ServiceAreaMapPng}
+                      alt="Ryde Car Detailing service area map (Ryde NSW and nearby suburbs)"
+                      className="w-full h-auto"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                   {/* Hover overlay with scope icon */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center">
                     <div className="bg-primary text-primary-foreground rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -61,11 +66,16 @@ const ServiceArea = () => {
                   <DialogDescription>Expanded view of the service area</DialogDescription>
                 </DialogHeader>
                 <div className="relative w-full h-full flex flex-col items-center justify-center p-4 gap-4">
-                  <img
-                    src= {ServiceAreaMap}
-                    alt="RYDE Car Detailing Service Area Map - Expanded View"
-                    className="max-h-[80vh] w-auto max-w-full object-contain rounded-lg"
-                  />
+                  <picture>
+                    <source type="image/webp" srcSet={ServiceAreaMapWebp} />
+                    <img
+                      src={ServiceAreaMapPng}
+                      alt="Expanded service area map for Ryde Car Detailing (Ryde NSW and nearby suburbs)"
+                      className="max-h-[80vh] w-auto max-w-full object-contain rounded-lg"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                   <div className="flex gap-4 bg-background/90 backdrop-blur-sm rounded-lg p-4">
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 rounded-full bg-green-600" />

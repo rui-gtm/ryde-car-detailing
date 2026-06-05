@@ -1,4 +1,4 @@
-import logo from "@/assets/ryde-logo-Bh-MidXe.jpg";
+import logo from "@/assets/ryde-logo-Bh-MidXe-removebg-preview.png";
 
 const Footer = () => {
   return (
@@ -10,8 +10,9 @@ const Footer = () => {
               <img
                 src={logo}
                 alt="Ryde Car Detailing logo"
-                className="absolute inset-0 h-full w-full object-cover origin-center scale-[2]"
+                className="h-full w-full object-contain"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <span className="font-semibold text-foreground">Ryde Car Detailing</span>
