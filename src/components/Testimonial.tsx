@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Quote, Star, Shield, Users, Leaf, ThumbsUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { GoogleRatingSection } from "@/components/GoogleRatingSection";
+
 const testimonials = [
   {
     quote: "Best detail in Ryde, hands down. My car looks brand new.",
@@ -58,7 +60,6 @@ const Testimonial = () => {
             ⭐ Customer Reviews
           </h2>
         </div>
-
         <div className="max-w-3xl mx-auto">
           <div className="relative">
             {/* Left Arrow */}

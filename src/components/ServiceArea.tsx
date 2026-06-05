@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Phone, MessageCircle, MapPin, ZoomIn, X } from "lucide-react";
+import { Phone, MessageCircle, ZoomIn, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -13,8 +13,6 @@ import BookingDialog from "@/components/BookingDialog";
 import ServiceAreaMapPng from "@/assets/service-area-map.png";
 import ServiceAreaMapWebp from "@/assets/service-area-map.webp";
 
-const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA";
-
 const ServiceArea = () => {
   return (
     <section id="service-area" className="py-20 bg-secondary/30 scroll-mt-24">
@@ -26,136 +24,111 @@ const ServiceArea = () => {
             Our Service Area
           </h2>
           <p className="text-muted-foreground text-lg">
-            Mobile detailing — we come to you
+            We come to you - mobile detailing at your convenience
           </p>
         </div>
 
         {/* Two-column layout */}
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-2 gap-6 items-start">
 
-          {/* Left — map + legend */}
-          <div className="space-y-3">
-            <Dialog>
-              <DialogTrigger asChild>
+          {/* Left — map only */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <button
+                type="button"
+                className="relative w-full rounded-xl overflow-hidden border border-border/50 cursor-pointer group hover:border-primary transition-colors"
+                aria-label="Expand service area map"
+              >
+                <picture>
+                  <source type="image/webp" srcSet={ServiceAreaMapWebp} />
+                  <img
+                    src={ServiceAreaMapPng}
+                    alt="Ryde Car Detailing service area map (Ryde NSW and nearby suburbs)"
+                    className="w-full h-auto block"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center">
+                  <div className="bg-primary text-primary-foreground rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
+                    <ZoomIn className="w-5 h-5" />
+                  </div>
+                </div>
+              </button>
+            </DialogTrigger>
+
+            <DialogContent className="fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%] max-w-5xl w-full p-0 bg-transparent border-0 shadow-none">
+              <DialogClose asChild>
                 <button
                   type="button"
-                  className="relative w-full rounded-xl overflow-hidden border border-border/50 cursor-pointer group hover:border-primary transition-colors"
-                  aria-label="Expand service area map"
+                  aria-label="Close"
+                  className="absolute right-4 top-4 z-50 rounded-full bg-background/90 p-2 hover:bg-background transition-colors shadow"
                 >
-                  <picture>
-                    <source type="image/webp" srcSet={ServiceAreaMapWebp} />
-                    <img
-                      src={ServiceAreaMapPng}
-                      alt="Ryde Car Detailing service area map — Ryde NSW and surrounding suburbs"
-                      className="w-full h-auto block"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </picture>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center">
-                    <div className="bg-primary text-primary-foreground rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
-                      <ZoomIn className="w-5 h-5" />
-                    </div>
-                  </div>
+                  <X className="w-5 h-5" />
                 </button>
-              </DialogTrigger>
-
-              <DialogContent className="fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%] max-w-5xl w-full p-0 bg-transparent border-0 shadow-none">
-                <DialogClose asChild>
-                  <button
-                    type="button"
-                    aria-label="Close"
-                    className="absolute right-4 top-4 z-50 rounded-full bg-background/90 p-2 hover:bg-background transition-colors shadow"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </DialogClose>
-                <DialogHeader className="sr-only">
-                  <DialogTitle>Service Area Map</DialogTitle>
-                  <DialogDescription>Expanded view of the service area map</DialogDescription>
-                </DialogHeader>
-                <div className="flex flex-col items-center gap-4 p-4">
-                  <picture>
-                    <source type="image/webp" srcSet={ServiceAreaMapWebp} />
-                    <img
-                      src={ServiceAreaMapPng}
-                      alt="Expanded service area map — Ryde Car Detailing"
-                      className="max-h-[80vh] w-auto max-w-full object-contain rounded-xl"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </picture>
-                  <div className="flex gap-6 bg-background/90 backdrop-blur-sm rounded-lg px-5 py-3 border border-border">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-green-600 shrink-0" />
-                      <span className="text-sm font-medium">Green zone — no outcall fee</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-600 shrink-0" />
-                      <span className="text-sm font-medium">Red zone — $30 outcall fee</span>
-                    </div>
+              </DialogClose>
+              <DialogHeader className="sr-only">
+                <DialogTitle>Service Area Map</DialogTitle>
+                <DialogDescription>Expanded view of the service area map</DialogDescription>
+              </DialogHeader>
+              <div className="flex flex-col items-center gap-4 p-4">
+                <picture>
+                  <source type="image/webp" srcSet={ServiceAreaMapWebp} />
+                  <img
+                    src={ServiceAreaMapPng}
+                    alt="Expanded service area map for Ryde Car Detailing (Ryde NSW and nearby suburbs)"
+                    className="max-h-[80vh] w-auto max-w-full object-contain rounded-xl"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <div className="flex gap-8 bg-background/90 backdrop-blur-sm rounded-lg px-6 py-3 border border-border">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-green-600 shrink-0" />
+                    <span className="text-sm font-semibold">Green Zone = No outcall fee</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-600 shrink-0" />
+                    <span className="text-sm font-semibold">Red Zone = $30 outcall fee</span>
                   </div>
                 </div>
-              </DialogContent>
-            </Dialog>
-          </div>
+              </div>
+            </DialogContent>
+          </Dialog>
 
-          {/* Right — info cards */}
-          <div className="space-y-4">
+          {/* Right — all cards */}
+          <div className="ml-10 space-y-8 items-center">
 
-            {/* Suburbs served */}
-            <div className="bg-card rounded-xl border border-border p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                We service
-              </p>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park,
-                Parramatta, Hunters Hill, and surrounding suburbs.
+            {/* Suburbs */}
+            <div className="mt-4 bg-card rounded-xl border border-border p-6">
+              <p className="text-base text-muted-foreground leading-relaxed">
+                We proudly service Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Parramatta, Hunters Hill, and surrounding suburbs.
               </p>
             </div>
 
-            {/* Google rating — no iframe, just a link */}
-            <div className="bg-card rounded-xl border border-border p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-                Google rating
-              </p>
-              <div className="flex items-center justify-between gap-4">
+            {/* Zone legend */}
+            <div className="grid grid-cols-2 gap-8">
+              <div className="flex items-center gap-4 px-5 py-5 bg-card rounded-xl border border-border">
+                <div className="w-4 h-4 rounded-full bg-green-500 shrink-0" />
                 <div>
-                  <p className="text-amber-400 text-lg leading-none tracking-wide">★★★★★</p>
-                  <p className="text-sm text-muted-foreground mt-1">5.0 · 41 reviews</p>
-                </div>
-                <Button variant="outline" size="sm" asChild>
-                  <a href={GOOGLE_MAPS_URL} target="_blank" rel="noreferrer">
-                    <MapPin className="w-4 h-4 mr-1.5" />
-                    View on Google
-                  </a>
-                </Button>
-              </div>
-            </div>
-
-            {/* Legend — sits flush below the map */}
-            <div className="grid grid-cols-2 gap-3 py-0.5">
-              <div className="flex items-center gap-3 px-4 py-3 bg-card rounded-lg border border-border">
-                <div className="w-3 h-3 rounded-full bg-green-500 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold text-foreground leading-none">Green zone</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">No outcall fee</p>
+                  <p className="text-base font-semibold text-foreground">Green Zone</p>
+                  <p className="text-base text-muted-foreground mt-1">No outcall fee</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 px-4 py-3 bg-card rounded-lg border border-border">
-                <div className="w-3 h-3 rounded-full bg-red-500 shrink-0" />
+              <div className="flex items-center gap-4 px-5 py-5 bg-card rounded-xl border border-border">
+                <div className="w-4 h-4 rounded-full bg-red-500 shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-foreground leading-none">Red zone</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">$30 outcall fee</p>
+                  <p className="text-base font-semibold text-foreground">Red Zone</p>
+                  <p className="text-base text-muted-foreground mt-1">$30 outcall fee</p>
                 </div>
               </div>
             </div>
 
             {/* Contact */}
-            <div className="bg-card rounded-xl border border-border p-5 scroll-mt-28" id="contact">
-              <h3 className="text-base font-bold text-foreground mb-1">Contact us</h3>
-              <p className="text-sm text-muted-foreground mb-5">
-                Not sure if we cover your area? Give us a call — we're happy to help.
+            <div className="bg-card rounded-xl border border-border p-6 scroll-mt-28" id="contact">
+              <h3 className="text-xl font-bold text-foreground mb-2">Contact Us</h3>
+              <p className="text-base text-muted-foreground mb-6">
+                Not sure if we serve your area? Give us a call! We're happy to answer any questions.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button className="flex-1" asChild>
@@ -167,7 +140,7 @@ const ServiceArea = () => {
                 <BookingDialog>
                   <Button variant="outline" className="flex-1">
                     <MessageCircle className="w-4 h-4 mr-2" />
-                    Get a quote
+                    Get a Quote
                   </Button>
                 </BookingDialog>
               </div>

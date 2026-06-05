@@ -1,0 +1,229 @@
+<!--
+  ============================================================================
+  RYDE CAR DETAILING — corrected JSON-LD (clean drop-in replacement)
+  Replace the existing <script type="application/ld+json"> block with this.
+  ============================================================================
+  Changes from the live version:
+   - REMOVED  aggregateRating + review[]  → self-serving review markup on your
+     own LocalBusiness is against Google policy and risks a manual action.
+     Let your Google Business Profile (linked in sameAs) carry the stars.
+   - REMOVED  WebSite.potentialAction (SearchAction) → the site has no on-site
+     search, so declaring one is misleading markup.
+   Everything else (LocalBusiness, Services, Offers, WebPage, FAQPage) kept.
+
+  Still worth checking (not changed here):
+   - openingHours is "Mo-Su 00:00-23:59" (24/7) — set real booking hours.
+   - Confirm 109 Blaxland Rd is a legitimate address you operate from; add
+     "geo" lat/long if available.
+   - "MOST POPULAR" badge appears on all four packages in the page body —
+     keep it on one package only (this is page HTML, not schema).
+  ============================================================================
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.rydecardetailing.com/#website",
+      "url": "https://www.rydecardetailing.com/",
+      "name": "Ryde Car Detailing",
+      "inLanguage": "en-AU"
+    },
+    {
+      "@type": "AutoWash",
+      "@id": "https://www.rydecardetailing.com/#localbusiness",
+      "name": "Ryde Car Detailing",
+      "url": "https://www.rydecardetailing.com/",
+      "telephone": "+61411666174",
+      "priceRange": "$$",
+      "sameAs": ["https://maps.app.goo.gl/AVe32BtBi5oWsNBDA"],
+      "openingHours": ["Mo-Su 00:00-23:59"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "109 Blaxland Rd",
+        "addressLocality": "Ryde",
+        "addressRegion": "NSW",
+        "postalCode": "2112",
+        "addressCountry": "AU"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Ryde" },
+        { "@type": "City", "name": "North Ryde" },
+        { "@type": "City", "name": "Meadowbank" },
+        { "@type": "City", "name": "Gladesville" },
+        { "@type": "City", "name": "Macquarie Park" },
+        { "@type": "City", "name": "Parramatta" },
+        { "@type": "City", "name": "Hunters Hill" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Car Detailing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Basic Exterior Wash",
+            "description": "Essential exterior care, finished to a premium standard.",
+            "priceCurrency": "AUD",
+            "price": "79"
+          },
+          {
+            "@type": "Offer",
+            "name": "Interior Deep Clean",
+            "description": "Restore your cabin to a pristine, hygienic, like-new condition.",
+            "priceCurrency": "AUD",
+            "price": "129"
+          },
+          {
+            "@type": "Offer",
+            "name": "Premium Full Detail",
+            "description": "The complete inside-and-out transformation. Our signature service.",
+            "priceCurrency": "AUD",
+            "price": "149"
+          },
+          {
+            "@type": "Offer",
+            "name": "Ceramic Coating",
+            "description": "Elite paint protection with a superior gloss finish.",
+            "priceCurrency": "AUD",
+            "price": "499"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.rydecardetailing.com/#service-basic-exterior-wash",
+      "name": "Basic Exterior Wash",
+      "serviceType": "Mobile car detailing",
+      "provider": { "@id": "https://www.rydecardetailing.com/#localbusiness" },
+      "areaServed": [
+        { "@type": "City", "name": "Ryde" },
+        { "@type": "City", "name": "North Ryde" },
+        { "@type": "City", "name": "Meadowbank" },
+        { "@type": "City", "name": "Gladesville" },
+        { "@type": "City", "name": "Macquarie Park" },
+        { "@type": "City", "name": "Parramatta" },
+        { "@type": "City", "name": "Hunters Hill" }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "AUD",
+        "price": "79",
+        "url": "https://www.rydecardetailing.com/#service-basic-exterior-wash"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.rydecardetailing.com/#service-interior-deep-clean",
+      "name": "Interior Deep Clean",
+      "serviceType": "Mobile car detailing",
+      "provider": { "@id": "https://www.rydecardetailing.com/#localbusiness" },
+      "areaServed": [
+        { "@type": "City", "name": "Ryde" },
+        { "@type": "City", "name": "North Ryde" },
+        { "@type": "City", "name": "Meadowbank" },
+        { "@type": "City", "name": "Gladesville" },
+        { "@type": "City", "name": "Macquarie Park" },
+        { "@type": "City", "name": "Parramatta" },
+        { "@type": "City", "name": "Hunters Hill" }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "AUD",
+        "price": "129",
+        "url": "https://www.rydecardetailing.com/#service-interior-deep-clean"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.rydecardetailing.com/#service-premium-full-detail",
+      "name": "Premium Full Detail",
+      "serviceType": "Mobile car detailing",
+      "provider": { "@id": "https://www.rydecardetailing.com/#localbusiness" },
+      "areaServed": [
+        { "@type": "City", "name": "Ryde" },
+        { "@type": "City", "name": "North Ryde" },
+        { "@type": "City", "name": "Meadowbank" },
+        { "@type": "City", "name": "Gladesville" },
+        { "@type": "City", "name": "Macquarie Park" },
+        { "@type": "City", "name": "Parramatta" },
+        { "@type": "City", "name": "Hunters Hill" }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "AUD",
+        "price": "149",
+        "url": "https://www.rydecardetailing.com/#service-premium-full-detail"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.rydecardetailing.com/#service-ceramic-coating",
+      "name": "Ceramic Coating",
+      "serviceType": "Mobile car detailing",
+      "provider": { "@id": "https://www.rydecardetailing.com/#localbusiness" },
+      "areaServed": [
+        { "@type": "City", "name": "Ryde" },
+        { "@type": "City", "name": "North Ryde" },
+        { "@type": "City", "name": "Meadowbank" },
+        { "@type": "City", "name": "Gladesville" },
+        { "@type": "City", "name": "Macquarie Park" },
+        { "@type": "City", "name": "Parramatta" },
+        { "@type": "City", "name": "Hunters Hill" }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "AUD",
+        "price": "499",
+        "url": "https://www.rydecardetailing.com/#service-ceramic-coating"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.rydecardetailing.com/#webpage",
+      "url": "https://www.rydecardetailing.com/",
+      "name": "Ryde Car Detailing | Mobile Car Detailing Ryde NSW",
+      "inLanguage": "en-AU",
+      "isPartOf": { "@id": "https://www.rydecardetailing.com/#website" },
+      "about": { "@id": "https://www.rydecardetailing.com/#localbusiness" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.rydecardetailing.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you come to my home or office?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — we're a mobile detailing service and bring everything needed." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a detail take?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Between 1–3 hours depending on the package and car condition." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to supply water or power?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Please ensure water and power are available and easily accessible." }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas do you service?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Parramatta, Hunters Hill, and nearby suburbs." }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment methods do you accept?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Cash and PayID accepted. Credit card payments coming soon." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you remove stains and pet hair?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — included in the Interior Deep Clean package." }
+        }
+      ]
+    }
+  ]
+}
+</script>
