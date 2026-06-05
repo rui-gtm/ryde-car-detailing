@@ -2,25 +2,39 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Index from "./pages/Index";
+import { BrowserRouter } from "react-router-dom";
+import { type ReactNode, useState } from "react";
+import AppRoutes from "@/AppRoutes";
 
-const queryClient = new QueryClient();
+type AppShellProps = {
+  router: ReactNode;
+};
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+export const AppShell = ({ router }: AppShellProps) => {
+  const [queryClient] = useState(() => new QueryClient());
+  const isBrowser = typeof window !== "undefined";
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        {isBrowser ? <Toaster /> : null}
+        {isBrowser ? <Sonner /> : null}
+        {router}
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
+
+const App = () => {
+  return (
+    <AppShell
+      router={
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      }
+    />
+  );
+};
 
 export default App;

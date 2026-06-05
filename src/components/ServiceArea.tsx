@@ -12,78 +12,87 @@ import {
 import BookingDialog from "@/components/BookingDialog";
 import ServiceAreaMapPng from "@/assets/service-area-map.png";
 import ServiceAreaMapWebp from "@/assets/service-area-map.webp";
+
+const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA";
+
 const ServiceArea = () => {
   return (
     <section id="service-area" className="py-20 bg-secondary/30 scroll-mt-24">
       <div className="container mx-auto px-4">
+
+        {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Service Area</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Our Service Area
+          </h2>
           <p className="text-muted-foreground text-lg">
-            We come to you - mobile detailing at your convenience
+            Mobile detailing — we come to you
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Service area map */}
-          <div className="space-y-6">
+        {/* Two-column layout */}
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+
+          {/* Left — map + legend */}
+          <div className="space-y-3">
             <Dialog>
               <DialogTrigger asChild>
                 <button
                   type="button"
-                  className="relative rounded-lg overflow-hidden border border-border/50 cursor-pointer group hover:border-primary transition-all w-full"
-                  aria-label="Expand Service Area Map"
+                  className="relative w-full rounded-xl overflow-hidden border border-border/50 cursor-pointer group hover:border-primary transition-colors"
+                  aria-label="Expand service area map"
                 >
                   <picture>
                     <source type="image/webp" srcSet={ServiceAreaMapWebp} />
                     <img
                       src={ServiceAreaMapPng}
-                      alt="Ryde Car Detailing service area map (Ryde NSW and nearby suburbs)"
-                      className="w-full h-auto"
+                      alt="Ryde Car Detailing service area map — Ryde NSW and surrounding suburbs"
+                      className="w-full h-auto block"
                       loading="lazy"
                       decoding="async"
                     />
                   </picture>
-                  {/* Hover overlay with scope icon */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center">
-                    <div className="bg-primary text-primary-foreground rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ZoomIn className="w-6 h-6" />
+                    <div className="bg-primary text-primary-foreground rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
+                      <ZoomIn className="w-5 h-5" />
                     </div>
                   </div>
                 </button>
               </DialogTrigger>
-              <DialogContent className="fixed left-[50%] top-[50%] z-50 grid translate-x-[-50%] translate-y-[-50%] gap-4 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg max-w-7xl w-full p-0 bg-transparent border-0">
+
+              <DialogContent className="fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%] max-w-5xl w-full p-0 bg-transparent border-0 shadow-none">
                 <DialogClose asChild>
                   <button
                     type="button"
                     aria-label="Close"
-                    className="absolute right-4 top-4 z-50 rounded-full bg-background/80 p-2 hover:bg-background transition-colors"
+                    className="absolute right-4 top-4 z-50 rounded-full bg-background/90 p-2 hover:bg-background transition-colors shadow"
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-5 h-5" />
                   </button>
                 </DialogClose>
                 <DialogHeader className="sr-only">
                   <DialogTitle>Service Area Map</DialogTitle>
-                  <DialogDescription>Expanded view of the service area</DialogDescription>
+                  <DialogDescription>Expanded view of the service area map</DialogDescription>
                 </DialogHeader>
-                <div className="relative w-full h-full flex flex-col items-center justify-center p-4 gap-4">
+                <div className="flex flex-col items-center gap-4 p-4">
                   <picture>
                     <source type="image/webp" srcSet={ServiceAreaMapWebp} />
                     <img
                       src={ServiceAreaMapPng}
-                      alt="Expanded service area map for Ryde Car Detailing (Ryde NSW and nearby suburbs)"
-                      className="max-h-[80vh] w-auto max-w-full object-contain rounded-lg"
+                      alt="Expanded service area map — Ryde Car Detailing"
+                      className="max-h-[80vh] w-auto max-w-full object-contain rounded-xl"
                       loading="lazy"
                       decoding="async"
                     />
                   </picture>
-                  <div className="flex gap-4 bg-background/90 backdrop-blur-sm rounded-lg p-4">
+                  <div className="flex gap-6 bg-background/90 backdrop-blur-sm rounded-lg px-5 py-3 border border-border">
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-green-600" />
-                      <span className="text-sm font-semibold">Green Zone = No outcall fee</span>
+                      <div className="w-3 h-3 rounded-full bg-green-600 shrink-0" />
+                      <span className="text-sm font-medium">Green zone — no outcall fee</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-red-600" />
-                      <span className="text-sm font-semibold">Red Zone = $30 outcall fee</span>
+                      <div className="w-3 h-3 rounded-full bg-red-600 shrink-0" />
+                      <span className="text-sm font-medium">Red zone — $30 outcall fee</span>
                     </div>
                   </div>
                 </div>
@@ -91,51 +100,79 @@ const ServiceArea = () => {
             </Dialog>
           </div>
 
-          {/* Zone Info & Contact */}
-          <div className="space-y-6">
-            {/* Local SEO: service suburbs */}
-            <div className="bg-card rounded-xl border border-border p-6">
-              <p className="text-sm md:text-base text-muted-foreground">
-                We proudly service Ryde, North Ryde, Parramatta, Gladesville, Meadowbank, Hunters Hill, and surrounding suburbs.
+          {/* Right — info cards */}
+          <div className="space-y-4">
+
+            {/* Suburbs served */}
+            <div className="bg-card rounded-xl border border-border p-5">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                We service
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park,
+                Parramatta, Hunters Hill, and surrounding suburbs.
               </p>
             </div>
-            <div className="flex gap-6">
-              <div className="flex items-center gap-3 p-4 bg-card rounded-lg border border-border flex-1">
-                <div className="w-4 h-4 rounded-full bg-green-500" />
+
+            {/* Google rating — no iframe, just a link */}
+            <div className="bg-card rounded-xl border border-border p-5">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                Google rating
+              </p>
+              <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="font-semibold text-foreground">Green Zone</p>
-                  <p className="text-sm text-muted-foreground">No outcall fee</p>
+                  <p className="text-amber-400 text-lg leading-none tracking-wide">★★★★★</p>
+                  <p className="text-sm text-muted-foreground mt-1">5.0 · 41 reviews</p>
+                </div>
+                <Button variant="outline" size="sm" asChild>
+                  <a href={GOOGLE_MAPS_URL} target="_blank" rel="noreferrer">
+                    <MapPin className="w-4 h-4 mr-1.5" />
+                    View on Google
+                  </a>
+                </Button>
+              </div>
+            </div>
+
+            {/* Legend — sits flush below the map */}
+            <div className="grid grid-cols-2 gap-3 py-0.5">
+              <div className="flex items-center gap-3 px-4 py-3 bg-card rounded-lg border border-border">
+                <div className="w-3 h-3 rounded-full bg-green-500 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-foreground leading-none">Green zone</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">No outcall fee</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-card rounded-lg border border-border flex-1">
-                <div className="w-4 h-4 rounded-full bg-red-500" />
+              <div className="flex items-center gap-3 px-4 py-3 bg-card rounded-lg border border-border">
+                <div className="w-3 h-3 rounded-full bg-red-500 shrink-0" />
                 <div>
-                  <p className="font-semibold text-foreground">Red Zone</p>
-                  <p className="text-sm text-muted-foreground">$30 outcall fee</p>
+                  <p className="text-sm font-semibold text-foreground leading-none">Red zone</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">$30 outcall fee</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-card rounded-xl border border-border p-6 scroll-mt-28" id="contact">
-              <h3 className="text-xl font-bold text-foreground mb-2">Contact Us</h3>
-              <p className="text-muted-foreground mb-6">
-                Not sure if we serve your area? Give us a call! We're happy to answer any questions.
+            {/* Contact */}
+            <div className="bg-card rounded-xl border border-border p-5 scroll-mt-28" id="contact">
+              <h3 className="text-base font-bold text-foreground mb-1">Contact us</h3>
+              <p className="text-sm text-muted-foreground mb-5">
+                Not sure if we cover your area? Give us a call — we're happy to help.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button className="flex-1" asChild>
                   <a href="tel:+61411666174">
                     <Phone className="w-4 h-4 mr-2" />
                     Call 0411 666 174
                   </a>
                 </Button>
-                  <BookingDialog>
-                    <Button variant="outline" className="flex-1">
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Get a Quote
-                    </Button>
-                  </BookingDialog>
+                <BookingDialog>
+                  <Button variant="outline" className="flex-1">
+                    <MessageCircle className="w-4 h-4 mr-2" />
+                    Get a quote
+                  </Button>
+                </BookingDialog>
               </div>
             </div>
+
           </div>
         </div>
       </div>

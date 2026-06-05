@@ -55,16 +55,20 @@
             }
           },
           {
-            "@type": "LocalBusiness",
+            "@type": "AutoWash",
             "@id": "https://www.rydecardetailing.com/#localbusiness",
             "name": "Ryde Car Detailing",
             "url": "https://www.rydecardetailing.com/",
             "telephone": "+61411666174",
             "priceRange": "$$",
+            "sameAs": ["https://maps.app.goo.gl/AVe32BtBi5oWsNBDA"],
+            "openingHours": ["Mo-Su 00:00-23:59"],
             "address": {
               "@type": "PostalAddress",
+              "streetAddress": "109 Blaxland Rd",
               "addressLocality": "Ryde",
               "addressRegion": "NSW",
+              "postalCode": "2112",
               "addressCountry": "AU"
             },
             "areaServed": [
@@ -75,6 +79,25 @@
               { "@type": "City", "name": "Macquarie Park" },
               { "@type": "City", "name": "Parramatta" },
               { "@type": "City", "name": "Hunters Hill" }
+            ],
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": "41"
+            },
+            "review": [
+              {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Sarah Cunliffe" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+                "reviewBody": "Jared did SUCH a good job. It was such short notice but he was super professional and attentive, spending over 90 minutes to make sure he did a 5* job. Would really recommend- thank you!"
+              },
+              {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Deb R" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+                "reviewBody": "Great car cleaning service! Got an interior and exterior clean and the car looks fantastic. Super easy to organise and highly recommended. Big thanks for the clean and will be using Ryde Car Detailing again!"
+              }
             ],
             "hasOfferCatalog": {
               "@type": "OfferCatalog",
@@ -109,6 +132,94 @@
                   "price": "499"
                 }
               ]
+            }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://www.rydecardetailing.com/#service-basic-exterior-wash",
+            "name": "Basic Exterior Wash",
+            "serviceType": "Mobile car detailing",
+            "provider": { "@id": "https://www.rydecardetailing.com/#localbusiness" },
+            "areaServed": [
+              { "@type": "City", "name": "Ryde" },
+              { "@type": "City", "name": "North Ryde" },
+              { "@type": "City", "name": "Meadowbank" },
+              { "@type": "City", "name": "Gladesville" },
+              { "@type": "City", "name": "Macquarie Park" },
+              { "@type": "City", "name": "Parramatta" },
+              { "@type": "City", "name": "Hunters Hill" }
+            ],
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "AUD",
+              "price": "79",
+              "url": "https://www.rydecardetailing.com/#service-basic-exterior-wash"
+            }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://www.rydecardetailing.com/#service-interior-deep-clean",
+            "name": "Interior Deep Clean",
+            "serviceType": "Mobile car detailing",
+            "provider": { "@id": "https://www.rydecardetailing.com/#localbusiness" },
+            "areaServed": [
+              { "@type": "City", "name": "Ryde" },
+              { "@type": "City", "name": "North Ryde" },
+              { "@type": "City", "name": "Meadowbank" },
+              { "@type": "City", "name": "Gladesville" },
+              { "@type": "City", "name": "Macquarie Park" },
+              { "@type": "City", "name": "Parramatta" },
+              { "@type": "City", "name": "Hunters Hill" }
+            ],
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "AUD",
+              "price": "129",
+              "url": "https://www.rydecardetailing.com/#service-interior-deep-clean"
+            }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://www.rydecardetailing.com/#service-premium-full-detail",
+            "name": "Premium Full Detail",
+            "serviceType": "Mobile car detailing",
+            "provider": { "@id": "https://www.rydecardetailing.com/#localbusiness" },
+            "areaServed": [
+              { "@type": "City", "name": "Ryde" },
+              { "@type": "City", "name": "North Ryde" },
+              { "@type": "City", "name": "Meadowbank" },
+              { "@type": "City", "name": "Gladesville" },
+              { "@type": "City", "name": "Macquarie Park" },
+              { "@type": "City", "name": "Parramatta" },
+              { "@type": "City", "name": "Hunters Hill" }
+            ],
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "AUD",
+              "price": "149",
+              "url": "https://www.rydecardetailing.com/#service-premium-full-detail"
+            }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://www.rydecardetailing.com/#service-ceramic-coating",
+            "name": "Ceramic Coating",
+            "serviceType": "Mobile car detailing",
+            "provider": { "@id": "https://www.rydecardetailing.com/#localbusiness" },
+            "areaServed": [
+              { "@type": "City", "name": "Ryde" },
+              { "@type": "City", "name": "North Ryde" },
+              { "@type": "City", "name": "Meadowbank" },
+              { "@type": "City", "name": "Gladesville" },
+              { "@type": "City", "name": "Macquarie Park" },
+              { "@type": "City", "name": "Parramatta" },
+              { "@type": "City", "name": "Hunters Hill" }
+            ],
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "AUD",
+              "price": "499",
+              "url": "https://www.rydecardetailing.com/#service-ceramic-coating"
             }
           },
           {
@@ -153,7 +264,7 @@
                 "name": "What areas do you service?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, and nearby suburbs."
+                  "text": "Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Parramatta, Hunters Hill, and nearby suburbs."
                 }
               },
               {
