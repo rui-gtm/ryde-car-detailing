@@ -1,32 +1,17 @@
 import { useState, useEffect } from "react";
 import { Quote, Star, Shield, Users, Leaf, ThumbsUp, ChevronLeft, ChevronRight } from "lucide-react";
-import { GoogleRatingSection } from "@/components/GoogleRatingSection";
+
+const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA";
+const GOOGLE_RATING = 5;
+const GOOGLE_REVIEW_COUNT = 41;
 
 const testimonials = [
-  {
-    quote: "Best detail in Ryde, hands down. My car looks brand new.",
-    name: "James R.",
-  },
-  {
-    quote: "Fast, friendly, and came to my office. Super convenient.",
-    name: "Melissa T.",
-  },
-  {
-    quote: "Interior detail removed all pet hair. Amazing!",
-    name: "Alex P.",
-  },
-  {
-    quote: "Great car cleaning service! Got an interior and exterior clean and the car looks fantastic. Super easy to organise and highly recommended. Big thanks for the clean and will be using Ryde Car Detailing again!",
-    name: "Deb R",
-  },
-  {
-    quote: "Great communication, service- and job well done. Would recommend!",
-    name: "Saarang J",
-  },
-  {
-    quote: "Jared did SUCH a good job. It was such short notice but he was super professional and attentive, spending over 90 minutes to make sure he did a 5* job. Would really recommend- thank you!",
-    name: "Sarah C",
-  }
+  { quote: "Best detail in Ryde, hands down. My car looks brand new.", name: "James R." },
+  { quote: "Fast, friendly, and came to my office. Super convenient.", name: "Melissa T." },
+  { quote: "Interior detail removed all pet hair. Amazing!", name: "Alex P." },
+  { quote: "Great car cleaning service! Got an interior and exterior clean and the car looks fantastic. Super easy to organise and highly recommended. Big thanks for the clean and will be using Ryde Car Detailing again!", name: "Deb R" },
+  { quote: "Great communication, service- and job well done. Would recommend!", name: "Saarang J" },
+  { quote: "Jared did SUCH a good job. It was such short notice but he was super professional and attentive, spending over 90 minutes to make sure he did a 5* job. Would really recommend- thank you!", name: "Sarah C" },
 ];
 
 const trustBadges = [
@@ -35,6 +20,17 @@ const trustBadges = [
   { icon: Leaf, text: "Eco-Friendly Products" },
   { icon: ThumbsUp, text: "100% Satisfaction Guarantee" },
 ];
+
+const GoogleLogo = () => (
+  <span className="text-xl font-bold tracking-tight">
+    <span style={{ color: "#4285F4" }}>G</span>
+    <span style={{ color: "#EA4335" }}>o</span>
+    <span style={{ color: "#FBBC04" }}>o</span>
+    <span style={{ color: "#4285F4" }}>g</span>
+    <span style={{ color: "#34A853" }}>l</span>
+    <span style={{ color: "#EA4335" }}>e</span>
+  </span>
+);
 
 const Testimonial = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -57,12 +53,40 @@ const Testimonial = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            ⭐ Customer Reviews
+            Customer Reviews
           </h2>
+
+          {/* Google 评分徽章 — 点击跳转 */}
+          <a
+            href={GOOGLE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 mb-2 mt-2"
+          >
+            <div className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:bg-muted transition-colors cursor-pointer">
+              <GoogleLogo />
+              <div className="w-px h-8 bg-border" />
+              <div className="text-left">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-semibold text-foreground">
+                    {GOOGLE_RATING}
+                  </span>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Based on {GOOGLE_REVIEW_COUNT} Google reviews
+                </p>
+              </div>
+            </div>
+          </a>
         </div>
+
         <div className="max-w-3xl mx-auto">
           <div className="relative">
-            {/* Left Arrow */}
             <button
               onClick={goToPrev}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted transition-colors"
@@ -71,7 +95,6 @@ const Testimonial = () => {
               <ChevronLeft className="w-5 h-5 text-foreground" />
             </button>
 
-            {/* Right Arrow */}
             <button
               onClick={goToNext}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted transition-colors"
@@ -81,55 +104,51 @@ const Testimonial = () => {
             </button>
 
             <div className="bg-card rounded-xl border border-border p-8 md:p-12 relative min-h-[200px]">
-            <Quote className="w-12 h-12 text-primary/20 absolute top-6 left-6" />
-            
-            {/* Stars */}
-            <div className="flex justify-center gap-1 mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-              ))}
-            </div>
+              <Quote className="w-12 h-12 text-primary/20 absolute top-6 left-6" />
 
-            {/* Testimonial Content */}
-            <div className="relative">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className={`transition-all duration-500 ${
-                    index === activeIndex
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-4 absolute inset-0"
-                  }`}
-                >
-                  <blockquote className="text-lg md:text-xl text-foreground leading-relaxed text-center relative z-10">
-                    "{testimonial.quote}"
-                  </blockquote>
-                  <div className="mt-6 text-center">
-                    <p className="font-semibold text-foreground"> {testimonial.name}</p>
+              <div className="flex justify-center gap-1 mb-6">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+
+              <div className="relative">
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className={`transition-all duration-500 ${
+                      index === activeIndex
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4 absolute inset-0"
+                    }`}
+                  >
+                    <blockquote className="text-lg md:text-xl text-foreground leading-relaxed text-center relative z-10">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    <div className="mt-6 text-center">
+                      <p className="font-semibold text-foreground">{testimonial.name}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Dot Indicators */}
-            <div className="flex justify-center gap-2 mt-8">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === activeIndex
-                      ? "bg-primary w-6"
-                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
+              <div className="flex justify-center gap-2 mt-8">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === activeIndex
+                        ? "bg-primary w-6"
+                        : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                    }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Trust Badges */}
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
             {trustBadges.map((badge, index) => (
               <div
