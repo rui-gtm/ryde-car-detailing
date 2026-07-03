@@ -3,7 +3,7 @@ import { Quote, Star, Shield, Users, Leaf, ThumbsUp, ChevronLeft, ChevronRight }
 
 const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA";
 const GOOGLE_RATING = 5;
-const GOOGLE_REVIEW_COUNT = 41;
+const GOOGLE_REVIEW_COUNT = 42;
 
 const testimonials = [
   { quote: "Best detail in Ryde, hands down. My car looks brand new.", name: "James R." },
@@ -56,14 +56,13 @@ const Testimonial = () => {
             Customer Reviews
           </h2>
 
-          {/* Google 评分徽章 — 点击跳转 */}
           <a
             href={GOOGLE_MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 mb-2 mt-2"
           >
-            <div className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:bg-muted transition-colors cursor-pointer">
+            <div className="flex items-center gap-3 bg-card rounded-xl px-5 py-3 hover:bg-muted transition-colors cursor-pointer">
               <GoogleLogo />
               <div className="w-px h-8 bg-border" />
               <div className="text-left">

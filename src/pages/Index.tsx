@@ -8,7 +8,6 @@ import Gallery from "@/components/Gallery";
 import Testimonial from "@/components/Testimonial";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import { GoogleRatingSection } from "@/components/GoogleRatingSection";
 
 const Index = () => {
   return (

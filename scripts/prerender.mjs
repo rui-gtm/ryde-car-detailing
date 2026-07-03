@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import prettier from "prettier";
 
 const projectRoot = process.cwd();
 const distDir = path.resolve(projectRoot, "dist");
@@ -45,4 +46,8 @@ const replaced =
     ? template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
     : template.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${appHtml}</div>`);
 
-await fs.writeFile(indexHtmlPath, replaced, "utf8");
+const formatted = await prettier.format(replaced, {
+  parser: "html",
+});
+
+await fs.writeFile(indexHtmlPath, formatted, "utf8");
