@@ -15,8 +15,14 @@ const Footer = () => {
                 decoding="async"
               />
             </div>
-            <span className="font-semibold text-foreground">Ryde Car Detailing</span>
+            <div className="flex flex-col">
+              <span className="font-semibold text-foreground">Ryde Car Detailing</span>
+              <span className="text-xs text-muted-foreground">109 Blaxland Rd, Ryde NSW 2112</span>
+            </div>
           </div>
+          <p className="text-xs text-muted-foreground text-center md:text-right max-w-md">
+            Servicing Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Parramatta &amp; Hunters Hill
+          </p>
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Ryde Car Detailing. All rights reserved.
           </p>
