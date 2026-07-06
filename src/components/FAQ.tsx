@@ -14,7 +14,7 @@ const FAQ = () => {
     },
     {
       q: "What areas do you service?",
-      a: "Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Parramatta, Hunters Hill, and nearby suburbs.",
+      a: "Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Hunters Hill, and nearby suburbs.",
     },
     {
       q: "What payment methods do you accept?",

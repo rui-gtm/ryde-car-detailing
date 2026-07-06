@@ -102,7 +102,7 @@ const ServiceArea = () => {
             {/* Suburbs */}
             <div className="mt-4 bg-card rounded-xl border border-border p-6">
               <p className="text-base text-muted-foreground leading-relaxed">
-                We proudly service Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Parramatta, Hunters Hill, and surrounding suburbs.
+                We proudly service Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Hunters Hill, and surrounding suburbs.
               </p>
             </div>
 
@@ -162,7 +162,7 @@ const ServiceArea = () => {
               Finding a reliable car detailer nearby shouldn't mean driving across Sydney or waiting
               weeks for a booking. Ryde Car Detailing is based right in Ryde NSW, and we bring premium
               mobile car detailing directly to your driveway, office car park or apartment garage —
-              anywhere across Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Parramatta and
+              anywhere across Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park and
               Hunters Hill.
             </p>
             <p>
@@ -175,8 +175,7 @@ const ServiceArea = () => {
             <p>
               We've built our reputation suburb by suburb: families in Ryde and North Ryde trust us for
               regular maintenance washes, apartment residents in Meadowbank and Gladesville appreciate
-              that we come down to basement car parks, and busy professionals in Macquarie Park and
-              Parramatta book us for detailing during work hours. If you're near Ryde and searching for
+              that we come down to basement car parks, and busy professionals in Macquarie Park book us for detailing during work hours. If you're near Ryde and searching for
               mobile car detailing near you, we're the local team that turns up on time and leaves your
               car looking showroom-fresh.
             </p>

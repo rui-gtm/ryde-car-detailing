@@ -21,9 +21,9 @@ const Footer = () => {
             </div>
           </div>
           <p className="text-xs text-muted-foreground text-center md:text-right max-w-md">
-            Servicing Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Parramatta &amp; Hunters Hill
+            Servicing Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Hunters Hill
           </p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Ryde Car Detailing. All rights reserved.
           </p>
         </div>
