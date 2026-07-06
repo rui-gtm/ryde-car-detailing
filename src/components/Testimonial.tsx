@@ -3,7 +3,7 @@ import { Quote, Star, Shield, Users, Leaf, ThumbsUp, ChevronLeft, ChevronRight }
 
 const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA";
 const GOOGLE_RATING = 5;
-const GOOGLE_REVIEW_COUNT = 42;
+const GOOGLE_REVIEW_COUNT = 34;
 
 const testimonials = [
   { quote: "Best detail in Ryde, hands down. My car looks brand new.", name: "James R." },
