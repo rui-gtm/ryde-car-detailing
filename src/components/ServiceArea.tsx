@@ -152,7 +152,7 @@ const ServiceArea = () => {
           </div>
         </div>
 
-        {/* Local content block */}
+        {/* Local content block 
         <div className="mt-16 max-w-4xl mx-auto text-left">
           <h3 className="text-2xl font-bold text-foreground mb-4">
             Why Ryde Locals Choose Us for Mobile Car Detailing
@@ -180,7 +180,7 @@ const ServiceArea = () => {
               car looking showroom-fresh.
             </p>
           </div>
-        </div>
+        </div>*/}
       </div>
     </section>
   );

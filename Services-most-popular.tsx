@@ -31,7 +31,7 @@ const services = [
   {
     title: "Premium Full Detail",
     description: "The complete inside-and-out transformation. Our signature service.",
-    price: "from $149",
+    price: "from $199",
     features: [
       "Full interior deep clean",
       "Complete exterior wash + wheel clean",

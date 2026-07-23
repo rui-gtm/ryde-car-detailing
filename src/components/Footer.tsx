@@ -20,7 +20,7 @@ const Footer = () => {
               <span className="text-xs text-muted-foreground">109 Blaxland Rd, Ryde NSW 2112</span>
             </div>
           </div>
-          <p className="text-xs text-muted-foreground text-center md:text-right max-w-md">
+          <p className="text-xs text-muted-foreground text-center max-w-md">
             Servicing Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Hunters Hill
           </p>
           <p className="text-xs text-muted-foreground">
