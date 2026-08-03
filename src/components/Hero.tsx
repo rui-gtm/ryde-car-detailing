@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Check } from "lucide-react";
 import heroImage from "@/assets/hero-car.jpg";
-import BookingDialog from "@/components/BookingDialog";
 
 const Hero = () => {
   return (
@@ -68,11 +68,9 @@ const Hero = () => {
 
         {/* CTA Buttons */}
   <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center animate-fade-in-up [animation-delay:0.2s] mt-1 flex-none">
-          <BookingDialog>
-            <Button size="lg">
-              Book Your Detail →
-            </Button>
-          </BookingDialog>
+          <Button size="lg" asChild>
+            <Link to="/book">Book Your Detail →</Link>
+          </Button>
           <Button size="lg" variant="outline" asChild>
             <a href="#services">View Packages</a>
           </Button>

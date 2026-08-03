@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
-import BookingDialog from "@/components/BookingDialog";
 
 const createServiceId = (title: string) => {
   return `service-${title
@@ -132,11 +132,9 @@ const Services = () => {
                     </ul>
                   </CardContent>
                   <CardFooter className="mt-auto">
-                    <BookingDialog defaultPackage={service.packageValue}>
-                      <Button className="w-full">
-                        Book Now
-                      </Button>
-                    </BookingDialog>
+                    <Button className="w-full" asChild>
+                      <Link to={`/book?package=${service.packageValue}`}>Book Now</Link>
+                    </Button>
                   </CardFooter>
                 </Card>
               </article>

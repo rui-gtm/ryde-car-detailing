@@ -1,15 +1,41 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/ryde-logo-Bh-MidXe-removebg-preview.png";
-import BookingDialog from "@/components/BookingDialog";
+
+type NavLink =
+  | { type: "scroll"; id: string; label: string }
+  | { type: "page"; to: string; label: string };
+
+const navLinks: NavLink[] = [
+  { type: "scroll", id: "services", label: "Services" },
+  { type: "page", to: "/terms", label: "Terms" },
+  { type: "scroll", id: "service-area", label: "Contact" },
+];
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const handleLogoClick = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogoClick = (e: MouseEvent) => {
     setIsMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleScrollLinkClick = (id: string) => (e: MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    if (location.pathname === "/") {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/", { state: { scrollTo: id } });
+    }
   };
 
   useEffect(() => {
@@ -20,10 +46,30 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { href: "#services", label: "Services" },
-    { href: "#service-area", label: "Contact" },
-  ];
+  const renderLink = (link: NavLink, className: string) => {
+    if (link.type === "page") {
+      return (
+        <Link
+          key={link.label}
+          to={link.to}
+          className={className}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          {link.label}
+        </Link>
+      );
+    }
+    return (
+      <a
+        key={link.label}
+        href={`/#${link.id}`}
+        className={className}
+        onClick={handleScrollLinkClick(link.id)}
+      >
+        {link.label}
+      </a>
+    );
+  };
 
   return (
     <header
@@ -32,9 +78,9 @@ const Header = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo (clickable) */}
-          {/* When clicked, return to the top of the page */}
-          <button
-            type="button"
+          {/* When clicked, go to (or scroll to the top of) the home page */}
+          <Link
+            to="/"
             onClick={handleLogoClick}
             className="flex items-center gap-2 focus:outline-none"
             aria-label="Ryde Car Detailing logo"
@@ -48,24 +94,16 @@ const Header = () => {
                 decoding="async"
               />
             </div>
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-foreground/80 hover:text-foreground transition-colors font-medium"
-              >
-                {link.label}
-              </a>
-            ))}
-            <BookingDialog>
-              <Button>
-                Book Now
-              </Button>
-            </BookingDialog>
+            {navLinks.map((link) =>
+              renderLink(link, "text-foreground/80 hover:text-foreground transition-colors font-medium"),
+            )}
+            <Button asChild>
+              <Link to="/book">Book Now</Link>
+            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -85,21 +123,14 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <nav className="md:hidden py-4 border-t border-border bg-white">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="block py-3 text-foreground/80 hover:text-foreground transition-colors font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
-            <BookingDialog>
-              <Button className="w-full mt-4">
+            {navLinks.map((link) =>
+              renderLink(link, "block py-3 text-foreground/80 hover:text-foreground transition-colors font-medium"),
+            )}
+            <Button asChild className="w-full mt-4">
+              <Link to="/book" onClick={() => setIsMobileMenuOpen(false)}>
                 Book Now
-              </Button>
-            </BookingDialog>
+              </Link>
+            </Button>
           </nav>
         )}
       </div>

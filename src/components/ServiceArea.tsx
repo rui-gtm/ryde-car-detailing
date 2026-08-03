@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageCircle, ZoomIn, X } from "lucide-react";
 import {
@@ -9,7 +10,6 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
-import BookingDialog from "@/components/BookingDialog";
 import ServiceAreaMapPng from "@/assets/service-area-map.png";
 import ServiceAreaMapWebp from "@/assets/service-area-map.webp";
 
@@ -140,12 +140,12 @@ const ServiceArea = () => {
                     Call 0411 666 174
                   </a>
                 </Button>
-                <BookingDialog>
-                  <Button variant="outline" className="flex-1">
+                <Button variant="outline" className="flex-1" asChild>
+                  <Link to="/book">
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Get a Quote
-                  </Button>
-                </BookingDialog>
+                  </Link>
+                </Button>
               </div>
             </div>
 
