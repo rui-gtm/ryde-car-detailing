@@ -289,7 +289,7 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Vehicle Type</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value || undefined}>
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select type" />
@@ -313,7 +313,7 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Service Package</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value || undefined}>
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select package" />
@@ -402,7 +402,7 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Preferred Time</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value || undefined}>
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select time" />
