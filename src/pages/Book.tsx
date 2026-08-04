@@ -91,7 +91,14 @@ const Book = () => {
 
               {/* Right: Booking Form */}
               <div className="order-1 lg:order-2 bg-card rounded-xl p-6 md:p-8">
-                <BookingForm defaultPackage={defaultPackage} confirmChecklist={checklist} />
+                <BookingForm
+                  defaultPackage={defaultPackage}
+                  confirmChecklist={checklist}
+                  contactPhone={{
+                    href: "tel:+61411666174",
+                    label: "Any questions? Please call or text: 0411 666 174",
+                  }}
+                />
               </div>
             </div>
           </div>

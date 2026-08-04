@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import { CalendarIcon, CheckCircle2 } from "lucide-react";
+import { CalendarIcon, CheckCircle2, Phone } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -110,25 +110,38 @@ const formSchema = z
     }
   });
 
+type BookingFormValues = z.infer<typeof formSchema>;
+
+// Kept in module scope (not component state) so it survives client-side route
+// navigation away from and back to the booking page, but is naturally cleared
+// on a full page refresh.
+let bookingFormDraft: BookingFormValues | null = null;
+
 interface ChecklistItem {
   title: string;
   description: string;
+}
+
+interface ContactPhone {
+  href: string;
+  label: string;
 }
 
 interface BookingFormProps {
   defaultPackage?: string;
   onSuccess?: () => void;
   confirmChecklist?: ChecklistItem[];
+  contactPhone?: ContactPhone;
 }
 
-const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist }: BookingFormProps) => {
+const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone }: BookingFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const d2f9f94d_8345_46ae_9684_e0a629cb2cf2 = "88e97baa5d7f5ccb3421e709774efa24e8817251a86a62075892d156b92baacc";
 
-  const defaultValues = {
+  const emptyDefaultValues: BookingFormValues = {
     name: "",
     phone: "",
     email: "",
@@ -136,19 +149,28 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist }: BookingFor
     package: defaultPackage ?? "",
     carModel: "",
     year: "",
-    date: undefined as Date | undefined,
+    date: undefined,
     time: "",
     address: "",
     message: "",
     agreeToTerms: false,
   };
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const defaultValues = bookingFormDraft ?? emptyDefaultValues;
+
+  const form = useForm<BookingFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
 
   const agreeToTerms = form.watch("agreeToTerms");
+
+  useEffect(() => {
+    const subscription = form.watch((values) => {
+      bookingFormDraft = values as BookingFormValues;
+    });
+    return () => subscription.unsubscribe();
+  }, [form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -177,7 +199,8 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist }: BookingFor
         title: "Booking Request Sent!",
         description: "We'll get back to you shortly to confirm your appointment.",
       });
-      form.reset(defaultValues);
+      form.reset(emptyDefaultValues);
+      bookingFormDraft = null;
       onSuccess?.();
     } catch (error) {
       console.error("Failed to send booking request to Netlify function", error);
@@ -275,9 +298,9 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist }: BookingFor
                   <SelectContent>
                     <SelectItem value="sedan">Sedan</SelectItem>
                     <SelectItem value="suv">SUV</SelectItem>
+                    <SelectItem value="other">UTE</SelectItem>
                     <SelectItem value="truck">Truck</SelectItem>
                     <SelectItem value="van">Van</SelectItem>
-                    <SelectItem value="other">Sports Car</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -490,6 +513,15 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist }: BookingFor
               </Link>
               .
             </p>
+            {contactPhone && (
+              <a
+                href={contactPhone.href}
+                className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                <Phone className="w-4 h-4 shrink-0" />
+                {contactPhone.label}
+              </a>
+            )}
           </div>
           <DialogFooter className="shrink-0 flex-row justify-end gap-2 border-t border-border p-6 pt-4 sm:space-x-0">
             <Button type="button" variant="outline" onClick={() => setShowConfirmDialog(false)}>
