@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -22,7 +24,21 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+
+const TIME_OPTIONS = (() => {
+  const options: string[] = [];
+  for (let minutes = 6 * 60; minutes < 24 * 60; minutes += 30) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    options.push(`${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}`);
+  }
+  options.push("00:00");
+  return options;
+})();
 
 const formSchema = z
   .object({
@@ -45,6 +61,8 @@ const formSchema = z
       ),
     vehicleType: z.string().trim().optional(),
     package: z.string().trim().optional(),
+    date: z.date().optional(),
+    time: z.string().trim().optional(),
     address: z
       .string()
       .max(200, "Address cannot exceed 200 characters")
@@ -91,6 +109,8 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
     email: "",
     vehicleType: "",
     package: defaultPackage ?? "",
+    date: undefined as Date | undefined,
+    time: "",
     address: "",
     message: "",
     agreeToTerms: false,
@@ -107,7 +127,11 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
     try {
       setIsSubmitting(true);
 
-      const { agreeToTerms, ...payload } = values;
+      const { agreeToTerms, date, ...rest } = values;
+      const payload = {
+        ...rest,
+        date: date ? format(date, "yyyy-MM-dd") : "",
+      };
 
       const response = await fetch("https://jade-mandazi-77ee90.netlify.app/.netlify/functions/quote", {
         method: "POST",
@@ -226,6 +250,68 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
                     <SelectItem value="interior">Interior Deep Clean</SelectItem>
                     <SelectItem value="premium">Premium Full Detail</SelectItem>
                     <SelectItem value="ceramic">Ceramic Coating</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="date"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Preferred Date</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className={cn(
+                          "w-full pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground",
+                        )}
+                      >
+                        {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="time"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Preferred Time</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value || undefined}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select time" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="max-h-60">
+                    {TIME_OPTIONS.map((time) => (
+                      <SelectItem key={time} value={time}>
+                        {time}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />
