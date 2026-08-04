@@ -278,7 +278,7 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
               <div className="space-y-1 leading-snug">
                 <FormLabel className="font-normal leading-snug">
                   I have read and agree to the{" "}
-                  <Link to="/terms" className="text-primary underline underline-offset-4">
+                  <Link to="/terms" className="text-primary">
                     Terms &amp; Conditions
                   </Link>
                   .

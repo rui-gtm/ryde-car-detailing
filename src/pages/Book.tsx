@@ -77,11 +77,11 @@ const Book = () => {
                     ))}
                   </ul>
 
-                  <div className="border-t border-border mt-6 pt-6 space-y-3">
+                  <div className="border-t border-border mt-6 pt-6 space-y-6">
                     <p className="text-sm text-muted-foreground leading-snug">
                       By submitting this booking, I confirm that the information I have provided is accurate and
                       complete, and that I have read and agree to the{" "}
-                      <a href="/terms" className="text-primary underline underline-offset-4">
+                      <a href="/terms" className="text-primary">
                         Ryde Car Detailing Terms &amp; Conditions
                       </a>
                       .
@@ -91,7 +91,7 @@ const Book = () => {
                       className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
                     >
                       <Phone className="w-4 h-4" />
-                      Prefer to book by phone? Call 0411 666 174
+                      Any questions? Please call or text: 0411 666 174
                     </a>
                   </div>
                 </div>
