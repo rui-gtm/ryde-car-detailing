@@ -61,9 +61,9 @@ const Book = () => {
               <div className="order-2 lg:order-1">
                 <div className="bg-secondary/30 rounded-xl p-6 md:p-8 lg:sticky lg:top-28">
                   <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-                    Before You Confirm Your Booking
+                    Before Confirming Your Booking
                   </h2>
-                  <p className="text-sm text-muted-foreground mb-6">Please confirm the following:</p>
+                  <p className="text-sm text-muted-foreground mb-6">Please check the following details:</p>
 
                   <ul className="space-y-4">
                     {checklist.map((item) => (
