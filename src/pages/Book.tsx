@@ -58,7 +58,7 @@ const Book = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 max-w-5xl mx-auto items-start">
               {/* Left: Before You Confirm Your Booking */}
-              <div className="order-2 lg:order-1">
+              <div className="order-2 lg:order-1 hidden md:block">
                 <div className="bg-secondary/30 rounded-xl p-6 md:p-8 lg:sticky lg:top-28">
                   <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
                     Before Confirming Your Booking
@@ -77,15 +77,7 @@ const Book = () => {
                     ))}
                   </ul>
 
-                  <div className="border-t border-border mt-6 pt-6 space-y-6">
-                    <p className="text-sm text-muted-foreground leading-snug">
-                      By submitting this booking, I confirm that the information I have provided is accurate and
-                      complete, and that I have read and agree to the{" "}
-                      <a href="/terms" className="text-primary">
-                        Ryde Car Detailing Terms &amp; Conditions
-                      </a>
-                      .
-                    </p>
+                  <div className="border-t border-border mt-6 pt-6 space-y-3">
                     <a
                       href="tel:+61411666174"
                       className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
@@ -99,7 +91,7 @@ const Book = () => {
 
               {/* Right: Booking Form */}
               <div className="order-1 lg:order-2 bg-card rounded-xl p-6 md:p-8">
-                <BookingForm defaultPackage={defaultPackage} />
+                <BookingForm defaultPackage={defaultPackage} confirmChecklist={checklist} />
               </div>
             </div>
           </div>

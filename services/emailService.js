@@ -109,6 +109,16 @@ const formatEmailContent = (data) => {
           </div>
 
           <div class="field">
+            <div class="field-label">Car Model:</div>
+            <div class="field-value">${data.carModel}</div>
+          </div>
+
+          <div class="field">
+            <div class="field-label">Year:</div>
+            <div class="field-value">${data.year}</div>
+          </div>
+
+          <div class="field">
             <div class="field-label">Package:</div>
             <div class="field-value">${data.package}</div>
           </div>
@@ -154,6 +164,8 @@ Preferred Date: ${data.date}
 Preferred Time: ${data.time}
 Address: ${data.address}
 Vehicle Type: ${data.vehicleType}
+Car Model: ${data.carModel}
+Year: ${data.year}
 Package: ${data.package}
 Message: ${data.message}
       `.trim()

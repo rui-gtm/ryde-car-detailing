@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, CheckCircle2 } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -26,7 +26,16 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 const QUOTE_API_URL = import.meta.env.VITE_QUOTE_API_URL || "https://ryde-car-detailing.vercel.app/api/quote";
@@ -63,6 +72,12 @@ const formSchema = z
       ),
     vehicleType: z.string().trim().optional(),
     package: z.string().trim().optional(),
+    carModel: z.string().trim().max(50, "Car model cannot exceed 50 characters").optional(),
+    year: z
+      .string()
+      .trim()
+      .optional()
+      .refine((value) => !value || /^\d{4}$/.test(value), "Please enter a valid year"),
     date: z.date().optional(),
     time: z.string().trim().optional(),
     address: z
@@ -95,14 +110,22 @@ const formSchema = z
     }
   });
 
+interface ChecklistItem {
+  title: string;
+  description: string;
+}
+
 interface BookingFormProps {
   defaultPackage?: string;
   onSuccess?: () => void;
+  confirmChecklist?: ChecklistItem[];
 }
 
-const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
+const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist }: BookingFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   const d2f9f94d_8345_46ae_9684_e0a629cb2cf2 = "88e97baa5d7f5ccb3421e709774efa24e8817251a86a62075892d156b92baacc";
 
   const defaultValues = {
@@ -111,6 +134,8 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
     email: "",
     vehicleType: "",
     package: defaultPackage ?? "",
+    carModel: "",
+    year: "",
     date: undefined as Date | undefined,
     time: "",
     address: "",
@@ -164,6 +189,30 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleMobileSubmitClick = async () => {
+    const isValid = await form.trigger([
+      "name",
+      "phone",
+      "email",
+      "vehicleType",
+      "package",
+      "carModel",
+      "year",
+      "date",
+      "time",
+      "address",
+      "message",
+    ]);
+    if (isValid) {
+      setShowConfirmDialog(true);
+    }
+  };
+
+  const handleConfirmAgree = async () => {
+    setShowConfirmDialog(false);
+    await onSubmit({ ...form.getValues(), agreeToTerms: true });
   };
 
   return (
@@ -262,6 +311,34 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
+            name="carModel"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Car Model</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g. Toyota Camry" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="year"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Year</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g. 2020" inputMode="numeric" maxLength={4} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
             name="date"
             render={({ field }) => (
               <FormItem>
@@ -343,7 +420,7 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Additional details (Car Model and Year)</FormLabel>
+              <FormLabel>Additional Details</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Any specific requirements or questions?"
@@ -355,31 +432,75 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="agreeToTerms"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-start gap-3 space-y-0 rounded-md p-4">
-              <FormControl>
-                <Checkbox checked={field.value} onCheckedChange={field.onChange} className="mt-0.5" />
-              </FormControl>
-              <div className="space-y-1 leading-snug">
-                <FormLabel className="font-normal leading-snug">
-                  I have read and agree to the{" "}
-                  <Link to="/terms" className="text-primary">
-                    Terms &amp; Conditions
-                  </Link>
-                  .
-                </FormLabel>
-                <FormMessage />
-              </div>
-            </FormItem>
-          )}
-        />
-        <Button type="submit" className="w-full" disabled={isSubmitting || !agreeToTerms}>
+        {!isMobile && (
+          <FormField
+            control={form.control}
+            name="agreeToTerms"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start gap-3 space-y-0 rounded-lg bg-muted/30 p-4">
+                <FormControl>
+                  <Checkbox checked={field.value} onCheckedChange={field.onChange} className="mt-0.5" />
+                </FormControl>
+                <div className="space-y-1 leading-snug">
+                  <FormLabel className="font-normal leading-snug text-muted-foreground">
+                    By submitting this booking, I confirm that the information I have provided is accurate and complete, and that I have read and agree to the{" "}
+                    <Link to="/terms" className="font-medium text-primary hover:text-primary/80">
+                      Terms &amp; Conditions
+                    </Link>
+                    .
+                  </FormLabel>
+                  <FormMessage />
+                </div>
+              </FormItem>
+            )}
+          />
+        )}
+        <Button
+          type={isMobile ? "button" : "submit"}
+          className="w-full"
+          disabled={isSubmitting || (!isMobile && !agreeToTerms)}
+          onClick={isMobile ? handleMobileSubmitClick : undefined}
+        >
           {isSubmitting ? "Sending..." : "Submit Booking Request"}
         </Button>
       </form>
+
+      <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+        <DialogContent className="flex max-h-[85vh] flex-col gap-0 p-0">
+          <DialogHeader className="shrink-0 p-6 pb-4">
+            <DialogTitle>Before Confirming Your Booking</DialogTitle>
+            <DialogDescription>Please check the following details:</DialogDescription>
+          </DialogHeader>
+          <div className="flex-1 space-y-4 overflow-y-auto px-6 pb-6">
+            <ul className="space-y-4">
+              {confirmChecklist?.map((item) => (
+                <li key={item.title} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">{item.title}</p>
+                    <p className="text-sm text-muted-foreground leading-snug">{item.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="text-sm text-muted-foreground leading-snug border-t border-border pt-4">
+              By submitting this booking, I confirm that the information I have provided is accurate and complete, and that I have read and agree to the{" "}
+              <Link to="/terms" className="font-medium text-primary hover:text-primary/80">
+                Terms &amp; Conditions
+              </Link>
+              .
+            </p>
+          </div>
+          <DialogFooter className="shrink-0 flex-row justify-end gap-2 border-t border-border p-6 pt-4 sm:space-x-0">
+            <Button type="button" variant="outline" onClick={() => setShowConfirmDialog(false)}>
+              Cancel
+            </Button>
+            <Button type="button" onClick={handleConfirmAgree} disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Agree"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </Form>
   );
 };

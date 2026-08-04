@@ -15,6 +15,7 @@ const isPhone = (s) => {
   return digits.length >= 7 && digits.length <= 20;
 };
 const within = (s, max) => typeof s === 'string' && s.length <= max;
+const isYear = (s) => !s || /^\d{4}$/.test(s);
 
 const setCorsHeaders = (res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -65,6 +66,8 @@ export default async function handler(req, res) {
     if (body.address && !within(body.address, 200)) errors.push('Invalid address');
     if (body.vehicleType && !within(body.vehicleType, 50)) errors.push('Invalid vehicleType');
     if (body.package && !within(body.package, 50)) errors.push('Invalid package');
+    if (body.carModel && !within(body.carModel, 50)) errors.push('Invalid carModel');
+    if (body.year && !isYear(body.year)) errors.push('Invalid year');
     if (body.message && !within(body.message, 2000)) errors.push('Invalid message');
     if (body.date && !within(body.date, 20)) errors.push('Invalid date');
     if (body.time && !within(body.time, 10)) errors.push('Invalid time');
@@ -81,6 +84,8 @@ export default async function handler(req, res) {
       email: body.email,
       vehicleType: body.vehicleType || 'Not specified',
       package: body.package || 'Not specified',
+      carModel: body.carModel || 'Not specified',
+      year: body.year || 'Not specified',
       date: body.date || 'Not specified',
       time: body.time || 'Not specified',
       message: body.message || 'No additional message',
