@@ -225,7 +225,7 @@ const Terms = () => {
               <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
                 Ryde Car Detailing – Terms &amp; Conditions
               </h1>
-              <p className="text-sm text-muted-foreground mb-8">Effective Date: 1 August 2026</p>
+              <p className="text-sm text-muted-foreground mb-8">Effective Date: 1st July 2026</p>
 
               <p className="text-muted-foreground leading-relaxed mb-10">
                 These Terms &amp; Conditions apply to all services provided by Ryde Car Detailing. By requesting,
