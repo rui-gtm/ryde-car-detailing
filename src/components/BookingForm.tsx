@@ -29,6 +29,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
+const QUOTE_API_URL = import.meta.env.VITE_QUOTE_API_URL || "https://ryde-car-detailing.vercel.app/api/quote";
+
 const TIME_OPTIONS = (() => {
   const options: string[] = [];
   for (let minutes = 6 * 60; minutes < 24 * 60; minutes += 30) {
@@ -133,7 +135,7 @@ const BookingForm = ({ defaultPackage, onSuccess }: BookingFormProps) => {
         date: date ? format(date, "yyyy-MM-dd") : "",
       };
 
-      const response = await fetch("https://jade-mandazi-77ee90.netlify.app/.netlify/functions/quote", {
+      const response = await fetch(QUOTE_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
