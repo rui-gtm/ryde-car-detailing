@@ -41,13 +41,13 @@ import { cn } from "@/lib/utils";
 const QUOTE_API_URL = (() => {
   const configured = import.meta.env.VITE_QUOTE_API_URL;
   if (configured) return configured;
-  const fallback = "https://ryde-car-detailing.vercel.app/api/quote";
+  const fallback = "https://rydecardetailing.vercel.app/api/quote";
   if (typeof window !== "undefined") {
     // eslint-disable-next-line no-console
     console.warn(
-      "[BookingForm] VITE_QUOTE_API_URL is not set. Falling back to the old default " +
+      "[BookingForm] VITE_QUOTE_API_URL is not set. Falling back to default " +
         fallback +
-        " — this will break after switching Vercel accounts. Set VITE_QUOTE_API_URL before `npm run build` to point to your new Vercel project."
+        ". For production builds, explicitly set VITE_QUOTE_API_URL before `npm run build`."
     );
   }
   return fallback;
