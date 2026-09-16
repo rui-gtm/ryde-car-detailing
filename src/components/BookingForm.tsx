@@ -38,7 +38,20 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
-const QUOTE_API_URL = import.meta.env.VITE_QUOTE_API_URL || "https://ryde-car-detailing.vercel.app/api/quote";
+const QUOTE_API_URL = (() => {
+  const configured = import.meta.env.VITE_QUOTE_API_URL;
+  if (configured) return configured;
+  const fallback = "https://ryde-car-detailing.vercel.app/api/quote";
+  if (typeof window !== "undefined") {
+    // eslint-disable-next-line no-console
+    console.warn(
+      "[BookingForm] VITE_QUOTE_API_URL is not set. Falling back to the old default " +
+        fallback +
+        " — this will break after switching Vercel accounts. Set VITE_QUOTE_API_URL before `npm run build` to point to your new Vercel project."
+    );
+  }
+  return fallback;
+})();
 
 const TIME_OPTIONS = (() => {
   const options: string[] = [];
@@ -139,7 +152,6 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const { toast } = useToast();
   const isMobile = useIsMobile();
-  const d2f9f94d_8345_46ae_9684_e0a629cb2cf2 = "88e97baa5d7f5ccb3421e709774efa24e8817251a86a62075892d156b92baacc";
 
   const emptyDefaultValues: BookingFormValues = {
     name: "",
@@ -186,7 +198,6 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": d2f9f94d_8345_46ae_9684_e0a629cb2cf2,
         },
         body: JSON.stringify(payload),
       });

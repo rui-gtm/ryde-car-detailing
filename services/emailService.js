@@ -4,19 +4,27 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const createTransporter = () => {
-  return nodemailer.createTransport({
+  const port = parseInt(process.env.EMAIL_PORT, 10);
+  const secure = port === 465;
+  const isGmail = /smtp\.gmail\.com/i.test(process.env.EMAIL_HOST || '');
+
+  const transportConfig = {
     host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT),
-    secure: false, // true for 465, false for other ports
+    port,
+    secure,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
-    },
-    tls: {
-      ciphers: 'SSLv3',
-      rejectUnauthorized: false
     }
-  });
+  };
+
+  if (!isGmail) {
+    transportConfig.tls = {
+      rejectUnauthorized: false
+    };
+  }
+
+  return nodemailer.createTransport(transportConfig);
 };
 
 // Format email HTML content

@@ -9,6 +9,7 @@ const getIp = (req) => {
   if (xff) return xff.split(',')[0].trim();
   return req.headers['x-real-ip'] || req.socket?.remoteAddress || 'unknown';
 };
+
 const isEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s || '');
 const isPhone = (s) => {
   const digits = String(s || '').replace(/\D/g, '');
@@ -17,14 +18,62 @@ const isPhone = (s) => {
 const within = (s, max) => typeof s === 'string' && s.length <= max;
 const isYear = (s) => !s || /^\d{4}$/.test(s);
 
-const setCorsHeaders = (res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key');
+const getAllowedOrigins = () => {
+  const raw = process.env.ALLOWED_ORIGINS || '';
+  return raw
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((s) => s.replace(/\/$/, ''));
+};
+
+const originMatches = (origin, allowedList) => {
+  if (!origin) return false;
+  const normalized = origin.replace(/\/$/, '');
+  return allowedList.some((allowed) => {
+    if (!allowed) return false;
+    if (allowed.startsWith('/') && allowed.endsWith('/')) {
+      try {
+        return new RegExp(allowed.slice(1, -1)).test(normalized);
+      } catch {
+        return false;
+      }
+    }
+    return normalized === allowed || normalized.endsWith('.' + allowed);
+  });
+};
+
+const refererMatches = (referer, allowedList) => {
+  if (!referer) return false;
+  try {
+    const refererOrigin = new URL(referer).origin.replace(/\/$/, '');
+    return allowedList.some((allowed) => {
+      if (!allowed) return false;
+      if (allowed.startsWith('/') && allowed.endsWith('/')) {
+        try {
+          return new RegExp(allowed.slice(1, -1)).test(refererOrigin);
+        } catch {
+          return false;
+        }
+      }
+      return refererOrigin === allowed || refererOrigin.endsWith('.' + allowed);
+    });
+  } catch {
+    return false;
+  }
+};
+
+const setCorsHeaders = (res, allowedOrigins) => {
+  const originList = allowedOrigins.length > 0 ? allowedOrigins.join(', ') : '*';
+  res.setHeader('Access-Control-Allow-Origin', originList);
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
 };
 
 export default async function handler(req, res) {
-  setCorsHeaders(res);
+  const allowedOrigins = getAllowedOrigins();
+  setCorsHeaders(res, allowedOrigins);
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -34,10 +83,15 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
   }
 
-  const apiKey = process.env.API_KEY;
-  const reqKey = req.headers['x-api-key'];
-  if (!apiKey || reqKey !== apiKey) {
-    return res.status(401).json({ success: false, error: 'Unauthorized' });
+  if (allowedOrigins.length > 0) {
+    const origin = req.headers['origin'];
+    const referer = req.headers['referer'];
+    const originOk = originMatches(origin, allowedOrigins);
+    const refererOk = refererMatches(referer, allowedOrigins);
+    if (!originOk && !refererOk) {
+      console.warn('Blocked request — origin/referer mismatch', { origin, referer });
+      return res.status(403).json({ success: false, error: 'Forbidden: origin not allowed' });
+    }
   }
 
   const ip = getIp(req);
