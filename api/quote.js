@@ -63,17 +63,38 @@ const refererMatches = (referer, allowedList) => {
   }
 };
 
-const setCorsHeaders = (res, allowedOrigins) => {
-  const originList = allowedOrigins.length > 0 ? allowedOrigins.join(', ') : '*';
-  res.setHeader('Access-Control-Allow-Origin', originList);
+const resolveCorsOrigin = (req, allowedOrigins) => {
+  if (allowedOrigins.length === 0) return '*';
+  const origin = req.headers['origin'];
+  if (origin && originMatches(origin, allowedOrigins)) return origin;
+  const referer = req.headers['referer'];
+  if (referer) {
+    try {
+      const originFromReferer = new URL(referer).origin;
+      if (originFromReferer && originMatches(originFromReferer, allowedOrigins)) {
+        return originFromReferer;
+      }
+    } catch {
+      /* ignore malformed referer */
+    }
+  }
+  return 'null';
+};
+
+const setCorsHeaders = (req, res, allowedOrigins) => {
+  const acao = resolveCorsOrigin(req, allowedOrigins);
+  res.setHeader('Access-Control-Allow-Origin', acao);
   res.setHeader('Vary', 'Origin');
+  if (acao !== '*') {
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
 };
 
 export default async function handler(req, res) {
   const allowedOrigins = getAllowedOrigins();
-  setCorsHeaders(res, allowedOrigins);
+  setCorsHeaders(req, res, allowedOrigins);
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
