@@ -5,6 +5,7 @@ import * as z from "zod";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { CalendarIcon, CheckCircle2, Phone } from "lucide-react";
+import { trackEvent } from "@/AppRoutes";
 import {
   Form,
   FormControl,
@@ -194,6 +195,13 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
         date: date ? format(date, "yyyy-MM-dd") : "",
       };
 
+      trackEvent("booking_submit", {
+        package: values.package || "unspecified",
+        vehicle_type: values.vehicleType || "unspecified",
+        has_date: !!values.date,
+        has_time: !!values.time,
+      });
+
       const response = await fetch(QUOTE_API_URL, {
         method: "POST",
         headers: {
@@ -206,6 +214,11 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
         throw new Error(`Request failed with status ${response.status}`);
       }
 
+      trackEvent("booking_success", {
+        package: values.package || "unspecified",
+        vehicle_type: values.vehicleType || "unspecified",
+      });
+
       toast({
         title: "Booking Request Sent!",
         description: "We'll get back to you shortly to confirm your appointment.",
@@ -215,6 +228,10 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
       onSuccess?.();
     } catch (error) {
       console.error("Failed to send booking request to Netlify function", error);
+      trackEvent("booking_error", {
+        package: values.package || "unspecified",
+        error_message: error instanceof Error ? error.message : "unknown",
+      });
       toast({
         title: "Something went wrong",
         description: "Please try again or contact us directly.",
