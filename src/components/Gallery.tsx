@@ -21,29 +21,89 @@ import exterior9 from "@/assets/exteriorImage-9.jpg";
 import exterior10 from "@/assets/exteriorImage-10.jpg";
 
 const interiorImages = [
-  { src: interior1, alt: "Mobile car detailing in Ryde NSW – deep-cleaned car interior and dashboard" },
-  { src: interior2, alt: "Ryde car detailing – seats and carpets professionally cleaned" },
-  { src: interior3, alt: "Interior detail – leather seats conditioned and refreshed in Ryde NSW" },
-  { src: interior4, alt: "Car boot and cargo area deep clean – professional detailing in Ryde NSW" },
-  { src: interior5, alt: "Dashboard and console detail – Ryde NSW mobile car detailing" },
-  { src: interior6, alt: "Rear seat interior clean – Ryde NSW car detailing service" },
-  { src: interior7, alt: "Steering wheel and cabin detail – freshly cleaned in Ryde NSW" },
-  { src: interior8, alt: "Interior deep clean – seats and carpets professionally detailed in Ryde NSW" },
-  { src: interior9, alt: "Premium interior detailing – dashboard and trim cleaned in Ryde NSW" },
-  { src: interior10, alt: "Interior deep clean – freshly detailed and protected in Ryde NSW" },
+  { 
+    src: interior1, 
+    alt: "Interior Deep Clean - seats and carpets professionally shampooed in Ryde NSW" 
+  },
+  { 
+    src: interior2, 
+    alt: "Mobile car interior deep clean and dashboard detailing in North Ryde" 
+  },
+  { 
+    src: interior3, 
+    alt: "Leather steering wheel and cabin detailing in Meadowbank" 
+  },
+  { 
+    src: interior4, 
+    alt: "Dashboard and interior trim detailed with vinyl protection in Gladesville" 
+  },
+  { 
+    src: interior5, 
+    alt: "Interior Deep Clean package - sanitized and protected car cabin in Gladesville" 
+  },
+  { 
+    src: interior6, 
+    alt: "Mobile interior detailing - dashboard and center console cleaned in Hunters Hill" 
+  },
+  { 
+    src: interior7, 
+    alt: "Cloth seats and floor carpets deep cleaned and vacuumed in Macquarie Park" 
+  },
+  { 
+    src: interior8, 
+    alt: "Leather seats conditioned and hydrated during interior detail in North Ryde" 
+  },
+  { 
+    src: interior9, 
+    alt: "Rear seat row vacuumed and deep cleaned in Macquarie Park" 
+  },
+  { 
+    src: interior10, 
+    alt: "Car boot and cargo area vacuumed and deep cleaned in Macquarie Park" 
+  },
 ];
 
 const exteriorImages = [
-  { src: exterior1, alt: "Exterior detail in Ryde NSW – glossy, streak-free paint finish" },
-  { src: exterior2, alt: "Wheel and rim detailing – professional detailing results in Ryde NSW" },
-  { src: exterior3, alt: "Exterior wash and detail in Ryde NSW – SUV cleaned to a polished finish" },
-  { src: exterior4, alt: "Premium exterior wash – thick foam cannon treatment in Ryde NSW" },
-  { src: exterior5, alt: "Car exterior polished finish – professional detailing results in Ryde NSW" },
-  { src: exterior6, alt: "Exterior detail in Ryde NSW – paintwork cleaned and protected" },
-  { src: exterior7, alt: "Wheel and brake caliper detailing – Ryde NSW mobile car detailing" },
-  { src: exterior8, alt: "Exterior wash and detail in Ryde NSW – luxury SUV cleaned to a polished finish" },
-  { src: exterior9, alt: "Premium exterior detail – glossy, streak-free finish in Ryde NSW" },
-  { src: exterior10, alt: "Exterior detailing in Ryde NSW – showroom finish after a full detail" },
+  { 
+    src: exterior1, 
+    alt: "Hand exterior wash and detail on a luxury SUV in Hunters Hill" 
+  },
+  { 
+    src: exterior2, 
+    alt: "Glossy showroom finish on luxury SUV after full exterior detail in Hunters Hill" 
+  },
+  { 
+    src: exterior3, 
+    alt: "Mobile wheel and brake caliper cleaning on luxury SUV in Hunters Hill" 
+  },
+  { 
+    src: exterior4, 
+    alt: "Exterior paintwork deep cleaned and spray-sealed in North Ryde" 
+  },
+  { 
+    src: exterior5, 
+    alt: "Alloy wheel and rim detailing with tire shine in North Ryde" 
+  },
+  { 
+    src: exterior6, 
+    alt: "Exterior paint correction and hand-polished finish in Gladesville" 
+  },
+  { 
+    src: exterior7, 
+    alt: "Mobile exterior wash and dry for SUV in Macquarie Park" 
+  },
+  { 
+    src: exterior8, 
+    alt: "Thick snow foam cannon pre-wash treatment in Meadowbank" 
+  },
+  { 
+    src: exterior9, 
+    alt: "Premium exterior wash result - glossy, streak-free paint finish in Ryde" 
+  },
+  { 
+    src: exterior10, 
+    alt: "Exterior detailing with streak-free glass and glossy paint in Ryde NSW" 
+  },
 ];
 
 const Gallery = () => {
