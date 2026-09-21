@@ -2,7 +2,7 @@ import { useState, useEffect, type MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/ryde-logo-Bh-MidXe-removebg-preview.png";
+import logo from "@/assets/logo.png";
 
 type NavLink =
   | { type: "scroll"; id: string; label: string }
@@ -85,11 +85,11 @@ const Header = () => {
             className="flex items-center gap-2 focus:outline-none"
             aria-label="Ryde Car Detailing logo"
           >
-            <div className="relative h-10 w-10 md:h-12 md:w-12 overflow-hidden rounded-full">
+            <div className="relative h-14 md:h-16 w-auto">
               <img
                 src={logo}
                 alt="Ryde Car Detailing logo"
-                className="h-full w-full object-contain"
+                className="h-full w-auto object-contain"
                 loading="eager"
                 decoding="async"
               />

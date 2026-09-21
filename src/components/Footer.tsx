@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "@/assets/ryde-logo-Bh-MidXe-removebg-preview.png";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -7,11 +7,11 @@ const Footer = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <Link to="/" className="flex items-center gap-2" aria-label="Ryde Car Detailing home">
-            <div className="relative h-10 w-10 md:h-12 md:w-12 overflow-hidden rounded-full">
+            <div className="relative h-14 md:h-16 w-auto">
               <img
                 src={logo}
                 alt="Ryde Car Detailing logo"
-                className="h-full w-full object-contain"
+                className="h-full w-auto object-contain"
                 loading="lazy"
                 decoding="async"
               />
