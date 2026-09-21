@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
+import { BUSINESS, AREA_SERVED_TEXT } from "@/data/business";
 
 const Footer = () => {
   return (
@@ -17,12 +18,12 @@ const Footer = () => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-semibold text-foreground">Ryde Car Detailing</span>
-              <span className="text-xs text-muted-foreground">109 Blaxland Rd, Ryde NSW 2112</span>
+              <span className="font-semibold text-foreground">{BUSINESS.name}</span>
+              <span className="text-xs text-muted-foreground">{BUSINESS.addressDisplay}</span>
             </div>
           </Link>
           <p className="text-xs text-muted-foreground text-center max-w-md">
-            Servicing Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Hunters Hill
+            Servicing {AREA_SERVED_TEXT}
           </p>
           <div className="flex flex-col items-center md:items-end gap-2">
             <Link
@@ -32,7 +33,7 @@ const Footer = () => {
               Terms &amp; Conditions
             </Link>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Ryde Car Detailing. All rights reserved.
+              © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.
             </p>
           </div>
         </div>

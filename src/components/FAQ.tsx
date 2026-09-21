@@ -1,30 +1,7 @@
+import { FAQS } from "@/data/faqs";
+
 const FAQ = () => {
-  const faqs = [
-    {
-      q: "Do you come to my home or office?",
-      a: "Yes — we’re a mobile detailing service and bring everything needed.",
-    },
-    {
-      q: "How long does a detail take?",
-      a: "Between 1–3 hours depending on the package and car condition.",
-    },
-    {
-      q: "Do I need to supply water or power?",
-      a: "No. Please ensure water and power are available and easily accessible.",
-    },
-    {
-      q: "What areas do you service?",
-      a: "Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Hunters Hill, and nearby suburbs.",
-    },
-    {
-      q: "What payment methods do you accept?",
-      a: "Cash and PayID accepted. Credit card payments coming soon.",
-    },
-    {
-      q: "Do you remove stains and pet hair?",
-      a: "Yes — included in the Interior Deep Clean package.",
-    },
-  ];
+  const faqs = FAQS;
 
   return (
     <section id="faq" className="py-20 bg-secondary/30 scroll-mt-24">

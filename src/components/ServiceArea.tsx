@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import ServiceAreaMapPng from "@/assets/service-area-map.png";
 import ServiceAreaMapWebp from "@/assets/service-area-map.webp";
+import { BUSINESS, AREA_SERVED_TEXT } from "@/data/business";
 
 const ServiceArea = () => {
   return (
@@ -102,7 +103,7 @@ const ServiceArea = () => {
             {/* Suburbs */}
             <div className="mt-4 bg-card rounded-xl border border-border p-6">
               <p className="text-base text-muted-foreground leading-relaxed">
-                We proudly service Ryde, North Ryde, Meadowbank, Gladesville, Macquarie Park, Hunters Hill, and surrounding suburbs.
+                We proudly service {AREA_SERVED_TEXT}, and surrounding suburbs.
               </p>
             </div>
 
@@ -131,13 +132,13 @@ const ServiceArea = () => {
                 Not sure if we serve your area? Give us a call! We're happy to answer any questions.
               </p>
               <p className="text-sm text-muted-foreground mb-6">
-                109 Blaxland Rd, Ryde NSW 2112
+                {BUSINESS.addressDisplay}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button className="flex-1" asChild>
-                  <a href="tel:+61411666174">
+                  <a href={BUSINESS.phoneHref}>
                     <Phone className="w-4 h-4 mr-2" />
-                    Call 0411 666 174
+                    Call {BUSINESS.phoneDisplay}
                   </a>
                 </Button>
                 <Button variant="outline" className="flex-1" asChild>

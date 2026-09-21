@@ -10,6 +10,8 @@ import Gallery from "@/components/Gallery";
 import Testimonial from "@/components/Testimonial";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import { buildHomepageSchema } from "@/lib/schema";
 
 const Index = () => {
   const location = useLocation();
@@ -26,6 +28,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <JsonLd data={buildHomepageSchema("Mobile Car Detailing Ryde NSW | Ryde Car Detailing")} />
       <Header />
       <main>
         <Hero />

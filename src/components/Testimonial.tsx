@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Quote, Star, Shield, Users, Leaf, ThumbsUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { BUSINESS, GOOGLE_REVIEWS } from "@/data/business";
 
-const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA";
-const GOOGLE_RATING = 5;
-const GOOGLE_REVIEW_COUNT = 49;
+const GOOGLE_MAPS_URL = BUSINESS.googleMapsUrl;
+const GOOGLE_RATING = GOOGLE_REVIEWS.rating;
+const GOOGLE_REVIEW_COUNT = GOOGLE_REVIEWS.count;
 
 const testimonials = [
   { quote: "Best detail in Ryde, hands down. My car looks brand new.", name: "James R." },

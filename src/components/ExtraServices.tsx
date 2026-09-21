@@ -8,21 +8,27 @@ import {
   Eraser,
   Layers,
   Droplets,
-  Armchair
+  Armchair,
+  type LucideIcon,
 } from "lucide-react";
+import { EXTRA_SERVICES } from "@/data/extraServices";
 
-const extraServices = [
-  { icon: Dog, label: "Pet Hair Removal" },
-  { icon: Sparkles, label: "Clay Bar Treatment" },
-  { icon: Paintbrush, label: "Exterior Plastics Restoration" },
-  { icon: Lightbulb, label: "Headlight Restoration" },
-  { icon: Shield, label: "Ceramic Coating" },
-  { icon: Cog, label: "Engine Bay Clean" },
-  { icon: Eraser, label: "Step 1 Paint Correction" },
-  { icon: Layers, label: "Step 2 Paint Correction" },
-  { icon: Droplets, label: "Deep Steam Clean" },
-  { icon: Armchair, label: "Deep Seat Extraction" },
-];
+// Icons aren't part of the schema.org-facing data (src/data/extraServices.ts)
+// since structured data has no concept of an icon — mapped here by label instead.
+const ICONS: Record<string, LucideIcon> = {
+  "Pet Hair Removal": Dog,
+  "Clay Bar Treatment": Sparkles,
+  "Exterior Plastics Restoration": Paintbrush,
+  "Headlight Restoration": Lightbulb,
+  "Ceramic Coating": Shield,
+  "Engine Bay Clean": Cog,
+  "Step 1 Paint Correction": Eraser,
+  "Step 2 Paint Correction": Layers,
+  "Deep Steam Clean": Droplets,
+  "Deep Seat Extraction": Armchair,
+};
+
+const extraServices = EXTRA_SERVICES.map((s) => ({ ...s, icon: ICONS[s.label] }));
 
 const ExtraServices = () => {
   return (

@@ -4,6 +4,9 @@ import { CheckCircle2, Phone } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
+import JsonLd from "@/components/JsonLd";
+import { buildPageSchema } from "@/lib/schema";
+import { BUSINESS } from "@/data/business";
 
 const checklist = [
   {
@@ -45,6 +48,7 @@ const Book = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd data={buildPageSchema("/book", "Book Your Detail | Ryde Car Detailing")} />
       <Header />
       <main className="flex-1 pt-16 lg:pt-20">
         <section className="py-12 md:py-16">
@@ -79,11 +83,11 @@ const Book = () => {
 
                   <div className="border-t border-border mt-6 pt-6 space-y-3">
                     <a
-                      href="tel:+61411666174"
+                      href={BUSINESS.phoneHref}
                       className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
                     >
                       <Phone className="w-4 h-4" />
-                      Any questions? Please call or text: 0411 666 174
+                      Any questions? Please call or text: {BUSINESS.phoneDisplay}
                     </a>
                   </div>
                 </div>
@@ -95,8 +99,8 @@ const Book = () => {
                   defaultPackage={defaultPackage}
                   confirmChecklist={checklist}
                   contactPhone={{
-                    href: "tel:+61411666174",
-                    label: "Any questions? Please call or text: 0411 666 174",
+                    href: BUSINESS.phoneHref,
+                    label: `Any questions? Please call or text: ${BUSINESS.phoneDisplay}`,
                   }}
                 />
               </div>

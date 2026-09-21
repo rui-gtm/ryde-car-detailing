@@ -2,71 +2,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { SERVICES } from "@/data/services";
 
-const createServiceId = (title: string) => {
-  return `service-${title
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "")}`;
-};
-
-const services = [
-  {
-    title: "Basic Exterior Wash",
-    packageValue: "basic",
-    description: "Essential exterior care, finished to a premium standard.",
-    price: "from $79",
-    features: [
-      "Hand contact wash for a gentle, swirl-free clean",
-      "Dirt, grime & brake-dust removal",
-      "Wheel & tyre cleanse",
-      "Streak-free exterior windows",
-      "Quick-dry, polished finish",
-    ],
-  },
-  {
-    title: "Interior Deep Clean",
-    packageValue: "basic",
-    description: "Restore your cabin to a pristine, hygienic, like-new condition.",
-    price: "from $129",
-    features: [
-      "Full interior vacuum (seats, carpets, mats & boot)",
-      "Interior scrub + deep decontamination",
-      "Dirt & stain extraction",
-      "Dash, console & trim detailing",
-      "Crystal-clear, streakless windows",
-    ],
-  },
-  {
-    title: "Premium Full Detail",
-    packageValue: "premium",
-    description: "The complete inside-and-out transformation. Our signature service.",
-    price: "from $199",
-    features: [
-      "Full interior deep clean",
-      "Complete exterior wash + wheel clean",
-      "Streak-free interior & exterior windows",
-      "Interior scrub, stain removal & decontamination",
-      "Tyre shine for a refined finish",
-      "Full-vehicle vacuum throughout",
-    ],
-  },
-  {
-    title: "Ceramic Coating",
-    packageValue: "ceramic",
-    description: "Elite paint protection with a superior gloss finish.",
-    price: "from $499",
-    features: [
-      "Paint decontamination & professional surface prep",
-      "High-gloss, mirror-like finish",
-      "UV & chemical resistance",
-      "Hydrophobic water-beading performance",
-      "10H hardness formula for long-term durability",
-      "1-year or 7-year protection kit options",
-    ],
-  },
-];
+const services = SERVICES;
 
 const Services = () => {
   return (
@@ -81,7 +19,7 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => {
-            const serviceId = createServiceId(service.title);
+            const serviceId = service.id;
             const titleId = `${serviceId}-title`;
 
             return (
@@ -118,7 +56,7 @@ const Services = () => {
                   </CardHeader>
                   <CardContent className="flex-1 px-6 pt-0 pb-6">
                     <div className="border-t border-border/60 pt-1">
-                      <p className="text-2xl font-bold text-primary mt-1">{service.price}</p>
+                      <p className="text-2xl font-bold text-primary mt-1">from ${service.price}</p>
                     </div>
                     <ul className="space-y-2.5 mt-2.5">
                       {service.features.map((feature) => (

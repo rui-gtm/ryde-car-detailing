@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import { buildPageSchema } from "@/lib/schema";
 
 type Section = {
   heading: string;
@@ -217,6 +219,7 @@ const Terms = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd data={buildPageSchema("/terms", "Terms & Conditions | Ryde Car Detailing")} />
       <Header />
       <main className="flex-1 pt-16 lg:pt-20">
         <section className="py-12 md:py-16">
