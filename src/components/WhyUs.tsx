@@ -1,3 +1,4 @@
+import { Card, CardContent } from "@/components/ui/card";
 import { TRUST_BADGES } from "@/data/trustBadges";
 
 // Full "why choose us" section with descriptions — this supersedes the
@@ -15,14 +16,16 @@ const WhyUs = () => (
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {TRUST_BADGES.map((badge) => (
-          <div
+          <Card
             key={badge.text}
-            className="p-6 bg-card rounded-xl text-center hover:border-primary hover:shadow-md transition-all duration-300"
+            className="border-0 text-center hover:shadow-md transition-all duration-300"
           >
-            <badge.icon className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-semibold text-foreground mb-2">{badge.text}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{badge.description}</p>
-          </div>
+            <CardContent className="p-6">
+              <badge.icon className="w-8 h-8 text-primary mx-auto mb-3" />
+              <h3 className="font-semibold text-foreground mb-2">{badge.text}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{badge.description}</p>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>

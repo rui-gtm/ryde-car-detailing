@@ -10,7 +10,7 @@ const WhoWeAre = () => (
       <div className="max-w-2xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Who We Are</h2>
         <p className="text-muted-foreground leading-relaxed mb-4 text-lg">{BUSINESS.description}</p>
-        <Link to="/about" className="text-sm font-medium text-primary hover:underline">
+        <Link to="/about" className="text-sm text-primary">
           Learn more about us →
         </Link>
       </div>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, ArrowUpRight, Clock, Users } from "lucide-react";
+import { Check, Clock, Users } from "lucide-react";
 import { serviceHref, type ServicePackage } from "@/data/services";
 
 export type ServiceCardVariant = "compact" | "detailed";
@@ -82,10 +82,9 @@ const ServiceCard = ({
           </Button>
           <Link
             to={href}
-            className="mt-2 inline-flex items-center justify-center gap-1 text-sm font-medium text-primary hover:underline underline-offset-4"
+            className="mt-2 inline-flex items-center justify-center gap-1 text-sm text-primary"
           >
-            View Service
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            View Service →
           </Link>
         </CardFooter>
       </Card>

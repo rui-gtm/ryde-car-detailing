@@ -16,7 +16,7 @@ const ReadingSection = () => (
       <GuideCardGrid limit={3} />
 
       <div className="text-center mt-10">
-        <Link to="/guides" className="text-sm font-medium text-primary hover:underline">
+        <Link to="/guides" className="text-sm text-primary">
           View all guides →
         </Link>
       </div>
