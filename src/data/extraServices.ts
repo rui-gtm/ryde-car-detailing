@@ -2,7 +2,9 @@
 // ExtraServices.tsx. The same list feeds the JSON-LD `Service` nodes in
 // src/lib/schema.ts (icons stay in ExtraServices.tsx since schema.org has no
 // concept of an icon).
-import { slugify } from "./services";
+import { slugify as slugifyBase } from "@/lib/slug";
+
+const slugify = (title: string) => `service-${slugifyBase(title)}`;
 
 export type ExtraService = {
   id: string;

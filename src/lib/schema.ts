@@ -5,9 +5,23 @@
 // places, and they drifted apart. Now there is exactly one place to edit each
 // fact; this file just re-shapes it into schema.org form.
 import { BUSINESS, AREA_SERVED, SITE_URL } from "@/data/business";
-import { SERVICES } from "@/data/services";
+import { SERVICES, type ServicePackage } from "@/data/services";
 import { EXTRA_SERVICES } from "@/data/extraServices";
 import { FAQS } from "@/data/faqs";
+import type { Suburb } from "@/data/suburbs";
+import type { Guide } from "@/data/guides";
+
+export type Crumb = { name: string; url: string };
+
+const breadcrumbNode = (items: Crumb[]) => ({
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((item, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: item.name,
+    item: `${SITE_URL}${item.url}`,
+  })),
+});
 
 const areaServedNodes = AREA_SERVED.map((name) => ({ "@type": "City", name }));
 
@@ -123,7 +137,66 @@ export const buildHomepageSchema = (pageTitle: string) => ({
  * that page (declaring FAQPage/Service on a page with no FAQs or services
  * visible would itself be a structured-data mismatch).
  */
-export const buildPageSchema = (url: string, pageTitle: string) => ({
+export const buildPageSchema = (url: string, pageTitle: string, breadcrumbs?: Crumb[]) => ({
   "@context": "https://schema.org",
-  "@graph": [webPageNode(url, pageTitle)],
+  "@graph": [webPageNode(url, pageTitle), ...(breadcrumbs ? [breadcrumbNode(breadcrumbs)] : [])],
+});
+
+/** Per-service detail page (/services/:slug) — reuses the same Service node shape as the homepage. */
+export const buildServicePageSchema = (service: ServicePackage, url: string, pageTitle: string, breadcrumbs: Crumb[]) => ({
+  "@context": "https://schema.org",
+  "@graph": [
+    webPageNode(url, pageTitle),
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/#${service.id}`,
+      name: service.title,
+      serviceType: service.serviceType,
+      description: service.description,
+      provider: { "@id": `${SITE_URL}/#localbusiness` },
+      areaServed: areaServedNodes,
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "AUD",
+        price: String(service.price),
+        url: `${SITE_URL}${url}`,
+      },
+    },
+    breadcrumbNode(breadcrumbs),
+  ],
+});
+
+/** Per-suburb detail page (/areas/:slug). */
+export const buildSuburbPageSchema = (suburb: Suburb, url: string, pageTitle: string, breadcrumbs: Crumb[]) => ({
+  "@context": "https://schema.org",
+  "@graph": [
+    webPageNode(url, pageTitle),
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}${url}#service`,
+      name: `Mobile Car Detailing in ${suburb.name}`,
+      serviceType: "Mobile car detailing",
+      provider: { "@id": `${SITE_URL}/#localbusiness` },
+      areaServed: { "@type": "City", name: suburb.name },
+    },
+    breadcrumbNode(breadcrumbs),
+  ],
+});
+
+/** Per-guide article page (/guides/:slug). */
+export const buildGuidePageSchema = (guide: Guide, url: string, pageTitle: string, breadcrumbs: Crumb[]) => ({
+  "@context": "https://schema.org",
+  "@graph": [
+    webPageNode(url, pageTitle),
+    {
+      "@type": "Article",
+      "@id": `${SITE_URL}${url}#article`,
+      headline: guide.title,
+      description: guide.excerpt,
+      author: { "@id": `${SITE_URL}/#localbusiness` },
+      publisher: { "@id": `${SITE_URL}/#localbusiness` },
+      mainEntityOfPage: { "@id": `${SITE_URL}${url}#webpage` },
+    },
+    breadcrumbNode(breadcrumbs),
+  ],
 });

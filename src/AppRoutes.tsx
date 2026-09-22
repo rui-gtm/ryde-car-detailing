@@ -3,6 +3,13 @@ import { useEffect } from "react";
 import Index from "@/pages/Index";
 import Book from "@/pages/Book";
 import Terms from "@/pages/Terms";
+import About from "@/pages/About";
+import ServicesOverview from "@/pages/ServicesOverview";
+import ServiceDetail from "@/pages/ServiceDetail";
+import Areas from "@/pages/Areas";
+import AreaDetail from "@/pages/AreaDetail";
+import Guides from "@/pages/Guides";
+import GuideDetail from "@/pages/GuideDetail";
 
 declare global {
   interface Window {
@@ -40,6 +47,13 @@ const AppRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/book" element={<Book />} />
       <Route path="/terms" element={<Terms />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/services" element={<ServicesOverview />} />
+      <Route path="/services/:slug" element={<ServiceDetail />} />
+      <Route path="/areas" element={<Areas />} />
+      <Route path="/areas/:slug" element={<AreaDetail />} />
+      <Route path="/guides" element={<Guides />} />
+      <Route path="/guides/:slug" element={<GuideDetail />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

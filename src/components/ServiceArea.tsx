@@ -105,6 +105,9 @@ const ServiceArea = () => {
               <p className="text-base text-muted-foreground leading-relaxed">
                 We proudly service {AREA_SERVED_TEXT}, and surrounding suburbs.
               </p>
+              <Link to="/areas" className="inline-block mt-2 text-sm font-medium text-primary hover:underline">
+                View all suburbs we service →
+              </Link>
             </div>
 
             {/* Zone legend */}

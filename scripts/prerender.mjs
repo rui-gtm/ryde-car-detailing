@@ -39,21 +39,19 @@ if (typeof ssrModule.render !== "function") {
 const indexHtmlPath = path.resolve(distDir, "index.html");
 const baseTemplate = await fs.readFile(indexHtmlPath, "utf8");
 
+// Route list (path/title/description) comes from src/lib/siteRoutes.ts via
+// the compiled SSR bundle — NOT hardcoded here — so adding a new suburb,
+// service or guide only ever means editing one data file, not this script too.
+const siteRoutes = ssrModule.ALL_ROUTES ?? [];
+
 const routes = [
   { url: "/", outFile: indexHtmlPath },
-  {
-    url: "/book",
-    outFile: path.resolve(distDir, "book", "index.html"),
-    title: "Book Your Detail | Ryde Car Detailing",
-    description:
-      "Book your mobile car detail in Ryde NSW. Fill out the form and we'll contact you to confirm your appointment.",
-  },
-  {
-    url: "/terms",
-    outFile: path.resolve(distDir, "terms", "index.html"),
-    title: "Terms & Conditions | Ryde Car Detailing",
-    description: "Read the Terms & Conditions for Ryde Car Detailing's mobile car detailing services.",
-  },
+  ...siteRoutes.map((r) => ({
+    url: r.path,
+    outFile: path.resolve(distDir, r.path.replace(/^\//, ""), "index.html"),
+    title: r.title,
+    description: r.description,
+  })),
 ];
 
 const applyMeta = (html, route) => {
@@ -95,3 +93,20 @@ for (const route of routes) {
   await fs.mkdir(path.dirname(route.outFile), { recursive: true });
   await fs.writeFile(route.outFile, formatted, "utf8");
 }
+
+// Regenerate sitemap.xml from the same route list instead of the
+// hand-maintained public/sitemap.xml (which only ever listed 3 URLs and
+// required a manual edit every time a page was added) — this overwrites the
+// static copy Vite already put in dist/ during the build.
+const today = new Date().toISOString().slice(0, 10);
+const sitemapUrls = ["/", ...siteRoutes.map((r) => r.path)];
+const sitemapXml = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...sitemapUrls.map(
+    (u) => `  <url>\n    <loc>https://www.rydecardetailing.com${u}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`,
+  ),
+  "</urlset>",
+  "",
+].join("\n");
+await fs.writeFile(path.resolve(distDir, "sitemap.xml"), sitemapXml, "utf8");
