@@ -26,24 +26,17 @@ const ServiceCard = ({
   return (
     <article id={service.id} aria-labelledby={titleId} className="h-full scroll-mt-28">
       <Card
-        className={`relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col${
+        className={`relative overflow-visible transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col${
           isPopular ? " bg-sky-50" : ""
         }`}
         style={{ animationDelay: `${index * 0.1}s` }}
       >
+        {isPopular && (
+          <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-sky-700 shadow-sm ring-1 ring-sky-200">
+            MOST POPULAR
+          </span>
+        )}
         <CardHeader className="relative flex flex-col px-6 pt-6 pb-4 gap-3">
-          {isPopular ? (
-            <span className="self-start rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-sky-700">
-              MOST POPULAR
-            </span>
-          ) : (
-            <span
-              aria-hidden="true"
-              className="self-start rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide opacity-0"
-            >
-              MOST POPULAR
-            </span>
-          )}
           <CardTitle id={titleId} className="text-lg font-semibold leading-snug text-foreground">
             <Link to={href} className="hover:underline underline-offset-4">
               {service.title}

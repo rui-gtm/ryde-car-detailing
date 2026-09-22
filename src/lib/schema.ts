@@ -150,16 +150,26 @@ export const buildHomepageSchema = (pageTitle: string) => ({
 });
 
 /**
- * Lightweight graph for secondary pages (e.g. /book, /terms) that don't carry
- * FAQ or Service content of their own — just a WebPage node referencing the
- * same business/website entities declared on the homepage, so the entity
- * stays consistent without re-declaring markup for content that isn't on
- * that page (declaring FAQPage/Service on a page with no FAQs or services
- * visible would itself be a structured-data mismatch).
+ * Graph for secondary pages — a WebPage node referencing the same
+ * business/website entities declared on the homepage, so the entity stays
+ * consistent without re-declaring markup for content that isn't on that page
+ * (declaring FAQPage/Service on a page with no FAQs or services visible would
+ * itself be a structured-data mismatch). Pass `options.services`/`options.faq`
+ * when the page actually renders those sections (e.g. /services).
  */
-export const buildPageSchema = (url: string, pageTitle: string, breadcrumbs?: Crumb[]) => ({
+export const buildPageSchema = (
+  url: string,
+  pageTitle: string,
+  breadcrumbs?: Crumb[],
+  options?: { services?: boolean; faq?: boolean },
+) => ({
   "@context": "https://schema.org",
-  "@graph": [webPageNode(url, pageTitle), ...(breadcrumbs ? [breadcrumbNode(breadcrumbs)] : [])],
+  "@graph": [
+    webPageNode(url, pageTitle),
+    ...(breadcrumbs ? [breadcrumbNode(breadcrumbs)] : []),
+    ...(options?.services ? coreServiceNodes() : []),
+    ...(options?.faq ? [faqPageNode()] : []),
+  ],
 });
 
 /** Per-service detail page (/services/:slug) — reuses the same Service node shape as the homepage. */
