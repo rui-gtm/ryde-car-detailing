@@ -4,10 +4,11 @@
 // editing a price, FAQ answer or suburb meant remembering to change it in two
 // places, and they drifted apart. Now there is exactly one place to edit each
 // fact; this file just re-shapes it into schema.org form.
-import { BUSINESS, AREA_SERVED, SITE_URL } from "@/data/business";
+import { BUSINESS, AREA_SERVED, GOOGLE_REVIEWS, SITE_URL } from "@/data/business";
 import { SERVICES, type ServicePackage } from "@/data/services";
 import { EXTRA_SERVICES } from "@/data/extraServices";
 import { FAQS } from "@/data/faqs";
+import { TESTIMONIALS } from "@/data/testimonials";
 import type { Suburb } from "@/data/suburbs";
 import type { Guide } from "@/data/guides";
 
@@ -24,6 +25,19 @@ const breadcrumbNode = (items: Crumb[]) => ({
 });
 
 const areaServedNodes = AREA_SERVED.map((name) => ({ "@type": "City", name }));
+
+// Only reviews sourced verbatim from Google Maps are declared as Review
+// structured data — declaring the placeholder testimonials too would be
+// structured data that can't be verified against the visible source.
+const googleTestimonials = TESTIMONIALS.filter((t) => t.source === "google");
+
+const reviewNodes = () =>
+  googleTestimonials.map((t) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: t.name },
+    reviewBody: t.quote,
+    reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
+  }));
 
 const websiteNode = () => ({
   "@type": "WebSite",
@@ -54,6 +68,12 @@ const localBusinessNode = () => ({
     ...BUSINESS.geo,
   },
   areaServed: areaServedNodes,
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: GOOGLE_REVIEWS.rating,
+    reviewCount: GOOGLE_REVIEWS.count,
+  },
+  review: reviewNodes(),
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Car Detailing Services",

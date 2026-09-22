@@ -46,5 +46,5 @@ export const AREA_SERVED_TEXT = AREA_SERVED.join(", ");
 // GoogleRatingSection.tsx, which is why the two disagreed.
 export const GOOGLE_REVIEWS = {
   rating: 5,
-  count: 49,
+  count: 51,
 } as const;

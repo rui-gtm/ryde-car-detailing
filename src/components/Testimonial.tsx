@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
-import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { BUSINESS, GOOGLE_REVIEWS } from "@/data/business";
+import { TESTIMONIALS as testimonials } from "@/data/testimonials";
 
 const GOOGLE_MAPS_URL = BUSINESS.googleMapsUrl;
 const GOOGLE_RATING = GOOGLE_REVIEWS.rating;
 const GOOGLE_REVIEW_COUNT = GOOGLE_REVIEWS.count;
-
-const testimonials = [
-  { quote: "Best detail in Ryde, hands down. My car looks brand new.", name: "James R." },
-  { quote: "Fast, friendly, and came to my office. Super convenient.", name: "Melissa T." },
-  { quote: "Interior detail removed all pet hair. Amazing!", name: "Alex P." },
-  { quote: "Great car cleaning service! Got an interior and exterior clean and the car looks fantastic. Super easy to organise and highly recommended. Big thanks for the clean and will be using Ryde Car Detailing again!", name: "Deb R" },
-  { quote: "Great communication, service- and job well done. Would recommend!", name: "Saarang J" },
-  { quote: "Jared did SUCH a good job. It was such short notice but he was super professional and attentive, spending over 90 minutes to make sure he did a 5* job. Would really recommend- thank you!", name: "Sarah C" },
-];
 
 const GoogleLogo = () => (
   <span className="text-xl font-bold tracking-tight">
@@ -56,7 +48,7 @@ const Testimonial = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 mb-2 mt-2"
           >
-            <div className="flex items-center gap-3 bg-card rounded-xl px-5 py-3 hover:bg-muted transition-colors cursor-pointer">
+            <div className="flex items-center gap-3 bg-card rounded-xl border border-border px-5 py-3 hover:bg-muted transition-colors cursor-pointer">
               <GoogleLogo />
               <div className="w-px h-8 bg-border" />
               <div className="text-left">
@@ -82,22 +74,24 @@ const Testimonial = () => {
           <div className="relative">
             <button
               onClick={goToPrev}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted transition-colors"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 rounded-full flex items-center justify-center hover:bg-muted transition-colors"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-5 h-5 text-foreground" />
+              <ChevronLeft className="w-5 h-5 text-muted-foreground" />
             </button>
 
             <button
               onClick={goToNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted transition-colors"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-10 h-10 rounded-full flex items-center justify-center hover:bg-muted transition-colors"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-5 h-5 text-foreground" />
+              <ChevronRight className="w-5 h-5 text-muted-foreground" />
             </button>
 
             <div className="bg-card rounded-xl border border-border p-8 md:p-12 relative min-h-[200px]">
-              <Quote className="w-12 h-12 text-primary/20 absolute top-6 left-6" />
+              <span className="absolute top-6 right-6 text-xs font-medium text-primary">
+                {testimonials[activeIndex].service}
+              </span>
 
               <div className="flex justify-center gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
