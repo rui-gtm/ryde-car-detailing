@@ -15,7 +15,7 @@ const navLinks: NavLink[] = [
   { type: "page", to: "/areas", label: "Areas" },
   { type: "page", to: "/guides", label: "Guides" },
   { type: "page", to: "/about", label: "About" },
-  { type: "scroll", id: "service-area", label: "Contact" },
+  { type: "page", to: "/book", label: "Contact" },
 ];
 
 // A nav item is "active" on its own page and any of its sub-pages

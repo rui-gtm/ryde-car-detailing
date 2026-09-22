@@ -6,7 +6,7 @@ import type { Crumb } from "@/lib/schema";
 // both here and to the matching schema builder in src/lib/schema.ts, so the
 // visible trail and the BreadcrumbList structured data can never disagree.
 const Breadcrumbs = ({ items }: { items: Crumb[] }) => (
-  <nav aria-label="Breadcrumb" className="border-b border-border/60 bg-secondary/20">
+  <nav aria-label="Breadcrumb" className="bg-secondary/20">
     <div className="container mx-auto px-4 py-3">
       <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
         {items.map((item, i) => {

@@ -1,5 +1,4 @@
-import type { MouseEvent } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Phone, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
@@ -8,18 +7,6 @@ import { SUBURBS } from "@/data/suburbs";
 import { SERVICES, serviceHref } from "@/data/services";
 
 const Footer = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleContactClick = (e: MouseEvent) => {
-    e.preventDefault();
-    if (location.pathname === "/") {
-      document.getElementById("service-area")?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      navigate("/", { state: { scrollTo: "service-area" } });
-    }
-  };
-
   return (
     <footer className="py-10 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
@@ -70,13 +57,12 @@ const Footer = () => {
             <Link to="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               About
             </Link>
-            <a
-              href="/#service-area"
-              onClick={handleContactClick}
+            <Link
+              to="/book"
               className="text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               Contact
-            </a>
+            </Link>
           </div>
 
           <div className="flex flex-col gap-2">

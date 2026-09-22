@@ -3,7 +3,6 @@ import PageShell from "@/components/PageShell";
 import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
 import MobileConvenience from "@/components/MobileConvenience";
-import ServiceNavigator from "@/components/services/ServiceNavigator";
 import Services from "@/components/Services";
 import ExtraServices from "@/components/ExtraServices";
 import BookCta from "@/components/BookCta";
@@ -33,7 +32,6 @@ const ServicesOverview = () => {
         </div>
       </PageHero>
       <MobileConvenience />
-      <ServiceNavigator />
       <Services
         heading="What each service covers"
         subheading="Every service is available across Ryde and nearby suburbs, priced up front."
