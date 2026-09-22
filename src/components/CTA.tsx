@@ -8,13 +8,19 @@ const benefits = [
   { icon: ThumbsUp, text: "100% satisfaction guaranteed" },
 ];
 
-const CTA = () => {
+const CTA = ({
+  heading = "Ready to Experience the Detailing Difference?",
+  bookHref = "/book",
+  bookLabel = "Book Your Detail Today",
+}: {
+  heading?: string;
+  bookHref?: string;
+  bookLabel?: string;
+}) => {
   return (
     <section id="book" className="py-20 bg-primary scroll-mt-24">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-8">
-          Ready to Experience the Detailing Difference?
-        </h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-8">{heading}</h2>
 
         <div className="flex flex-wrap justify-center gap-8 mb-10">
           {benefits.map((benefit) => (
@@ -26,7 +32,7 @@ const CTA = () => {
         </div>
 
         <Button size="lg" variant="secondary" className="text-lg px-8" asChild>
-          <Link to="/book">Book Your Detail Today</Link>
+          <Link to={bookHref}>{bookLabel}</Link>
         </Button>
       </div>
     </section>

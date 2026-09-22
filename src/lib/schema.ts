@@ -7,7 +7,7 @@
 import { BUSINESS, AREA_SERVED, GOOGLE_REVIEWS, SITE_URL } from "@/data/business";
 import { SERVICES, type ServicePackage } from "@/data/services";
 import { EXTRA_SERVICES } from "@/data/extraServices";
-import { FAQS } from "@/data/faqs";
+import { FAQS, type Faq } from "@/data/faqs";
 import { TESTIMONIALS } from "@/data/testimonials";
 import type { Suburb } from "@/data/suburbs";
 import type { Guide } from "@/data/guides";
@@ -126,10 +126,10 @@ const webPageNode = (url: string, name: string) => ({
   about: { "@id": `${SITE_URL}/#localbusiness` },
 });
 
-const faqPageNode = () => ({
+const faqPageNode = (faqs: Faq[] = FAQS, id = `${SITE_URL}/#faq`) => ({
   "@type": "FAQPage",
-  "@id": `${SITE_URL}/#faq`,
-  mainEntity: FAQS.map((f) => ({
+  "@id": id,
+  mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -193,6 +193,7 @@ export const buildServicePageSchema = (service: ServicePackage, url: string, pag
       },
     },
     breadcrumbNode(breadcrumbs),
+    faqPageNode(service.faqs, `${SITE_URL}${url}#faq`),
   ],
 });
 

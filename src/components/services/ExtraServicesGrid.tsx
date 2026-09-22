@@ -15,8 +15,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { EXTRA_SERVICES } from "@/data/extraServices";
 
 // Icons aren't part of the schema.org-facing data (src/data/extraServices.ts)
-// since structured data has no concept of an icon — mapped here by label instead.
-const ICONS: Record<string, LucideIcon> = {
+// since structured data has no concept of an icon — mapped here by label
+// instead, and exported so other places that reference an extra service by
+// label (e.g. ServiceDetail's "Often paired with") can reuse the same icon.
+export const EXTRA_SERVICE_ICONS: Record<string, LucideIcon> = {
   "Pet Hair Removal": Dog,
   "Clay Bar Treatment": Sparkles,
   "Exterior Plastics Restoration": Paintbrush,
@@ -29,7 +31,7 @@ const ICONS: Record<string, LucideIcon> = {
   "Deep Seat Extraction": Armchair,
 };
 
-const extraServices = EXTRA_SERVICES.map((s) => ({ ...s, icon: ICONS[s.label] }));
+const extraServices = EXTRA_SERVICES.map((s) => ({ ...s, icon: EXTRA_SERVICE_ICONS[s.label] }));
 
 // Grid of unpriced add-ons — reused by the homepage's ExtraServices section
 // and the /services page's "Extra Services" section (see ExtraServices.tsx).

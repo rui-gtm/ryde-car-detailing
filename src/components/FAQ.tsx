@@ -1,9 +1,17 @@
 import { ChevronDown } from "lucide-react";
-import { FAQS } from "@/data/faqs";
+import { FAQS, type Faq } from "@/data/faqs";
 
-const FAQ = ({ tone = "muted" }: { tone?: "muted" | "plain" }) => {
-  const faqs = FAQS;
-
+const FAQ = ({
+  tone = "muted",
+  faqs = FAQS,
+  title = "Frequently asked questions",
+  description = "If your question is not here, call 0411 666 174.",
+}: {
+  tone?: "muted" | "plain";
+  faqs?: Faq[];
+  title?: string;
+  description?: string;
+}) => {
   return (
     <section
       id="faq"
@@ -11,10 +19,8 @@ const FAQ = ({ tone = "muted" }: { tone?: "muted" | "plain" }) => {
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Frequently asked questions</h2>
-          <p className="text-muted-foreground text-lg">
-            If your question is not here, call 0411 666 174.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{title}</h2>
+          <p className="text-muted-foreground text-lg">{description}</p>
         </div>
         <div className="max-w-2xl mx-auto divide-y divide-border/50">
           {faqs.map((item) => (

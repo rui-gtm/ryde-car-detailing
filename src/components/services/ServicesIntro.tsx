@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
-import interiorImage from "@/assets/interiorImage-1.jpg";
-import exteriorImage from "@/assets/exteriorImage-1.jpg";
+import interiorImage from "@/assets/interiorImage-5.jpg";
+import exteriorImage from "@/assets/exteriorImage-3.jpg";
 
 const POINTS = [
   "Two-bucket hand washing — never automatic brushes",
@@ -51,9 +51,6 @@ const ServicesIntro = () => {
               className="hidden sm:block absolute -bottom-6 -left-6 w-2/5 aspect-square object-cover rounded-xl border-4 border-background shadow-lg"
               loading="lazy"
             />
-            <span className="absolute top-4 right-4 bg-background/90 backdrop-blur px-3 py-1.5 rounded-full text-xs font-semibold text-foreground shadow">
-              Mobile only
-            </span>
           </div>
         </div>
       </div>
