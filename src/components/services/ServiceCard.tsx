@@ -44,13 +44,13 @@ const ServiceCard = ({
           </CardTitle>
           <p className="text-sm leading-relaxed text-muted-foreground min-h-[56px]">{service.description}</p>
           {detailed && (
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+            <div className="flex flex-col gap-1.5 text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-primary shrink-0" />
                 {service.duration}
               </span>
-              <span className="flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5 text-primary shrink-0" />
+              <span className="flex items-start gap-1.5">
+                <Users className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
                 {service.bestFor}
               </span>
             </div>

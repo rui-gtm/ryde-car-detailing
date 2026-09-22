@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Clock, Users } from "lucide-react";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
+import Services from "@/components/Services";
 import { EXTRA_SERVICE_ICONS } from "@/components/services/ExtraServicesGrid";
 import { buildServicePageSchema } from "@/lib/schema";
 import { SERVICES, serviceSlug, serviceHref } from "@/data/services";
@@ -143,35 +144,22 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      <section
-        className={`py-16 md:py-20 ${hasInclusions ? "bg-secondary/30" : "bg-background"}`}
-        aria-labelledby="other-services-title"
-      >
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 id="other-services-title" className="text-3xl md:text-4xl font-bold text-foreground mb-6 text-center">
-              Other services
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {otherServices.map((s) => (
-                <Link
-                  key={s.id}
-                  to={serviceHref(s.id)}
-                  className="p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors text-center"
-                >
-                  <p className="text-sm font-medium text-foreground">{s.title}</p>
-                  <p className="text-xs text-muted-foreground mt-1">from ${s.price}</p>
-                </Link>
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/services">View all services & pricing</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Services
+        sectionId="other-services"
+        heading="Other services"
+        subheading="Explore the rest of our detailing packages."
+        variant="detailed"
+        tone={hasInclusions ? "muted" : "plain"}
+        services={otherServices}
+        footer={
+          <Link
+            to="/services"
+            className="inline-flex items-center gap-1 text-sm font-medium text-primary"
+          >
+            View all services & pricing →
+          </Link>
+        }
+      />
 
       <FAQ
         tone={hasInclusions ? "plain" : "muted"}

@@ -1,22 +1,29 @@
+import type { ReactNode } from "react";
 import ServiceCardGrid from "@/components/services/ServiceCardGrid";
 import type { ServiceCardVariant } from "@/components/services/ServiceCard";
+import type { ServicePackage } from "@/data/services";
 
-// Renders the 4 core packages as a heading + grid. Configurable so the exact
-// same section works both as the homepage's compact "Our Services" block and
-// the /services page's more detailed "What each service covers" block —
-// one component, two contexts, instead of two near-duplicate sections.
+// Renders the core packages as a heading + grid. Configurable so the exact
+// same section works both as the homepage's compact "Our Services" block, the
+// /services page's more detailed "What each service covers" block, and a
+// service detail page's "Other services" block — one component, several
+// contexts, instead of near-duplicate sections.
 const Services = ({
   heading = "Our Services",
   subheading = "Professional detailing services tailored to your needs.",
   variant = "compact",
   sectionId = "services",
   tone = "muted",
+  services,
+  footer,
 }: {
   heading?: string;
   subheading?: string;
   variant?: ServiceCardVariant;
   sectionId?: string;
   tone?: "muted" | "plain";
+  services?: ServicePackage[];
+  footer?: ReactNode;
 }) => {
   return (
     <section
@@ -29,7 +36,9 @@ const Services = ({
           <p className="text-muted-foreground text-lg">{subheading}</p>
         </div>
 
-        <ServiceCardGrid variant={variant} />
+        <ServiceCardGrid variant={variant} services={services} />
+
+        {footer && <div className="text-center mt-12">{footer}</div>}
       </div>
     </section>
   );
