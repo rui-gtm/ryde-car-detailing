@@ -16,7 +16,7 @@ import { BUSINESS, AREA_SERVED_TEXT } from "@/data/business";
 
 const ServiceArea = () => {
   return (
-    <section id="service-area" className="py-20 bg-secondary/30 scroll-mt-24">
+    <section id="service-area" className="py-20 bg-background scroll-mt-24">
       <div className="container mx-auto px-4">
 
         {/* Header */}
@@ -25,7 +25,7 @@ const ServiceArea = () => {
             Our Service Area
           </h2>
           <p className="text-muted-foreground text-lg">
-            We come to you - mobile detailing at your convenience
+            We come to you, mobile detailing at your convenience.
           </p>
         </div>
 

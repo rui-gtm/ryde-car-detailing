@@ -9,7 +9,7 @@ export const BUSINESS = {
   name: "Ryde Car Detailing",
   url: SITE_URL,
   description:
-    "Professional mobile car wash and detailing service in Ryde, NSW. We come to your home or office with everything needed — mobile car wash, interior deep clean, full detail, and ceramic coating.",
+    "Professional mobile car wash and detailing service in Ryde, NSW. We come to your home or office with everything needed, mobile car wash, interior deep clean, full detail, and ceramic coating.",
   keywords: "mobile car wash, mobile car detailing, car wash Ryde, car detailing Ryde NSW, mobile detailing Sydney",
   phoneDisplay: "0411 666 174",
   phoneE164: "+61411666174",

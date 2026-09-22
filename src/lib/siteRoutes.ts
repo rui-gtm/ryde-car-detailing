@@ -9,7 +9,7 @@
 import { BUSINESS } from "@/data/business";
 import { SERVICES, serviceHref } from "@/data/services";
 import { SUBURBS } from "@/data/suburbs";
-import { GUIDES } from "@/data/guides";
+import { GUIDES, guideHref } from "@/data/guides";
 
 export type SiteRoute = {
   path: string;
@@ -65,7 +65,7 @@ export const SUBURB_ROUTES: SiteRoute[] = SUBURBS.map((s) => ({
 }));
 
 export const GUIDE_ROUTES: SiteRoute[] = GUIDES.map((g) => ({
-  path: `/guides/${g.slug}`,
+  path: guideHref(g.slug),
   title: `${g.title} | ${BUSINESS.name}`,
   description: g.excerpt,
 }));

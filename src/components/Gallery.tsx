@@ -108,12 +108,12 @@ const exteriorImages = [
 
 const Gallery = () => {
   return (
-    <section id="gallery" className="py-20 bg-background scroll-mt-24">
+    <section id="gallery" className="py-20 bg-secondary/30 scroll-mt-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">See the Difference</h2>
           <p className="text-muted-foreground text-lg">
-            Professional results that speak for themselves
+            Professional results that speak for themselves.
           </p>
         </div>
 

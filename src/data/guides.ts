@@ -117,3 +117,4 @@ const raw: Omit<Guide, "slug">[] = [
 export const GUIDES: Guide[] = raw.map((g) => ({ slug: slugify(g.title), ...g }));
 
 export const findGuide = (slug: string) => GUIDES.find((g) => g.slug === slug);
+export const guideHref = (slug: string) => `/guides/${slug}`;

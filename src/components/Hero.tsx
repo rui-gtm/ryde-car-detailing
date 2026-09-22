@@ -72,7 +72,7 @@ const Hero = () => {
             <Link to="/book">Book Your Detail →</Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="#services">View Packages</a>
+            <Link to="/services">View Services →</Link>
           </Button>
         </div>
       </div>

@@ -82,7 +82,7 @@ const ServiceCard = ({
           </Button>
           <Link
             to={href}
-            className="inline-flex items-center justify-center gap-1 text-sm font-medium text-primary hover:underline underline-offset-4"
+            className="mt-2 inline-flex items-center justify-center gap-1 text-sm font-medium text-primary hover:underline underline-offset-4"
           >
             View Service
             <ArrowUpRight className="w-3.5 h-3.5" />

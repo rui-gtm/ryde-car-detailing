@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Quote, Star, Shield, Users, Leaf, ThumbsUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { BUSINESS, GOOGLE_REVIEWS } from "@/data/business";
 
 const GOOGLE_MAPS_URL = BUSINESS.googleMapsUrl;
@@ -13,13 +13,6 @@ const testimonials = [
   { quote: "Great car cleaning service! Got an interior and exterior clean and the car looks fantastic. Super easy to organise and highly recommended. Big thanks for the clean and will be using Ryde Car Detailing again!", name: "Deb R" },
   { quote: "Great communication, service- and job well done. Would recommend!", name: "Saarang J" },
   { quote: "Jared did SUCH a good job. It was such short notice but he was super professional and attentive, spending over 90 minutes to make sure he did a 5* job. Would really recommend- thank you!", name: "Sarah C" },
-];
-
-const trustBadges = [
-  { icon: Shield, text: "Fully Insured" },
-  { icon: Users, text: "Professional Detailers" },
-  { icon: Leaf, text: "Eco-Friendly Products" },
-  { icon: ThumbsUp, text: "100% Satisfaction Guarantee" },
 ];
 
 const GoogleLogo = () => (
@@ -50,7 +43,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <section id="reviews" className="py-20 bg-secondary/30 scroll-mt-24">
+    <section id="reviews" className="py-20 bg-background scroll-mt-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -147,18 +140,6 @@ const Testimonial = () => {
                 ))}
               </div>
             </div>
-          </div>
-
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {trustBadges.map((badge, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-2 justify-center p-4 bg-card rounded-lg border border-border"
-              >
-                <badge.icon className="w-5 h-5 text-primary" />
-                <span className="text-sm font-medium text-foreground">{badge.text}</span>
-              </div>
-            ))}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import type { ServiceCardVariant } from "@/components/services/ServiceCard";
 // one component, two contexts, instead of two near-duplicate sections.
 const Services = ({
   heading = "Our Services",
-  subheading = "Professional detailing services tailored to your needs",
+  subheading = "Professional detailing services tailored to your needs.",
   variant = "compact",
   sectionId = "services",
   tone = "muted",

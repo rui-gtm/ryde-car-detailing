@@ -3,7 +3,7 @@ import PageShell from "@/components/PageShell";
 import NotFound from "@/pages/NotFound";
 import BookCta from "@/components/BookCta";
 import { buildGuidePageSchema } from "@/lib/schema";
-import { GUIDES, findGuide } from "@/data/guides";
+import { GUIDES, findGuide, guideHref } from "@/data/guides";
 import { BUSINESS } from "@/data/business";
 
 const GuideDetail = () => {
@@ -12,7 +12,7 @@ const GuideDetail = () => {
 
   if (!guide) return <NotFound />;
 
-  const url = `/guides/${guide.slug}`;
+  const url = guideHref(guide.slug);
   const title = `${guide.title} | ${BUSINESS.name}`;
   const breadcrumbs = [
     { name: "Home", url: "/" },
@@ -59,7 +59,7 @@ const GuideDetail = () => {
                   {related.map((g) => (
                     <Link
                       key={g.slug}
-                      to={`/guides/${g.slug}`}
+                      to={guideHref(g.slug)}
                       className="block p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors"
                     >
                       <p className="font-medium text-foreground">{g.title}</p>

@@ -19,16 +19,21 @@ const points = [
   },
 ];
 
-// "Overview" section — a short explanation of how the service model works,
-// above the fold on /services before the full package breakdown.
-const ServicesOverviewSection = () => (
+// The "mobile convenience" explainer — same content used on the homepage
+// (as its own section) and the /services page (as its overview block), since
+// it's the same three facts in both places rather than two versions of them.
+const MobileConvenience = ({
+  heading = "Everything we do is mobile",
+  subheading = "We bring the equipment, every service happens wherever your car already is.",
+}: {
+  heading?: string;
+  subheading?: string;
+}) => (
   <section className="py-16">
     <div className="container mx-auto px-4">
       <div className="text-center max-w-2xl mx-auto mb-10">
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Everything we do is mobile</h2>
-        <p className="text-muted-foreground">
-          We bring the equipment, water and power — every service below happens wherever your car already is.
-        </p>
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{heading}</h2>
+        <p className="text-muted-foreground text-lg">{subheading}</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
         {points.map((point) => (
@@ -43,4 +48,4 @@ const ServicesOverviewSection = () => (
   </section>
 );
 
-export default ServicesOverviewSection;
+export default MobileConvenience;

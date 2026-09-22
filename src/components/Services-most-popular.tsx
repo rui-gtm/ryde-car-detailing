@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
@@ -65,6 +66,9 @@ const Services = () => {
           <p className="text-muted-foreground text-lg">
             Professional detailing services tailored to your needs
           </p>
+          <Button asChild variant="outline" className="mt-6">
+            <Link to="/services">View All Services</Link>
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -2,23 +2,17 @@ import { Link } from "react-router-dom";
 import PageShell from "@/components/PageShell";
 import PageHero from "@/components/PageHero";
 import BookCta from "@/components/BookCta";
-import { Shield, Users, Leaf, ThumbsUp, Check, X } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { buildPageSchema } from "@/lib/schema";
 import { BUSINESS, AREA_SERVED_TEXT } from "@/data/business";
 import { SERVICES, serviceHref } from "@/data/services";
 import { findTermsSection } from "@/data/terms";
+import { TRUST_BADGES } from "@/data/trustBadges";
 
 // Reuses the Scope of Service section already defined once in
 // src/data/terms.ts (for Terms.tsx), instead of re-listing the same
 // inclusions/exclusions in different words on this page.
 const scopeSection = findTermsSection("Scope of Service");
-
-const trustBadges = [
-  { icon: Shield, text: "Fully Insured" },
-  { icon: Users, text: "Professional Detailers" },
-  { icon: Leaf, text: "Eco-Friendly Products" },
-  { icon: ThumbsUp, text: "100% Satisfaction Guarantee" },
-];
 
 const About = () => {
   const title = `About Us | ${BUSINESS.name}`;
@@ -47,7 +41,7 @@ const About = () => {
           <div className="max-w-4xl mx-auto mb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">Why choose us</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {trustBadges.map((badge) => (
+              {TRUST_BADGES.map((badge) => (
                 <div
                   key={badge.text}
                   className="flex flex-col items-center gap-2 justify-center p-5 bg-card rounded-lg border border-border text-center"

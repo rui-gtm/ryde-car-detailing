@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PageShell from "@/components/PageShell";
 import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
-import ServicesOverviewSection from "@/components/services/ServicesOverviewSection";
+import MobileConvenience from "@/components/MobileConvenience";
 import ServiceNavigator from "@/components/services/ServiceNavigator";
 import Services from "@/components/Services";
 import ExtraServices from "@/components/ExtraServices";
@@ -32,7 +32,7 @@ const ServicesOverview = () => {
           </Button>
         </div>
       </PageHero>
-      <ServicesOverviewSection />
+      <MobileConvenience />
       <ServiceNavigator />
       <Services
         heading="What each service covers"
