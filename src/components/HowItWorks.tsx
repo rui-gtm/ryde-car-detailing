@@ -28,8 +28,11 @@ const steps = [
 // "Four steps, start to finish" — the booking flow explained, mirroring the
 // fields actually in BookingForm.tsx (service, vehicle, date/time, address)
 // so this stays accurate to how booking really works.
-const HowItWorks = () => (
-  <section id="how-it-works" className="py-20 bg-secondary/30 scroll-mt-24">
+const HowItWorks = ({ tone = "muted" }: { tone?: "muted" | "plain" }) => (
+  <section
+    id="how-it-works"
+    className={`py-20 scroll-mt-24 ${tone === "muted" ? "bg-secondary/30" : "bg-background"}`}
+  >
     <div className="container mx-auto px-4">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">How It Works</h2>

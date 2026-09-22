@@ -1,6 +1,7 @@
 import PageShell from "@/components/PageShell";
 import PageHero from "@/components/PageHero";
 import GuideCardGrid from "@/components/guides/GuideCardGrid";
+import CTA from "@/components/CTA";
 import { buildPageSchema } from "@/lib/schema";
 import { BUSINESS } from "@/data/business";
 
@@ -15,13 +16,14 @@ const Guides = () => {
     <PageShell title={title} schema={buildPageSchema("/guides", title, breadcrumbs)} breadcrumbs={breadcrumbs}>
       <PageHero
         title="Car detailing guides for Ryde drivers"
-        description="Practical answers on pricing, timing and what each service actually covers — no filler."
+        description="Practical answers on pricing, timing and what each service actually covers, no filler."
       />
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4">
           <GuideCardGrid />
         </div>
       </section>
+      <CTA />
     </PageShell>
   );
 };

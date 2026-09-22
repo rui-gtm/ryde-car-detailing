@@ -6,6 +6,7 @@ import ServicesIntro from "@/components/services/ServicesIntro";
 import Services from "@/components/Services";
 import ExtraServices from "@/components/ExtraServices";
 import ServiceComparison from "@/components/services/ServiceComparison";
+import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import { buildPageSchema } from "@/lib/schema";
@@ -44,7 +45,8 @@ const ServicesOverview = () => {
       />
       <ExtraServices />
       <ServiceComparison />
-      <FAQ tone="plain" />
+      <HowItWorks tone="plain" />
+      <FAQ tone="muted" />
       <CTA />
     </PageShell>
   );

@@ -1,16 +1,26 @@
+import type { ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 import { FAQS, type Faq } from "@/data/faqs";
+import { BUSINESS } from "@/data/business";
 
 const FAQ = ({
   tone = "muted",
   faqs = FAQS,
   title = "Frequently asked questions",
-  description = "If your question is not here, call 0411 666 174.",
+  description = (
+    <>
+      If your question is not here, call{" "}
+      <a href={BUSINESS.phoneHref} className="text-primary">
+        {BUSINESS.phoneDisplay}
+      </a>
+      .
+    </>
+  ),
 }: {
   tone?: "muted" | "plain";
   faqs?: Faq[];
   title?: string;
-  description?: string;
+  description?: ReactNode;
 }) => {
   return (
     <section

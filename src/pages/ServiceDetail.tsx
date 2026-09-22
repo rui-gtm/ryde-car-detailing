@@ -8,6 +8,7 @@ import { Check, Clock, Users } from "lucide-react";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Services from "@/components/Services";
+import HowItWorks from "@/components/HowItWorks";
 import { EXTRA_SERVICE_ICONS } from "@/components/services/ExtraServicesGrid";
 import { buildServicePageSchema } from "@/lib/schema";
 import { SERVICES, serviceSlug, serviceHref } from "@/data/services";
@@ -161,11 +162,12 @@ const ServiceDetail = () => {
         }
       />
 
+      <HowItWorks tone={hasInclusions ? "plain" : "muted"} />
+
       <FAQ
-        tone={hasInclusions ? "plain" : "muted"}
+        tone={hasInclusions ? "muted" : "plain"}
         faqs={service.faqs}
         title={`${service.title} FAQs`}
-        description="If your question is not here, call 0411 666 174."
       />
       <CTA
         heading={`Ready to book your ${service.title}?`}

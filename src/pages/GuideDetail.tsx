@@ -55,12 +55,12 @@ const GuideDetail = () => {
             {related.length > 0 && (
               <div className="mt-14">
                 <h2 className="text-lg font-bold text-foreground mb-4">Keep reading</h2>
-                <div className="space-y-3">
+                <div className="divide-y divide-border">
                   {related.map((g) => (
                     <Link
                       key={g.slug}
                       to={guideHref(g.slug)}
-                      className="block p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors"
+                      className="block py-4 hover:text-primary transition-colors"
                     >
                       <p className="font-medium text-foreground">{g.title}</p>
                     </Link>
