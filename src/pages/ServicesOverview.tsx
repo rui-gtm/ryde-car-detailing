@@ -32,9 +32,6 @@ const ServicesOverview = () => {
           <Button size="lg" asChild>
             <Link to="/book">Book Your Detail →</Link>
           </Button>
-          <Button size="lg" variant="outline" asChild>
-            <Link to="/areas">View Areas We Service</Link>
-          </Button>
         </div>
       </PageHero>
       <ServicesIntro />
