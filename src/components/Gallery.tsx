@@ -1,4 +1,4 @@
-import GalleryMarquee from "@/components/GalleryMarquee";
+import GalleryScroller from "@/components/GalleryScroller";
 import interior1 from "@/assets/interiorImage-1.jpg";
 import interior2 from "@/assets/interiorImage-2.jpg";
 import interior3 from "@/assets/interiorImage-3.jpg";
@@ -106,6 +106,9 @@ const exteriorImages = [
   },
 ];
 
+// Alternate interior/exterior so the two sets are mixed through the row.
+const mixedImages = interiorImages.flatMap((image, i) => [image, exteriorImages[i]]);
+
 const Gallery = () => {
   return (
     <section id="gallery" className="py-20 bg-secondary/30 scroll-mt-24">
@@ -117,7 +120,7 @@ const Gallery = () => {
           </p>
         </div>
 
-        <GalleryMarquee topRow={interiorImages} bottomRow={exteriorImages} />
+        <GalleryScroller images={mixedImages} />
       </div>
     </section>
   );

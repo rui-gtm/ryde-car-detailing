@@ -171,3 +171,8 @@
     transform: translateY(-10px);
   }
 }
+
+/* Darkens the standard OpenStreetMap tiles (no API key needed) for the service area map. */
+.dark-map-tiles {
+  filter: invert(1) hue-rotate(180deg) grayscale(0.85) brightness(0.9) contrast(0.85);
+}
