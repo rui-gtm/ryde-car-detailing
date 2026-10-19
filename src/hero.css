@@ -1,0 +1,146 @@
+/* ---- Hero: dull-to-gleaming wipe -------------------------------------- */
+@keyframes heroZoom {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes heroRise {
+  from { transform: translateY(105%); filter: blur(8px); }
+  to { transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes heroFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroScroll {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes heroShine {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: 0% 0; }
+}
+
+.hero {
+  --mx: 50%;
+  --my: 50%;
+  --px: 0;
+  --py: 0;
+}
+
+.hero-zoom {
+  animation: heroZoom 30s ease-out forwards;
+}
+
+.hero-parallax {
+  transform: translate3d(calc(var(--px) * -14px), calc(var(--py) * -10px), 0);
+  will-change: transform;
+}
+
+/* Dirty state: grey, hazy, blurred, with a speckled road-film overlay. */
+.hero-dull {
+  filter: grayscale(1) brightness(1.15) contrast(0.45) blur(3px);
+}
+
+.hero-grime {
+  background:
+    linear-gradient(rgba(150, 148, 140, 0.32), rgba(150, 148, 140, 0.32)),
+    radial-gradient(circle at 20% 30%, rgba(170, 170, 160, 0.4), transparent 45%),
+    radial-gradient(circle at 75% 70%, rgba(130, 125, 115, 0.3), transparent 50%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.7  0 0 0 0 0.68  0 0 0 0 0.62  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: screen;
+  opacity: 1;
+}
+
+/* Clean state: revealed left to right by --wipe (set from JS). */
+.hero-clean {
+  -webkit-mask-image: linear-gradient(100deg, #000 calc(var(--wipe) * 1% - 14%), transparent calc(var(--wipe) * 1%));
+  mask-image: linear-gradient(100deg, #000 calc(var(--wipe) * 1% - 14%), transparent calc(var(--wipe) * 1%));
+}
+
+.hero-clean img {
+  filter: contrast(1.25) brightness(1.08) saturate(1.15);
+}
+
+/* Showroom highlight that follows the cursor over the paint. */
+.hero-spec {
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.22), transparent 60%);
+  mix-blend-mode: soft-light;
+}
+
+/* The bright squeegee edge riding the front of the wipe. */
+.hero-edge {
+  left: calc(var(--wipe) * 1% - 7%);
+  width: 14%;
+  transform: skewX(-10deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55) 50%, transparent);
+  filter: blur(24px);
+  opacity: calc(1 - max(var(--wipe) - 100, 0) / 12);
+  mix-blend-mode: screen;
+}
+
+/* Headline: each line rises out of a mask. */
+.hero-line {
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.hero-line > span {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: heroRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--d, 0s);
+}
+
+.hero-line > .hero-gleam {
+  background: linear-gradient(100deg, #fff 30%, #9fd8ff 50%, #fff 70%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: heroRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards, heroShine 5s ease-in-out infinite;
+  animation-delay: var(--d, 0s), 3s;
+}
+
+.hero-fade {
+  opacity: 0;
+  animation: heroFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--d, 0s);
+}
+
+.hero-scroll {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
+  animation: heroScroll 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom,
+  .hero-scroll,
+  .hero-line > .hero-gleam {
+    animation: none;
+  }
+  .hero-line > span {
+    transform: none;
+    animation: none;
+  }
+  .hero-fade {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* Photo fades out at the bottom into the page gradient. */
+.hero-photo {
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+}
+
+/* The hero ends in the same blue the services section starts with. */
+.hero-glow {
+  background: linear-gradient(to top, hsl(214 88% 27%) 0%, hsl(214 88% 27% / 0.5) 18%, transparent 50%);
+}

@@ -61,7 +61,7 @@ export const SERVICE_ROUTES: SiteRoute[] = SERVICES.map((s) => ({
 export const SUBURB_ROUTES: SiteRoute[] = SUBURBS.map((s) => ({
   path: `/areas/${s.slug}`,
   title: `Mobile Car Detailing in ${s.name} | ${BUSINESS.name}`,
-  description: `Mobile car detailing in ${s.name}, NSW. We bring our own water and equipment and come to your home, apartment or workplace.`,
+  description: `Mobile car detailing in ${s.name}, NSW. We come to your home, apartment or workplace, so your car never has to move.`,
 }));
 
 export const GUIDE_ROUTES: SiteRoute[] = GUIDES.map((g) => ({

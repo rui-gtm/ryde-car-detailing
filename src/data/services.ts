@@ -1,4 +1,4 @@
-// Single source of truth for the four core priced packages. Services.tsx
+// Single source of truth for the three core priced packages. Services.tsx
 // renders this list on the page; src/lib/schema.ts turns the same list into
 // the JSON-LD `Service`/`Offer` nodes; ServiceDetail.tsx renders the
 // per-service page. Change a price or description once, here.
@@ -6,7 +6,14 @@ import { slugify as slugifyBase } from "@/lib/slug";
 import type { Faq } from "@/data/faqs";
 import { EXTRA_SERVICES } from "@/data/extraServices";
 
-const slugify = (title: string) => `service-${slugifyBase(title)}`;
+// The full detail used to be called "Premium Full Detail". It was renamed, but
+// its URL (/services/premium-full-detail) is already indexed, so the id — and
+// therefore the URL — keeps the old slug.
+const LEGACY_SLUGS: Record<string, string> = {
+  "Full Detail": "Premium Full Detail",
+};
+
+const slugify = (title: string) => `service-${slugifyBase(LEGACY_SLUGS[title] ?? title)}`;
 
 export type ServicePackage = {
   id: string;
@@ -28,7 +35,7 @@ export type ServicePackage = {
   // Optional two-column breakdown of `features` for the per-service detail
   // page's Inclusions section — only worth showing for packages that combine
   // distinct categories of work (e.g. interior + exterior). Single-focus
-  // packages (Basic Exterior Wash, Interior Deep Clean) omit this and the
+  // packages (Basic Exterior Wash) omit this and the
   // Inclusions section doesn't render at all for them.
   inclusionGroups?: { label: string; items: string[] }[];
   // Extra Services (src/data/extraServices.ts) commonly booked alongside this
@@ -42,7 +49,7 @@ const raw: Omit<ServicePackage, "id">[] = [
     packageValue: "basic",
     serviceType: "Mobile car wash",
     description: "Essential exterior care, finished to a premium standard.",
-    price: 79,
+    price: 150,
     duration: "45–90 minutes",
     bestFor: "Regular maintenance washes and cars that just need the outside refreshed.",
     features: [
@@ -64,47 +71,16 @@ const raw: Omit<ServicePackage, "id">[] = [
       },
       {
         q: "Do I need to supply water or power?",
-        a: "No. Please just make sure water and power are available and easily accessible.",
+        a: "Yes. We need access to a standard mains water supply and a power outlet close to the car. If that isn’t possible, contact us before booking.",
       },
     ],
   },
   {
-    title: "Interior Deep Clean",
-    packageValue: "basic",
-    serviceType: "Mobile car detailing",
-    description: "Restore your cabin to a pristine, hygienic, like-new condition.",
-    price: 129,
-    duration: "1–2 hours",
-    bestFor: "Cars with pet hair, stains, spills or general family/daily-use build-up inside.",
-    features: [
-      "Full interior vacuum (seats, carpets, mats & boot)",
-      "Interior scrub + deep decontamination",
-      "Dirt & stain extraction",
-      "Dash, console & trim detailing",
-      "Crystal-clear, streakless windows",
-    ],
-    recommendedExtras: ["Pet Hair Removal", "Deep Seat Extraction", "Deep Steam Clean"],
-    faqs: [
-      {
-        q: "Does the Interior Deep Clean remove pet hair and stains?",
-        a: "Yes — stain and pet hair removal is included as part of the deep decontamination process.",
-      },
-      {
-        q: "How long does an Interior Deep Clean take?",
-        a: "Typically 1–2 hours, depending on how much build-up there is inside.",
-      },
-      {
-        q: "Do you clean the boot and mats as well as the seats?",
-        a: "Yes — the full interior vacuum covers seats, carpets, mats and the boot.",
-      },
-    ],
-  },
-  {
-    title: "Premium Full Detail",
+    title: "Full Detail",
     packageValue: "premium",
     serviceType: "Mobile car detailing",
-    description: "The complete inside-and-out transformation. Our signature service.",
-    price: 199,
+    description: "The complete inside-and-out transformation, done in one visit.",
+    price: 249,
     duration: "2–3 hours",
     bestFor: "A full inside-and-out refresh — our most popular package for a like-new result.",
     features: [
@@ -137,15 +113,15 @@ const raw: Omit<ServicePackage, "id">[] = [
     recommendedExtras: ["Engine Bay Clean", "Step 1 Paint Correction", "Ceramic Coating"],
     faqs: [
       {
-        q: "What's included in the Premium Full Detail?",
+        q: "What's included in the Full Detail?",
         a: "Everything from the Interior Deep Clean and Basic Exterior Wash combined, plus tyre shine for a refined finish.",
       },
       {
-        q: "How long does the Premium Full Detail take?",
+        q: "How long does the Full Detail take?",
         a: "Around 2–3 hours for a complete inside-and-out transformation.",
       },
       {
-        q: "Is Premium Full Detail your most popular package?",
+        q: "Is Full Detail your most popular package?",
         a: "Yes — it's our signature, most-booked service for a full like-new result.",
       },
     ],
@@ -155,7 +131,7 @@ const raw: Omit<ServicePackage, "id">[] = [
     packageValue: "ceramic",
     serviceType: "Mobile car detailing",
     description: "Elite paint protection with a superior gloss finish.",
-    price: 499,
+    price: 599,
     duration: "Half-day service",
     bestFor: "Owners who want long-term paint protection and a showroom-gloss finish that lasts.",
     features: [

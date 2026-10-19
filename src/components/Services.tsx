@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import ServiceCardGrid from "@/components/services/ServiceCardGrid";
 import type { ServiceCardVariant } from "@/components/services/ServiceCard";
 import type { ServicePackage } from "@/data/services";
+import SectionHeading from "@/components/SectionHeading";
 
 // Renders the core packages as a heading + grid. Configurable so the exact
 // same section works both as the homepage's compact "Our Services" block, the
@@ -14,6 +15,7 @@ const Services = ({
   variant = "compact",
   sectionId = "services",
   tone = "muted",
+  fade = false,
   services,
   footer,
 }: {
@@ -22,19 +24,23 @@ const Services = ({
   variant?: ServiceCardVariant;
   sectionId?: string;
   tone?: "muted" | "plain";
+  /** Brand blue at the top fading to black at the bottom (homepage). */
+  fade?: boolean;
   services?: ServicePackage[];
   footer?: ReactNode;
 }) => {
   return (
     <section
       id={sectionId}
-      className={`py-20 scroll-mt-24 ${tone === "muted" ? "bg-secondary/30" : "bg-background"}`}
+      style={
+        fade
+          ? { background: "linear-gradient(180deg, hsl(214 88% 27%) 0%, hsl(var(--ink)) 92%)" }
+          : undefined
+      }
+      className={`py-24 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
     >
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{heading}</h2>
-          <p className="text-muted-foreground text-lg">{subheading}</p>
-        </div>
+      <div className="container mx-auto px-4 lg:px-8">
+        <SectionHeading eyebrow="Services" title={heading} description={subheading} />
 
         <ServiceCardGrid variant={variant} services={services} />
 

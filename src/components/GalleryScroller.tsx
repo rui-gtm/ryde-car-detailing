@@ -55,7 +55,7 @@ const GalleryScroller = ({ images }: GalleryScrollerProps) => {
             type="button"
             onClick={() => setSelectedImage(image)}
             aria-label={`View larger image: ${image.alt}`}
-            className="flex-shrink-0 snap-start cursor-pointer overflow-hidden rounded-lg shadow-md"
+            className="flex-shrink-0 snap-start cursor-pointer overflow-hidden rounded-xl shadow-md"
           >
             <img
               src={image.src}
@@ -77,7 +77,7 @@ const GalleryScroller = ({ images }: GalleryScrollerProps) => {
             <img
               src={selectedImage.src}
               alt={selectedImage.alt}
-              className="h-auto w-full rounded-lg object-contain"
+              className="h-auto w-full rounded-xl object-contain"
             />
           )}
         </DialogContent>

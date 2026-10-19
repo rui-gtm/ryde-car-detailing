@@ -19,6 +19,7 @@ import exterior7 from "@/assets/exteriorImage-7.jpg";
 import exterior8 from "@/assets/exteriorImage-8.jpg";
 import exterior9 from "@/assets/exteriorImage-9.jpg";
 import exterior10 from "@/assets/exteriorImage-10.jpg";
+import SectionHeading from "@/components/SectionHeading";
 
 const interiorImages = [
   { 
@@ -39,7 +40,7 @@ const interiorImages = [
   },
   { 
     src: interior5, 
-    alt: "Interior Deep Clean package - sanitized and protected car cabin in Gladesville" 
+    alt: "Full Detail - sanitized and protected car cabin in Gladesville" 
   },
   { 
     src: interior6, 
@@ -111,14 +112,13 @@ const mixedImages = interiorImages.flatMap((image, i) => [image, exteriorImages[
 
 const Gallery = () => {
   return (
-    <section id="gallery" className="py-20 bg-secondary/30 scroll-mt-24">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">See the Difference</h2>
-          <p className="text-muted-foreground text-lg">
-            Professional results that speak for themselves.
-          </p>
-        </div>
+    <section id="gallery" className="py-24 bg-transparent scroll-mt-24">
+      <div className="container mx-auto px-4 lg:px-8">
+        <SectionHeading
+          eyebrow="Portfolio" title="See the Difference"
+          description="Professional results that speak for themselves."
+          className="mb-8"
+        />
 
         <GalleryScroller images={mixedImages} />
       </div>

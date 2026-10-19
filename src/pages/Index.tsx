@@ -2,12 +2,10 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import WhoWeAre from "@/components/WhoWeAre";
 import Services from "@/components/Services";
 import FAQ from "@/components/FAQ";
 import ExtraServices from "@/components/ExtraServices";
-import WhyUs from "@/components/WhyUs";
-import MobileConvenience from "@/components/MobileConvenience";
+import Standards from "@/components/Standards";
 import HowItWorks from "@/components/HowItWorks";
 import ServiceArea from "@/components/ServiceArea";
 import Gallery from "@/components/Gallery";
@@ -37,15 +35,13 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <WhoWeAre />
-        <Services />
-        <ExtraServices />
-        <WhyUs />
-        <MobileConvenience />
-        <HowItWorks />
-        <ServiceArea />
+        <Services fade />
         <Gallery />
+        <ServiceArea />
+        <ExtraServices />
         <Testimonial />
+        <Standards />
+        <HowItWorks tone="plain" />
         <ReadingSection />
         <FAQ tone="plain"/>
         <CTA />

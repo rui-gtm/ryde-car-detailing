@@ -11,7 +11,6 @@ import {
   Armchair,
   type LucideIcon,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { EXTRA_SERVICES } from "@/data/extraServices";
 
 // Icons aren't part of the schema.org-facing data (src/data/extraServices.ts)
@@ -33,23 +32,17 @@ export const EXTRA_SERVICE_ICONS: Record<string, LucideIcon> = {
 
 const extraServices = EXTRA_SERVICES.map((s) => ({ ...s, icon: EXTRA_SERVICE_ICONS[s.label] }));
 
-// Grid of unpriced add-ons — reused by the homepage's ExtraServices section
-// and the /services page's "Extra Services" section (see ExtraServices.tsx).
+// Unpriced add-ons as a ruled list rather than a grid of icon cards —
+// reused by the homepage's ExtraServices section and the /services page.
 const ExtraServicesGrid = () => (
-  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-    {extraServices.map((service, index) => (
-      <Card
-        key={service.label}
-        className="group rounded-lg border-border hover:border-primary hover:shadow-md transition-all duration-300 text-center"
-        style={{ animationDelay: `${index * 0.05}s` }}
-      >
-        <CardContent className="p-6">
-          <service.icon className="w-8 h-8 mx-auto mb-3 text-primary group-hover:scale-110 transition-transform" />
-          <h3 className="text-sm font-medium text-foreground">{service.label}</h3>
-        </CardContent>
-      </Card>
+  <ul className="grid grid-cols-1 border-t border-border sm:grid-cols-2 sm:gap-x-12 lg:grid-cols-3">
+    {extraServices.map((service) => (
+      <li key={service.label} className="flex items-center gap-3 border-b border-border py-4">
+        <service.icon className="h-5 w-5 shrink-0 text-primary" strokeWidth={1.5} />
+        <h3 className="text-[15px] font-medium text-foreground">{service.label}</h3>
+      </li>
     ))}
-  </div>
+  </ul>
 );
 
 export default ExtraServicesGrid;

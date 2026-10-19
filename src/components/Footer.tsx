@@ -1,102 +1,103 @@
 import { Link } from "react-router-dom";
-import { Phone, MapPin } from "lucide-react";
-import logo from "@/assets/logo.png";
+import { Phone, MapPin, Instagram } from "lucide-react";
+import logo from "@/assets/logo-new.png";
 import { Button } from "@/components/ui/button";
 import { BUSINESS } from "@/data/business";
 import { SUBURBS } from "@/data/suburbs";
 import { SERVICES, serviceHref } from "@/data/services";
 
+const linkClass = "text-sm text-white/60 transition-colors hover:text-white";
+const headingClass = "text-sm font-semibold text-white";
+
 const Footer = () => {
   return (
-    <footer className="py-10 bg-background">
+    <footer className="border-t border-white/15 py-14 text-white">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-          <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
-            <Link to="/" className="flex items-start gap-2" aria-label="Ryde Car Detailing home">
-              <div className="relative h-14 md:h-16 w-auto -mt-4 md:-mt-5">
-                <img
-                  src={logo}
-                  alt="Ryde Car Detailing logo"
-                  className="h-full w-auto object-contain"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <span className="font-semibold text-foreground pt-0.5">{BUSINESS.name}</span>
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
+          <div className="col-span-2 flex flex-col gap-5 md:col-span-1">
+            <Link to="/" className="flex items-center gap-3" aria-label="Ryde Car Detailing home">
+              <img
+                src={logo}
+                alt="Ryde Car Detailing logo"
+                className="h-16 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+              <span className="font-semibold">{BUSINESS.name}</span>
             </Link>
 
-            <div className="flex flex-col gap-2">
-              <a href={BUSINESS.phoneHref} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                <Phone className="h-3.5 w-3.5" />
+            <div className="flex flex-col gap-3">
+              <a href={BUSINESS.phoneHref} className={`flex items-center gap-2 ${linkClass}`}>
+                <Phone className="h-4 w-4" />
                 {BUSINESS.phoneDisplay}
               </a>
-              <span className="flex items-center gap-2 text-xs text-muted-foreground">
-                <MapPin className="h-3.5 w-3.5" />
+              <span className="flex items-center gap-2 text-sm text-white/60">
+                <MapPin className="h-4 w-4 shrink-0" />
                 {BUSINESS.addressDisplay}
               </span>
+              {BUSINESS.instagramUrl && (
+                <a
+                  href={BUSINESS.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-2 ${linkClass}`}
+                >
+                  <Instagram className="h-4 w-4" />
+                  Instagram
+                </a>
+              )}
               <Button asChild size="sm" className="mt-1 w-fit">
-                <Link to="/book">Book Now</Link>
+                <Link to="/book">Get a Quote</Link>
               </Button>
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <span className="text-sm font-semibold text-foreground">Explore</span>
-            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+          <div className="flex flex-col gap-3">
+            <span className={headingClass}>Explore</span>
+            <Link to="/" className={linkClass}>
               Home
             </Link>
-            <Link to="/services" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/services" className={linkClass}>
               Services
             </Link>
-            <Link to="/areas" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/areas" className={linkClass}>
               Areas
             </Link>
-            <Link to="/guides" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/guides" className={linkClass}>
               Guides
             </Link>
-            <Link to="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/about" className={linkClass}>
               About
             </Link>
-            <Link
-              to="/book"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
+            <Link to="/book" className={linkClass}>
               Contact
             </Link>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <span className="text-sm font-semibold text-foreground">Areas</span>
+          <div className="flex flex-col gap-3">
+            <span className={headingClass}>Areas</span>
             {SUBURBS.map((suburb) => (
-              <Link
-                key={suburb.slug}
-                to={`/areas/${suburb.slug}`}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
+              <Link key={suburb.slug} to={`/areas/${suburb.slug}`} className={linkClass}>
                 {suburb.name}
               </Link>
             ))}
           </div>
 
-          <div className="flex flex-col gap-2">
-            <span className="text-sm font-semibold text-foreground">Services</span>
+          <div className="flex flex-col gap-3">
+            <span className={headingClass}>Services</span>
             {SERVICES.map((service) => (
-              <Link
-                key={service.id}
-                to={serviceHref(service.id)}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
+              <Link key={service.id} to={serviceHref(service.id)} className={linkClass}>
                 {service.title}
               </Link>
             ))}
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-border flex flex-col-reverse md:flex-row items-center md:justify-between gap-3">
-          <p className="text-xs text-muted-foreground">
+        <div className="mt-12 flex flex-col-reverse items-center gap-3 border-t border-white/10 pt-6 md:flex-row md:justify-between">
+          <p className="text-sm text-white/50">
             © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.
           </p>
-          <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+          <Link to="/terms" className={linkClass}>
             Terms & Conditions
           </Link>
         </div>

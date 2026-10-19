@@ -9,7 +9,7 @@ export const BUSINESS = {
   name: "Ryde Car Detailing",
   url: SITE_URL,
   description:
-    "Professional mobile car wash and detailing service in Ryde, NSW. We come to your home or office with everything needed, mobile car wash, interior deep clean, full detail, and ceramic coating.",
+    "Professional mobile car wash and detailing service in Ryde, NSW. We come to your home or office. Services include mobile car wash, full detail, and ceramic coating.",
   keywords: "mobile car wash, mobile car detailing, car wash Ryde, car detailing Ryde NSW, mobile detailing Sydney",
   phoneDisplay: "0411 666 174",
   phoneE164: "+61411666174",
@@ -30,6 +30,9 @@ export const BUSINESS = {
     latitude: -33.8138256,
     longitude: 151.106138,
   },
+  // Full Instagram profile URL, e.g. "https://www.instagram.com/yourhandle". Leave empty to hide the
+  // Instagram buttons in the header and footer.
+  instagramUrl: "" as string,
   googleMapsUrl: "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA",
   ogImageUrl: `${SITE_URL}/og-image.jpg`,
   openingHours: ["Mo-Su 00:00-23:59"],
@@ -46,5 +49,5 @@ export const AREA_SERVED_TEXT = AREA_SERVED.join(", ");
 // GoogleRatingSection.tsx, which is why the two disagreed.
 export const GOOGLE_REVIEWS = {
   rating: 5,
-  count: 51,
+  count: 50,
 } as const;

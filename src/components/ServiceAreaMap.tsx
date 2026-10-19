@@ -73,7 +73,7 @@ const MapOverlay = () => {
 
   return (
     <div ref={ref}>
-      <div className="absolute right-3 top-3 z-[1000] rounded-lg bg-neutral-900/90 px-4 py-3 text-sm text-white shadow-lg ring-1 ring-white/10">
+      <div className="absolute right-3 top-3 z-[1000] rounded-xl bg-neutral-900/90 px-4 py-3 text-sm text-white shadow-lg ring-1 ring-white/10">
         <div className="flex items-center gap-2.5">
           <span className="h-3.5 w-3.5 rounded-sm" style={{ backgroundColor: GREEN }} />
           No Outcall Fee

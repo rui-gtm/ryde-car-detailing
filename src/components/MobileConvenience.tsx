@@ -1,7 +1,8 @@
 import { Home, DollarSign, MapPin } from "lucide-react";
 import { BUSINESS } from "@/data/business";
+import SectionHeading from "@/components/SectionHeading";
 
-const points = [
+export const points = [
   {
     icon: Home,
     title: "We come to you",
@@ -24,21 +25,18 @@ const points = [
 // it's the same three facts in both places rather than two versions of them.
 const MobileConvenience = ({
   heading = "Everything we do is mobile",
-  subheading = "We bring the equipment, every service happens wherever your car already is.",
+  subheading = "Every service happens wherever your car already is.",
 }: {
   heading?: string;
   subheading?: string;
 }) => (
-  <section className="py-16">
-    <div className="container mx-auto px-4">
-      <div className="text-center max-w-2xl mx-auto mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{heading}</h2>
-        <p className="text-muted-foreground text-lg">{subheading}</p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+  <section className="py-24">
+    <div className="container mx-auto px-4 lg:px-8">
+      <SectionHeading eyebrow="Mobile" title={heading} description={subheading} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {points.map((point) => (
-          <div key={point.title} className="text-center p-6">
-            <point.icon className="w-8 h-8 text-primary mx-auto mb-3" />
+          <div key={point.title} className="rounded-xl border border-border bg-white/[0.06] p-8">
+            <point.icon className="w-8 h-8 text-primary mb-4" strokeWidth={1.5} />
             <h3 className="font-semibold text-foreground mb-1">{point.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{point.description}</p>
           </div>

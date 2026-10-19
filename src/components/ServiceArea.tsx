@@ -4,21 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Phone, MessageCircle } from "lucide-react";
 const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
 import { BUSINESS, AREA_SERVED_TEXT } from "@/data/business";
+import SectionHeading from "@/components/SectionHeading";
 
 const ServiceArea = () => {
   return (
-    <section id="service-area" className="py-20 bg-background scroll-mt-24">
-      <div className="container mx-auto px-4">
+    <section id="service-area" className="py-24 bg-transparent scroll-mt-24">
+      <div className="container mx-auto px-4 lg:px-8">
 
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Our Service Area
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            We come to you, mobile detailing at your convenience.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Where we work" title="Our Service Area"
+          description="We come to you, mobile detailing at your convenience."
+        />
 
         {/* Two-column layout */}
         <div className="grid lg:grid-cols-2 gap-6 items-center">
@@ -29,25 +26,25 @@ const ServiceArea = () => {
           </Suspense>
 
           {/* Right — all cards */}
-          <div className="ml-10 space-y-8 items-center">
+          <div className="space-y-6">
 
             {/* Suburbs */}
-            <div className="mt-4 bg-card rounded-xl border border-border p-6">
+            <div className="mt-4 bg-white/[0.06] rounded-xl border border-border p-6">
               <p className="text-base text-muted-foreground leading-relaxed">
                 We proudly service {AREA_SERVED_TEXT}, and surrounding suburbs.
               </p>
             </div>
 
             {/* Zone legend */}
-            <div className="grid grid-cols-2 gap-8">
-              <div className="flex items-center gap-4 px-5 py-5 bg-card rounded-xl border border-border">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
                 <div className="w-4 h-4 rounded-full bg-green-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Green Zone</p>
                   <p className="text-base text-muted-foreground mt-1">No outcall fee</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4 px-5 py-5 bg-card rounded-xl border border-border">
+              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
                 <div className="w-4 h-4 rounded-full bg-red-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Red Zone</p>
@@ -57,7 +54,7 @@ const ServiceArea = () => {
             </div>
 
             {/* Contact */}
-            <div className="bg-card rounded-xl border border-border p-6 scroll-mt-28" id="contact">
+            <div className="bg-white/[0.06] rounded-xl border border-border p-6 scroll-mt-28" id="contact">
               <h3 className="text-xl font-bold text-foreground mb-2">Contact Us</h3>
               <p className="text-base text-muted-foreground mb-1">
                 Not sure if we serve your area? Give us a call! We're happy to answer any questions.
@@ -98,7 +95,7 @@ const ServiceArea = () => {
               Hunters Hill.
             </p>
             <p>
-              Whether you need a quick basic exterior wash before the weekend, an interior deep clean to
+              Whether you need a quick basic exterior wash before the weekend, a full detail to
               remove pet hair and stains, or a ceramic coating to protect your paint for years, our local
               detailers know the area and can usually fit you in within days, not weeks. Being based
               locally means less travel time for us and lower outcall fees for you — most of our core

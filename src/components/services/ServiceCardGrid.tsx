@@ -9,8 +9,12 @@ const ServiceCardGrid = ({
   services?: ServicePackage[];
 }) => (
   <div
-    className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${
-      services.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
+    className={`grid grid-cols-1 gap-6 lg:gap-8 ${
+      services.length === 3
+        ? "lg:grid-cols-3"
+        : services.length === 2
+          ? "md:grid-cols-2"
+          : "md:grid-cols-2 lg:grid-cols-4"
     }`}
   >
     {services.map((service, index) => (

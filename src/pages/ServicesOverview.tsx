@@ -29,7 +29,7 @@ const ServicesOverview = () => {
         title={`Mobile car detailing services in ${BUSINESS.address.addressLocality}`}
         description={`Every service is priced up front and comes to you, home, apartment car park or workplace, anywhere across ${BUSINESS.address.addressLocality} and nearby suburbs.`}
       >
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button size="lg" asChild>
             <Link to="/book">Book Your Detail →</Link>
           </Button>
