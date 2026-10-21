@@ -83,7 +83,9 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
             <Link
               to="/"
               onClick={handleLogoClick}
-              className="relative z-[60] flex items-center focus:outline-none"
+              className={`relative z-[60] flex items-center transition-transform duration-300 focus:outline-none ${
+                overHero ? "translate-y-3 md:translate-y-6 lg:translate-y-10" : ""
+              }`}
               aria-label="Ryde Car Detailing home"
             >
               <img

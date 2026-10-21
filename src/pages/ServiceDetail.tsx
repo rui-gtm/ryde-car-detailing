@@ -14,6 +14,7 @@ import { buildServicePageSchema } from "@/lib/schema";
 import { SERVICES, serviceSlug, serviceHref } from "@/data/services";
 import { BUSINESS } from "@/data/business";
 import SectionHeading from "@/components/SectionHeading";
+import CeramicMedia from "@/components/CeramicMedia";
 
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -140,6 +141,8 @@ const ServiceDetail = () => {
           </div>
         </div>
       </section>
+
+      {service.packageValue === "ceramic" && <CeramicMedia />}
 
       <Services
         sectionId="other-services"

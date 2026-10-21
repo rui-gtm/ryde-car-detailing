@@ -2,19 +2,20 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Star } from "lucide-react";
-import heroImage from "@/assets/hero-car.jpg";
+import heroImage from "@/assets/hero-bmw-interior.jpg";
 import { BUSINESS, GOOGLE_REVIEWS } from "@/data/business";
 import GoogleG from "@/components/GoogleG";
 import "@/hero.css";
 
-// The hero acts out what the service does. The car starts under a dull film of
-// road grime, then a bright wipe sweeps across it and leaves the paint clean
-// and deep. After that, a soft highlight follows the cursor over the paint
-// like showroom lighting. All motion is driven by CSS variables set on the
-// section element, so nothing re-renders React while it runs.
-const WIPE_MS = 2600;
+// The hero acts out what the service does: the photo starts under a dull film
+// of road grime, then a single quick wipe sweeps across and leaves it clean.
+// Nothing else in the background moves — no zoom, no cursor parallax. The wipe
+// is driven by a CSS variable set on the section, so React never re-renders
+// while it runs.
+const WIPE_DELAY_MS = 250;
+const WIPE_MS = 1700;
 
-const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
 
 const delay = (d: string) => ({ ["--d" as string]: d });
 
@@ -31,44 +32,15 @@ const Hero = () => {
     }
 
     let raf = 0;
-    const start = performance.now() + 700;
+    const start = performance.now() + WIPE_DELAY_MS;
     const tick = (now: number) => {
       const t = Math.min(Math.max((now - start) / WIPE_MS, 0), 1);
-      el.style.setProperty("--wipe", String(-14 + easeOutExpo(t) * 126));
+      el.style.setProperty("--wipe", String(-14 + easeOutQuart(t) * 126));
       if (t < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
 
-    // Highlight + parallax follow the pointer (smoothed), fine pointers only.
-    let tx = 0.5;
-    let ty = 0.5;
-    let cx = 0.5;
-    let cy = 0.5;
-    let loop = 0;
-    const glide = () => {
-      cx += (tx - cx) * 0.08;
-      cy += (ty - cy) * 0.08;
-      el.style.setProperty("--mx", `${cx * 100}%`);
-      el.style.setProperty("--my", `${cy * 100}%`);
-      el.style.setProperty("--px", String((cx - 0.5) * 2));
-      el.style.setProperty("--py", String((cy - 0.5) * 2));
-      loop = requestAnimationFrame(glide);
-    };
-    const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      tx = (e.clientX - r.left) / r.width;
-      ty = (e.clientY - r.top) / r.height;
-    };
-    if (window.matchMedia("(pointer: fine)").matches) {
-      el.addEventListener("pointermove", onMove);
-      loop = requestAnimationFrame(glide);
-    }
-
-    return () => {
-      cancelAnimationFrame(raf);
-      cancelAnimationFrame(loop);
-      el.removeEventListener("pointermove", onMove);
-    };
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   return (
@@ -77,29 +49,28 @@ const Hero = () => {
       className="hero relative flex min-h-[100dvh] flex-col overflow-hidden text-white"
       style={{ ["--wipe" as string]: -14 }}
     >
-      {/* Layer 1: the car under road film */}
-      <div className="hero-parallax hero-photo absolute inset-[-3%]">
+      {/* Layer 1: the photo under road film */}
+      <div className="hero-photo absolute inset-0">
         <img
           src={heroImage}
           alt=""
           aria-hidden="true"
-          className="hero-zoom hero-dull absolute inset-0 h-full w-full object-cover object-[60%_center]"
+          className="hero-dull absolute inset-0 h-full w-full object-cover object-[50%_12%]"
           loading="eager"
           decoding="async"
           {...({ fetchpriority: "high" } as object)}
         />
         <div className="hero-grime absolute inset-0" />
 
-        {/* Layer 2: the same car, clean, revealed by the wipe */}
+        {/* Layer 2: the same photo, clean, revealed by the wipe */}
         <div className="hero-clean absolute inset-0">
           <img
             src={heroImage}
             alt=""
             aria-hidden="true"
-            className="hero-zoom absolute inset-0 h-full w-full object-cover object-[60%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-[50%_12%]"
             decoding="async"
           />
-          <div className="hero-spec absolute inset-0" />
         </div>
       </div>
 
@@ -110,13 +81,14 @@ const Hero = () => {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_62%,hsl(var(--ink)/0.75),transparent)]" />
 
       <div className="hero-glow pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/70 via-ink/30 to-transparent" aria-hidden="true" />
       <div className="container relative mx-auto flex flex-1 flex-col items-center justify-center px-4 pb-16 pt-44 text-center lg:px-8">
         <a
           href={BUSINESS.googleMapsUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="hero-fade group mb-8 inline-flex items-center gap-4 rounded-full border border-white/20 bg-white/10 py-2.5 pl-3 pr-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-md transition-colors hover:bg-white/15"
-          style={delay("0.2s")}
+          style={delay("0.1s")}
           aria-label={`${GOOGLE_REVIEWS.rating.toFixed(1)} stars from ${GOOGLE_REVIEWS.count} Google reviews`}
         >
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white">
@@ -137,21 +109,21 @@ const Hero = () => {
 
         <h1 className="mx-auto max-w-[48rem] [text-shadow:0_2px_40px_rgba(0,0,0,0.5)]">
           <span className="hero-line block text-5xl font-medium leading-[1.02] tracking-tighter md:text-6xl">
-            <span style={delay("0.4s")}>Mobile Car Detailing</span>
+            <span style={delay("0.2s")}>Mobile Car Detailing</span>
           </span>
-          <span className="hero-line block text-5xl font-medium leading-[1.02] tracking-tighter md:text-7xl">
-            <span className="hero-gleam" style={delay("1.6s")}>
+          <span className="hero-line block text-5xl font-medium leading-[1.02] tracking-tighter md:text-6xl">
+            <span className="hero-gleam" style={delay("0.32s")}>
               in Ryde, NSW
             </span>
           </span>
         </h1>
 
-        <p className="hero-fade mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/80" style={delay("2.6s")}>
+        <p className="hero-fade mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/80" style={delay("0.5s")}>
           Hand washing, full interior and exterior details and ceramic coating at your home or workplace, quoted up
           front and fully insured.
         </p>
 
-        <div className="hero-fade mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row" style={delay("2.9s")}>
+        <div className="hero-fade mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row" style={delay("0.62s")}>
           <Button size="lg" className="group h-12 gap-2 px-8 text-base" asChild>
             <Link to="/book">
               Get a Quote
@@ -168,7 +140,6 @@ const Hero = () => {
           </Button>
         </div>
       </div>
-
     </section>
   );
 };

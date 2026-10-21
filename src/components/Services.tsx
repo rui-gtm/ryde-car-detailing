@@ -34,7 +34,7 @@ const Services = ({
       id={sectionId}
       style={
         fade
-          ? { background: "linear-gradient(180deg, hsl(214 88% 27%) 0%, hsl(var(--ink)) 92%)" }
+          ? { background: "linear-gradient(180deg, hsl(214 80% 18%) 0%, hsl(var(--ink)) 92%)" }
           : undefined
       }
       className={`py-24 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}

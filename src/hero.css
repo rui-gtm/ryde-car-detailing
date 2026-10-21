@@ -5,12 +5,12 @@
 }
 
 @keyframes heroRise {
-  from { transform: translateY(105%); filter: blur(8px); }
+  from { transform: translateY(105%); filter: blur(4px); }
   to { transform: translateY(0); filter: blur(0); }
 }
 
 @keyframes heroFade {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -93,7 +93,7 @@
 .hero-line > span {
   display: inline-block;
   transform: translateY(105%);
-  animation: heroRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: var(--d, 0s);
 }
 
@@ -103,13 +103,13 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: heroRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards, heroShine 5s ease-in-out infinite;
-  animation-delay: var(--d, 0s), 3s;
+  animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--d, 0s);
 }
 
 .hero-fade {
   opacity: 0;
-  animation: heroFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: var(--d, 0s);
 }
 
@@ -140,7 +140,7 @@
   mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
 }
 
-/* The hero ends in the same blue the services section starts with. */
+/* A short, low blue fade at the very bottom — the colour the services section starts with. */
 .hero-glow {
-  background: linear-gradient(to top, hsl(214 88% 27%) 0%, hsl(214 88% 27% / 0.5) 18%, transparent 50%);
+  background: linear-gradient(to top, hsl(214 80% 18%) 0%, hsl(214 80% 18% / 0.4) 12%, transparent 30%);
 }
