@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import AppRoutes from "@/AppRoutes";
 
 type AppShellProps = {
@@ -12,13 +12,18 @@ type AppShellProps = {
 
 export const AppShell = ({ router }: AppShellProps) => {
   const [queryClient] = useState(() => new QueryClient());
-  const isBrowser = typeof window !== "undefined";
+  // The toasters are browser-only, but they must not render on the first
+  // client pass: the prerendered HTML doesn't contain them, and any difference
+  // makes React discard the whole prerendered page and re-render it (which
+  // replays the entrance animations and pushed LCP to ~6s on mobile).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {isBrowser ? <Toaster /> : null}
-        {isBrowser ? <Sonner /> : null}
+        {mounted ? <Toaster /> : null}
+        {mounted ? <Sonner /> : null}
         {router}
       </TooltipProvider>
     </QueryClientProvider>

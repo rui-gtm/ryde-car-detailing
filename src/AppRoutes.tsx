@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Index from "@/pages/Index";
 import Book from "@/pages/Book";
@@ -10,6 +10,7 @@ import Areas from "@/pages/Areas";
 import AreaDetail from "@/pages/AreaDetail";
 import Guides from "@/pages/Guides";
 import GuideDetail from "@/pages/GuideDetail";
+import NotFound from "@/pages/NotFound";
 
 declare global {
   interface Window {
@@ -62,7 +63,7 @@ const AppRoutes = () => {
       <Route path="/areas/:slug" element={<AreaDetail />} />
       <Route path="/guides" element={<Guides />} />
       <Route path="/guides/:slug" element={<GuideDetail />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

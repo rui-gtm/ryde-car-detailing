@@ -1,7 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import prettier from "prettier";
 
 const projectRoot = process.cwd();
 const distDir = path.resolve(projectRoot, "dist");
@@ -52,28 +51,53 @@ const routes = [
     title: r.title,
     description: r.description,
   })),
+  // Served by the web server for unknown URLs (Apache: `ErrorDocument 404
+  // /404.html`). The app renders <NotFound /> for any unmatched path, so the
+  // client hydrates this same markup whatever URL it was served at.
+  {
+    url: "/404",
+    outFile: path.resolve(distDir, "404.html"),
+    title: "Page Not Found | Ryde Car Detailing",
+    description: "The page you were looking for doesn't exist. Browse our mobile car detailing services in Ryde NSW.",
+    notFound: true,
+  },
 ];
 
+const escapeHtml = (s) =>
+  s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+// Every replacement below uses a replacer *function*: with a replacement
+// string, `$$`, `$&`, `$'` and `$1` inside the inserted text are treated as
+// special patterns — that's what turned the JSON-LD priceRange "$$" into "$".
 const applyMeta = (html, route) => {
   if (!route.title && !route.description) return html;
 
   let result = html;
   if (route.title) {
+    const title = escapeHtml(route.title);
     result = result
-      .replace(/<title>.*?<\/title>/, `<title>${route.title}</title>`)
-      .replace(/(property="og:title" content=")[^"]*(")/, `$1${route.title}$2`)
-      .replace(/(name="twitter:title" content=")[^"]*(")/, `$1${route.title}$2`);
+      .replace(/<title>.*?<\/title>/, () => `<title>${title}</title>`)
+      .replace(/(property="og:title" content=")[^"]*(")/, (_, a, b) => `${a}${title}${b}`)
+      .replace(/(name="twitter:title" content=")[^"]*(")/, (_, a, b) => `${a}${title}${b}`);
   }
   if (route.description) {
+    const description = escapeHtml(route.description);
     result = result
-      .replace(/(name="description"\s*\n?\s*content=")[^"]*(")/, `$1${route.description}$2`)
-      .replace(/(property="og:description"\s*\n?\s*content=")[^"]*(")/, `$1${route.description}$2`)
-      .replace(/(name="twitter:description"\s*\n?\s*content=")[^"]*(")/, `$1${route.description}$2`);
+      .replace(/(name="description"\s*\n?\s*content=")[^"]*(")/, (_, a, b) => `${a}${description}${b}`)
+      .replace(/(property="og:description"\s*\n?\s*content=")[^"]*(")/, (_, a, b) => `${a}${description}${b}`)
+      .replace(/(name="twitter:description"\s*\n?\s*content=")[^"]*(")/, (_, a, b) => `${a}${description}${b}`);
+  }
+  if (route.notFound) {
+    // A 404 page must not claim a canonical URL or be indexed.
+    return result
+      .replace(/\s*<link rel="canonical"[^>]*>/, "")
+      .replace(/\s*<meta property="og:url"[^>]*>/, "")
+      .replace(/(name="robots"\s*\n?\s*content=")[^"]*(")/, (_, a, b) => `${a}noindex,follow${b}`);
   }
   const canonicalUrl = `https://www.rydecardetailing.com${route.url === "/" ? "/" : route.url}`;
   result = result
-    .replace(/(rel="canonical" href=")[^"]*(")/, `$1${canonicalUrl}$2`)
-    .replace(/(property="og:url" content=")[^"]*(")/, `$1${canonicalUrl}$2`);
+    .replace(/(rel="canonical" href=")[^"]*(")/, (_, a, b) => `${a}${canonicalUrl}${b}`)
+    .replace(/(property="og:url" content=")[^"]*(")/, (_, a, b) => `${a}${canonicalUrl}${b}`);
 
   return result;
 };
@@ -82,16 +106,16 @@ for (const route of routes) {
   const { html: appHtml } = await ssrModule.render(route.url);
 
   const withMeta = applyMeta(baseTemplate, route);
+  const rootHtml = `<div id="root">${appHtml}</div>`;
   const replaced = withMeta.includes('<div id="root"></div>')
-    ? withMeta.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
-    : withMeta.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${appHtml}</div>`);
+    ? withMeta.replace('<div id="root"></div>', () => rootHtml)
+    : withMeta.replace(/<div id="root">[\s\S]*?<\/div>/, () => rootHtml);
 
-  const formatted = await prettier.format(replaced, {
-    parser: "html",
-  });
-
+  // Written exactly as React rendered it — no pretty-printing. Reformatting
+  // (prettier used to run here) adds whitespace text nodes and re-wraps text,
+  // which makes hydration fail on every page.
   await fs.mkdir(path.dirname(route.outFile), { recursive: true });
-  await fs.writeFile(route.outFile, formatted, "utf8");
+  await fs.writeFile(route.outFile, replaced, "utf8");
 }
 
 // Regenerate sitemap.xml from the same route list instead of the
