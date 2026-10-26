@@ -4,7 +4,7 @@ import exteriorImage from "@/assets/exteriorImage-3.jpg";
 
 const POINTS = [
   "Two-bucket hand washing — never automatic brushes",
-  "Machine polishing on the Premium Full Detail and Ceramic Coating packages",
+  "Machine polishing on the Full Detail and Ceramic Coating packages",
   "Wheels and tyres included in every service",
   "Prices fixed by package, not quoted on arrival",
 ];
@@ -14,9 +14,9 @@ const POINTS = [
 // service cards and comparison table below get into specifics.
 const ServicesIntro = () => {
   return (
-    <section className="py-16 md:py-20 bg-background" aria-labelledby="services-overview-title">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-5xl mx-auto">
+    <section className="py-16 md:py-20 bg-transparent" aria-labelledby="services-overview-title">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
             <h2 id="services-overview-title" className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
               Everything we do is mobile
@@ -26,8 +26,8 @@ const ServicesIntro = () => {
               apartment car park or a workplace bay.
             </p>
             <p className="text-muted-foreground leading-relaxed mt-3">
-              Water, power, products and equipment all travel with the detailer. You don't supply anything, and
-              the car doesn't move.
+              We bring the products and the know-how. You provide access to mains water and a standard power
+              outlet near the car, and the car doesn't move.
             </p>
             <ul className="mt-6 space-y-3">
               {POINTS.map((point) => (
@@ -42,7 +42,7 @@ const ServicesIntro = () => {
             <img
               src={interiorImage}
               alt="Detailer cleaning the interior of a car"
-              className="rounded-2xl w-full aspect-[4/3] object-cover shadow-lg"
+              className="rounded-xl w-full aspect-[4/3] object-cover shadow-lg"
               loading="lazy"
             />
             <img

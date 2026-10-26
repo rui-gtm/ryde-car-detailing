@@ -1,33 +1,32 @@
 import { Check, Minus } from "lucide-react";
 import { SERVICES } from "@/data/services";
+import SectionHeading from "@/components/SectionHeading";
 
 // Feature x package matrix, derived from each package's `features`/`duration`
 // list in src/data/services.ts (see that file for the source copy) so this
 // stays a faithful summary rather than a separately-maintained claim list.
 const ROWS: { label: string; included: boolean[] }[] = [
-  { label: "Hand contact exterior wash", included: [true, false, true, true] },
-  { label: "Wheel & tyre cleanse", included: [true, false, true, false] },
-  { label: "Streak-free windows", included: [true, true, true, false] },
-  { label: "Full interior vacuum", included: [false, true, true, false] },
-  { label: "Interior scrub & stain removal", included: [false, true, true, false] },
-  { label: "Dash, console & trim detailing", included: [false, true, true, false] },
-  { label: "Tyre shine", included: [false, false, true, false] },
-  { label: "Paint decontamination & prep", included: [false, false, false, true] },
-  { label: "Ceramic coating & UV protection", included: [false, false, false, true] },
+  { label: "Hand contact exterior wash", included: [true, true, true] },
+  { label: "Wheel & tyre cleanse", included: [true, true, false] },
+  { label: "Streak-free windows", included: [true, true, false] },
+  { label: "Full interior vacuum", included: [false, true, false] },
+  { label: "Interior scrub & stain removal", included: [false, true, false] },
+  { label: "Dash, console & trim detailing", included: [false, true, false] },
+  { label: "Tyre shine", included: [false, true, false] },
+  { label: "Paint decontamination & prep", included: [false, false, true] },
+  { label: "Ceramic coating & UV protection", included: [false, false, true] },
 ];
 
 const ServiceComparison = () => {
   return (
-    <section className="py-20 bg-secondary/30 scroll-mt-24" aria-labelledby="comparison-title">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 id="comparison-title" className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-            Service comparison
-          </h2>
-          <p className="text-muted-foreground text-lg">See exactly what's included before you book.</p>
-        </div>
+    <section className="py-24 scroll-mt-24" aria-labelledby="comparison-title">
+      <div className="container mx-auto px-4 lg:px-8">
+        <SectionHeading
+          eyebrow="Compare" title="Service comparison"
+          description="See exactly what is included before you book."
+        />
 
-        <div className="max-w-5xl mx-auto overflow-x-auto bg-background rounded-2xl">
+        <div className="overflow-x-auto bg-white/[0.04] rounded-xl border border-border">
           <table className="w-full min-w-[640px] text-sm">
             <caption className="sr-only">Comparison of our detailing services</caption>
             <thead>

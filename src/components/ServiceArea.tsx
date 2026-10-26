@@ -1,132 +1,96 @@
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Phone, MessageCircle, ZoomIn, X } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
-import ServiceAreaMapPng from "@/assets/service-area-map.png";
-import ServiceAreaMapWebp from "@/assets/service-area-map.webp";
-import { BUSINESS, AREA_SERVED_TEXT } from "@/data/business";
+import { Phone, MessageCircle } from "lucide-react";
+const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
+import { BUSINESS, AREA_SERVED_TEXT, RED_ZONE_OUTCALL_FEE } from "@/data/business";
+import SectionHeading from "@/components/SectionHeading";
+
+const mapPlaceholder = <div className="h-[420px] md:h-[520px] w-full rounded-xl bg-muted animate-pulse" />;
 
 const ServiceArea = () => {
+  // The map (Leaflet + OpenStreetMap tiles, ~400 KB) only loads once the section
+  // is about to scroll into view. The prerendered HTML and the first client
+  // render both show the placeholder, so hydration matches (rendering the lazy
+  // map straight away made React report error #419) and the homepage's initial
+  // load stays light.
+  const [showMap, setShowMap] = useState(false);
+  const mapSlot = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = mapSlot.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      setShowMap(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShowMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="service-area" className="py-20 bg-background scroll-mt-24">
-      <div className="container mx-auto px-4">
+    <section id="service-area" className="py-24 bg-transparent scroll-mt-24">
+      <div className="container mx-auto px-4 lg:px-8">
 
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Our Service Area
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            We come to you, mobile detailing at your convenience.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Where we work" title="Our Service Area"
+          description="We come to you, mobile detailing at your convenience."
+        />
 
         {/* Two-column layout */}
         <div className="grid lg:grid-cols-2 gap-6 items-center">
 
-          {/* Left — map only */}
-          <Dialog>
-            <DialogTrigger asChild>
-              <button
-                type="button"
-                className="relative w-full rounded-xl overflow-hidden border border-border/50 cursor-pointer group hover:border-primary transition-colors"
-                aria-label="Expand service area map"
-              >
-                <picture>
-                  <source type="image/webp" srcSet={ServiceAreaMapWebp} />
-                  <img
-                    src={ServiceAreaMapPng}
-                    alt="Ryde Car Detailing service area map (Ryde NSW and nearby suburbs)"
-                    className="w-full h-auto block"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center">
-                  <div className="bg-primary text-primary-foreground rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
-                    <ZoomIn className="w-5 h-5" />
-                  </div>
-                </div>
-              </button>
-            </DialogTrigger>
-
-            <DialogContent className="fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%] max-w-5xl w-full p-0 bg-transparent border-0 shadow-none">
-              <DialogClose asChild>
-                <button
-                  type="button"
-                  aria-label="Close"
-                  className="absolute right-4 top-4 z-50 rounded-full bg-background/90 p-2 hover:bg-background transition-colors shadow"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </DialogClose>
-              <DialogHeader className="sr-only">
-                <DialogTitle>Service Area Map</DialogTitle>
-                <DialogDescription>Expanded view of the service area map</DialogDescription>
-              </DialogHeader>
-              <div className="flex flex-col items-center gap-4 p-4">
-                <picture>
-                  <source type="image/webp" srcSet={ServiceAreaMapWebp} />
-                  <img
-                    src={ServiceAreaMapPng}
-                    alt="Expanded service area map for Ryde Car Detailing (Ryde NSW and nearby suburbs)"
-                    className="max-h-[80vh] w-auto max-w-full object-contain rounded-xl"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
-                <div className="flex gap-8 bg-background/90 backdrop-blur-sm rounded-lg px-6 py-3 border border-border">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-green-600 shrink-0" />
-                    <span className="text-sm font-semibold">Green Zone = No outcall fee</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-600 shrink-0" />
-                    <span className="text-sm font-semibold">Red Zone = $30 outcall fee</span>
-                  </div>
-                </div>
-              </div>
-            </DialogContent>
-          </Dialog>
+          {/* Left — interactive map */}
+          <div ref={mapSlot}>
+            {showMap ? (
+              <Suspense fallback={mapPlaceholder}>
+                <ServiceAreaMap />
+              </Suspense>
+            ) : (
+              mapPlaceholder
+            )}
+          </div>
 
           {/* Right — all cards */}
-          <div className="ml-10 space-y-8 items-center">
+          <div className="space-y-6">
 
             {/* Suburbs */}
-            <div className="mt-4 bg-card rounded-xl border border-border p-6">
+            <div className="mt-4 bg-white/[0.06] rounded-xl border border-border p-6">
               <p className="text-base text-muted-foreground leading-relaxed">
                 We proudly service {AREA_SERVED_TEXT}, and surrounding suburbs.
               </p>
             </div>
 
             {/* Zone legend */}
-            <div className="grid grid-cols-2 gap-8">
-              <div className="flex items-center gap-4 px-5 py-5 bg-card rounded-xl border border-border">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
                 <div className="w-4 h-4 rounded-full bg-green-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Green Zone</p>
                   <p className="text-base text-muted-foreground mt-1">No outcall fee</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4 px-5 py-5 bg-card rounded-xl border border-border">
+              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
                 <div className="w-4 h-4 rounded-full bg-red-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Red Zone</p>
-                  <p className="text-base text-muted-foreground mt-1">$30 outcall fee</p>
+                  <p className="text-base text-muted-foreground mt-1">${RED_ZONE_OUTCALL_FEE} outcall fee</p>
                 </div>
               </div>
             </div>
 
             {/* Contact */}
-            <div className="bg-card rounded-xl border border-border p-6 scroll-mt-28" id="contact">
+            <div className="bg-white/[0.06] rounded-xl border border-border p-6 scroll-mt-28" id="contact">
               <h3 className="text-xl font-bold text-foreground mb-2">Contact Us</h3>
               <p className="text-base text-muted-foreground mb-1">
                 Not sure if we serve your area? Give us a call! We're happy to answer any questions.
@@ -167,7 +131,7 @@ const ServiceArea = () => {
               Hunters Hill.
             </p>
             <p>
-              Whether you need a quick basic exterior wash before the weekend, an interior deep clean to
+              Whether you need a quick basic exterior wash before the weekend, a full detail to
               remove pet hair and stains, or a ceramic coating to protect your paint for years, our local
               detailers know the area and can usually fit you in within days, not weeks. Being based
               locally means less travel time for us and lower outcall fees for you — most of our core

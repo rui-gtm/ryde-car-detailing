@@ -47,10 +47,8 @@ const raw: Omit<Guide, "slug">[] = [
       {
         heading: "When you need a full detail",
         paragraphs: [
-          `Pet hair, stains, spills or general day-to-day build-up inside the cabin call for the Interior Deep Clean (from $${priceFor(
-            "Interior Deep Clean",
-          )}) or, for a complete inside-and-out result, the Premium Full Detail (from $${priceFor(
-            "Premium Full Detail",
+          `Pet hair, stains, spills or general day-to-day build-up inside the cabin call for the Full Detail (from $${priceFor(
+            "Full Detail",
           )}).`,
         ],
       },

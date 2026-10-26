@@ -13,11 +13,11 @@ const Terms = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <JsonLd data={buildPageSchema("/terms", "Terms & Conditions | Ryde Car Detailing")} />
-      <Header />
+      <Header heroOverlay={false} />
       <main className="flex-1 pt-16 lg:pt-20">
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl">
               <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
                 Ryde Car Detailing – Terms &amp; Conditions
               </h1>

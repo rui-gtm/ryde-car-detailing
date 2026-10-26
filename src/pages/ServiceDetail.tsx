@@ -13,6 +13,8 @@ import { EXTRA_SERVICE_ICONS } from "@/components/services/ExtraServicesGrid";
 import { buildServicePageSchema } from "@/lib/schema";
 import { SERVICES, serviceSlug, serviceHref } from "@/data/services";
 import { BUSINESS } from "@/data/business";
+import SectionHeading from "@/components/SectionHeading";
+import CeramicMedia from "@/components/CeramicMedia";
 
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -33,34 +35,32 @@ const ServiceDetail = () => {
   return (
     <PageShell title={title} schema={buildServicePageSchema(service, url, title, breadcrumbs)} breadcrumbs={breadcrumbs}>
       <PageHero title={service.title} description={service.description}>
-        <div className="flex flex-wrap items-center justify-center gap-6 mb-8 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-2 mb-8 text-base text-white/70">
           <span className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-primary" /> {service.duration}
+            <Clock className="w-4 h-4 text-sky-300" /> {service.duration}
           </span>
           <span className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-primary" /> {service.bestFor}
+            <Users className="w-4 h-4 text-sky-300" /> {service.bestFor}
           </span>
         </div>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button size="lg" asChild>
             <Link to={`/book?package=${service.packageValue}`}>Book Now →</Link>
           </Button>
-          <Button size="lg" variant="outline" asChild>
+          <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white" asChild>
             <a href="#pricing">See Pricing</a>
           </Button>
         </div>
       </PageHero>
 
-      <section className="py-16 md:py-20 bg-background" aria-labelledby="about-service-title">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 id="about-service-title" className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              About this service
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
+      <section className="py-24 bg-transparent" aria-labelledby="about-service-title">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[2fr_3fr] lg:gap-20">
+            <SectionHeading eyebrow="Overview" title="About this service" className="mb-0" />
+            <p id="about-service-title" className="text-xl leading-relaxed text-muted-foreground">
               {service.title} is a {service.serviceType.toLowerCase()} carried out entirely at your home,
               apartment car park or workplace across {BUSINESS.address.addressLocality} and nearby suburbs. There's
-              no workshop and no drop-off — water, power, products and equipment all travel with the detailer, and
+              no workshop and no drop-off. You provide access to mains water and a power outlet, and
               the car doesn't need to move. It typically takes {service.duration.toLowerCase()}, and suits{" "}
               {service.bestFor.toLowerCase()}
             </p>
@@ -69,15 +69,13 @@ const ServiceDetail = () => {
       </section>
 
       {service.inclusionGroups && (
-        <section className="py-16 md:py-20 bg-secondary/30 scroll-mt-24" aria-labelledby="inclusions-title">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 id="inclusions-title" className="text-3xl md:text-4xl font-bold text-foreground mb-6 text-center">
-                What the {service.title} includes
-              </h2>
+        <section className="py-24 bg-transparent scroll-mt-24" aria-labelledby="inclusions-title">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div>
+              <SectionHeading eyebrow="Included" title={`What the ${service.title} includes`} />
               <div className="grid sm:grid-cols-2 gap-6">
                 {service.inclusionGroups.map((group) => (
-                  <Card key={group.label} className="border-0">
+                  <Card key={group.label}>
                     <CardHeader>
                       <CardTitle>{group.label}</CardTitle>
                     </CardHeader>
@@ -101,19 +99,18 @@ const ServiceDetail = () => {
 
       <section
         id="pricing"
-        className={`py-16 md:py-20 scroll-mt-24 ${hasInclusions ? "bg-background" : "bg-secondary/30"}`}
+        className={`py-24 scroll-mt-24 ${hasInclusions ? "bg-transparent" : "bg-transparent"}`}
         aria-labelledby="pricing-title"
       >
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 id="pricing-title" className="text-3xl md:text-4xl font-bold text-foreground mb-6 text-center">
-              {service.title} Price
-            </h2>
+        <div className="container mx-auto px-4 lg:px-8">
+          <div>
+            <SectionHeading eyebrow="Pricing" title={`${service.title} Price`} />
             <div className="grid md:grid-cols-2 gap-6 items-stretch">
-              <Card className="bg-sky-50 h-full">
-                <CardContent className="pt-6">
-                  <p className="text-4xl font-bold text-primary mb-2">from ${service.price}</p>
-                  <p className="text-sm text-muted-foreground mb-6">
+              <Card className="h-full border-white/40 bg-white/10 text-white">
+                <CardContent className="p-8">
+                  <p className="text-sm uppercase tracking-wider text-white/60">Starting from</p>
+                  <p className="mt-1 mb-3 text-6xl font-semibold tracking-tight">${service.price}</p>
+                  <p className="text-base text-white/70 mb-8">
                     Final price depends on vehicle size and condition.
                   </p>
                   <Button size="lg" className="w-full" asChild>
@@ -123,17 +120,17 @@ const ServiceDetail = () => {
               </Card>
 
               <Card className="h-full">
-                <CardHeader>
-                  <CardTitle>Often paired with</CardTitle>
+                <CardHeader className="p-8 pb-4">
+                  <CardTitle className="text-xl">Often paired with</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-8 pb-8">
                   <ul className="space-y-4">
                     {service.recommendedExtras.map((extra) => {
                       const Icon = EXTRA_SERVICE_ICONS[extra];
                       return (
                         <li key={extra} className="flex items-center gap-3">
                           <Icon className="w-6 h-6 shrink-0 text-primary" />
-                          <span className="text-sm font-medium text-foreground">{extra}</span>
+                          <span className="text-base font-medium text-foreground">{extra}</span>
                         </li>
                       );
                     })}
@@ -144,6 +141,8 @@ const ServiceDetail = () => {
           </div>
         </div>
       </section>
+
+      {service.packageValue === "ceramic" && <CeramicMedia />}
 
       <Services
         sectionId="other-services"

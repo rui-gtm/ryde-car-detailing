@@ -49,21 +49,21 @@ const Book = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <JsonLd data={buildPageSchema("/book", "Book Your Detail | Ryde Car Detailing")} />
-      <Header />
+      <Header heroOverlay={false} />
       <main className="flex-1 pt-16 lg:pt-20">
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Book Your Detail</h1>
+            <div className="max-w-2xl mb-10 md:mb-14">
+              <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-4">Book Your Detail</h1>
               <p className="text-muted-foreground text-lg">
                 Fill out the form below and we'll contact you to confirm your appointment.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 max-w-5xl mx-auto items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
               {/* Left: Before You Confirm Your Booking */}
               <div className="order-2 lg:order-1 hidden md:block">
-                <div className="bg-secondary/30 rounded-xl p-6 md:p-8 lg:sticky lg:top-28">
+                <div className="bg-transparent rounded-xl p-6 md:p-8 lg:sticky lg:top-28">
                   <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
                     Before Confirming Your Booking
                   </h2>
@@ -94,7 +94,7 @@ const Book = () => {
               </div>
 
               {/* Right: Booking Form */}
-              <div className="order-1 lg:order-2 bg-card rounded-xl p-6 md:p-8">
+              <div className="order-1 lg:order-2 bg-white/[0.06] rounded-xl p-6 md:p-8">
                 <BookingForm
                   defaultPackage={defaultPackage}
                   confirmChecklist={checklist}

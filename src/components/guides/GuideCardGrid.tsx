@@ -8,15 +8,15 @@ const GuideCardGrid = ({ limit }: { limit?: number }) => {
   const guides = limit ? GUIDES.slice(0, limit) : GUIDES;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {guides.map((guide) => (
         <Link key={guide.slug} to={guideHref(guide.slug)} className="block cursor-pointer">
-          <Card className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+          <Card className="h-full transition-colors duration-200 hover:border-foreground/30">
             <CardHeader>
-              <CardTitle className="text-lg">{guide.title}</CardTitle>
+              <CardTitle className="text-xl leading-snug">{guide.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground leading-relaxed">{guide.excerpt}</p>
+              <p className="text-base text-muted-foreground leading-relaxed">{guide.excerpt}</p>
             </CardContent>
           </Card>
         </Link>

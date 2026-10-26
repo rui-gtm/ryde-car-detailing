@@ -3,9 +3,8 @@
 // node. Edit the questions/answers here — do NOT edit them separately in
 // FAQ.tsx or in index.html, that's what caused the two to drift apart.
 //
-// NOTE (2026-09-22): content left unchanged from the current live copy on
-// purpose — a content rewrite (including the water/power contradiction below)
-// is planned separately. This file only centralizes where that edit happens.
+// NOTE: customers supply water and power (see Terms §5) — keep every answer
+// here consistent with that.
 
 export type Faq = {
   q: string;
@@ -15,7 +14,7 @@ export type Faq = {
 export const FAQS: Faq[] = [
   {
     q: "Do you come to my home or office?",
-    a: "Yes — we’re a mobile detailing service and bring everything needed.",
+    a: "Yes. We’re a mobile detailing service and come to your home, apartment car park or workplace.",
   },
   {
     q: "How long does a detail take?",
@@ -23,7 +22,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Do I need to supply water or power?",
-    a: "No. Please ensure water and power are available and easily accessible.",
+    a: "Yes. We need access to a standard mains water supply and a power outlet close to the car. If that isn’t possible, contact us before booking so we can talk through options.",
   },
   {
     q: "What areas do you service?",
@@ -35,6 +34,6 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Do you remove stains and pet hair?",
-    a: "Yes — included in the Interior Deep Clean package.",
+    a: "Yes. Stain removal is included in the Full Detail, and pet hair removal is available as an extra service.",
   },
 ];

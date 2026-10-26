@@ -349,8 +349,7 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
                   </FormControl>
                   <SelectContent>
                     <SelectItem value="basic">Basic Exterior Wash</SelectItem>
-                    <SelectItem value="interior">Interior Deep Clean</SelectItem>
-                    <SelectItem value="premium">Premium Full Detail</SelectItem>
+                    <SelectItem value="premium">Full Detail</SelectItem>
                     <SelectItem value="ceramic">Ceramic Coating</SelectItem>
                   </SelectContent>
                 </Select>
@@ -488,7 +487,7 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
             control={form.control}
             name="agreeToTerms"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-start gap-3 space-y-0 rounded-lg bg-muted/30 p-4">
+              <FormItem className="flex flex-row items-start gap-3 space-y-0 rounded-xl bg-muted/30 p-4">
                 <FormControl>
                   <Checkbox checked={field.value} onCheckedChange={field.onChange} className="mt-0.5" />
                 </FormControl>

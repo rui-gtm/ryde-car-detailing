@@ -1,78 +1,142 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Check } from "lucide-react";
-import heroImage from "@/assets/hero-car.jpg";
+import { ArrowUpRight, Star } from "lucide-react";
+import heroImage from "@/assets/hero-bmw-interior.jpg";
+import { BUSINESS, GOOGLE_REVIEWS } from "@/data/business";
+import GoogleG from "@/components/GoogleG";
+import "@/hero.css";
+
+// The hero acts out what the service does: the photo starts under a dull film
+// of road grime, then a single quick wipe sweeps across and leaves it clean.
+// Nothing else in the background moves — no zoom, no cursor parallax. The wipe
+// is driven by a CSS variable set on the section, so React never re-renders
+// while it runs.
+const WIPE_DELAY_MS = 250;
+const WIPE_MS = 1700;
+
+const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+
+const delay = (d: string) => ({ ["--d" as string]: d });
 
 const Hero = () => {
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.style.setProperty("--wipe", "112");
+      return;
+    }
+
+    let raf = 0;
+    const start = performance.now() + WIPE_DELAY_MS;
+    const tick = (now: number) => {
+      const t = Math.min(Math.max((now - start) / WIPE_MS, 0), 1);
+      el.style.setProperty("--wipe", String(-14 + easeOutQuart(t) * 126));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 lg:pt-20">
-      {/* Background Image */}
-      <img
-        src={heroImage}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 z-0 h-full w-full object-cover object-center"
-        loading="eager"
-        decoding="async"
-        fetchPriority="high"
-      />
-      
-      {/* Overlay */}
-      <div className="absolute inset-0 z-0 pointer-events-none bg-[hsl(var(--hero-overlay))]" />
+    <section
+      ref={root}
+      className="hero relative flex min-h-[100dvh] flex-col overflow-hidden text-white"
+      style={{ ["--wipe" as string]: -14 }}
+    >
+      {/* Layer 1: the photo under road film */}
+      <div className="hero-photo absolute inset-0">
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          className="hero-dull absolute inset-0 h-full w-full object-cover object-[50%_12%]"
+          loading="eager"
+          decoding="async"
+          {...({ fetchpriority: "high" } as object)}
+        />
+        <div className="hero-grime absolute inset-0" />
 
-      {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 text-center space-y-6 md:space-y-10 pb-8 md:pb-12 pt-1 md:pt-4 flex flex-col">
-            <div className="flex flex-col items-center gap-3 md:gap-4 animate-fade-in-up flex-none">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-0.5 md:mt-3 [@media(max-height:900px)_and_(min-width:768px)]:mt-12">
-                Mobile Car Detailing in Ryde
-              </h1>
-              <span className="inline-flex items-center gap-2 text-lg md:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-primary via-pink-500 to-purple-500 text-transparent bg-clip-text px-3 pt-0 pb-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
-                 We Come to You
-              </span>
-              <p className="text-lg md:text-xl text-muted-foreground mt-0.5 md:mt-2 mb-1 md:mb-2 animate-fade-in-up [animation-delay:0.1s] max-w-3xl mx-auto flex-none [@media(max-height:900px)_and_(min-width:768px)]:mt-7">
-              Get a showroom shine at your home or office.
-              <br />
-              Trusted by Ryde locals for fast, professional, high-quality detailing.
-              </p>
-            </div>
-
-
-        
-        {/* Why Choose Us */}
-        <div className="mx-auto max-w-4xl text-center animate-fade-in-up [animation-delay:0.25s] mt-6 md:mt-8 mb-8 md:mb-12 flex-none">
-          <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Why Choose Us</h3>
-          <div className="flex flex-wrap items-center justify-center gap-4 mx-auto max-w-4xl px-2">
-            <span className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-primary shrink-0" />
-              <span className="text-sm md:text-base text-foreground">Local experts who service Ryde daily</span>
-            </span>
-            <span className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-primary shrink-0" />
-              <span className="text-sm md:text-base text-foreground">We come to you — home or workplace</span>
-            </span>
-            <span className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-primary shrink-0" />
-              <span className="text-sm md:text-base text-foreground">Premium products for a lasting finish</span>
-            </span>
-            <span className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-primary shrink-0" />
-              <span className="text-sm md:text-base text-foreground">Fast, reliable, friendly detailers</span>
-            </span>
-            <span className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-primary shrink-0" />
-              <span className="text-sm md:text-base text-foreground">Clear pricing with no surprises</span>
-            </span>
-          </div>
-
+        {/* Layer 2: the same photo, clean, revealed by the wipe */}
+        <div className="hero-clean absolute inset-0">
+          <img
+            src={heroImage}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover object-[50%_12%]"
+            decoding="async"
+          />
         </div>
+      </div>
 
-        {/* CTA Buttons */}
-  <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center animate-fade-in-up [animation-delay:0.2s] mt-1 flex-none">
-          <Button size="lg" asChild>
-            <Link to="/book">Book Your Detail →</Link>
+      {/* The wipe edge */}
+      <div className="hero-edge pointer-events-none absolute inset-y-0" aria-hidden="true" />
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--ink)/0.05)_0%,hsl(var(--ink)/0.6)_85%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_62%,hsl(var(--ink)/0.75),transparent)]" />
+
+      <div className="hero-glow pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/70 via-ink/30 to-transparent" aria-hidden="true" />
+      <div className="container relative mx-auto flex flex-1 flex-col items-center justify-center px-4 pb-16 pt-44 text-center lg:px-8">
+        <a
+          href={BUSINESS.googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hero-fade group mb-8 inline-flex items-center gap-4 rounded-full border border-white/20 bg-white/10 py-2.5 pl-3 pr-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-md transition-colors hover:bg-white/15"
+          style={delay("0.1s")}
+          aria-label={`${GOOGLE_REVIEWS.rating.toFixed(1)} stars from ${GOOGLE_REVIEWS.count} Google reviews`}
+        >
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white">
+            <GoogleG className="h-6 w-6" />
+          </span>
+          <span className="text-left">
+            <span className="flex items-center gap-2">
+              <span className="text-lg font-semibold leading-none">{GOOGLE_REVIEWS.rating.toFixed(1)}</span>
+              <span className="flex gap-0.5" aria-hidden="true">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                ))}
+              </span>
+            </span>
+            <span className="mt-1 block text-xs text-white/70">{GOOGLE_REVIEWS.count} Google reviews</span>
+          </span>
+        </a>
+
+        <h1 className="mx-auto max-w-[48rem] [text-shadow:0_2px_40px_rgba(0,0,0,0.5)]">
+          <span className="hero-line block text-5xl font-medium leading-[1.02] tracking-tighter md:text-6xl">
+            <span style={delay("0.2s")}>Mobile Car Detailing</span>
+          </span>{" "}
+          <span className="hero-line block text-5xl font-medium leading-[1.02] tracking-tighter md:text-6xl">
+            <span className="hero-gleam" style={delay("0.32s")}>
+              in Ryde, NSW
+            </span>
+          </span>
+        </h1>
+
+        <p className="hero-fade mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/80" style={delay("0.5s")}>
+          Hand washing, full interior and exterior details and ceramic coating at your home or workplace, quoted up
+          front and fully insured.
+        </p>
+
+        <div className="hero-fade mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row" style={delay("0.62s")}>
+          <Button size="lg" className="group h-12 gap-2 px-8 text-base" asChild>
+            <Link to="/book">
+              Get a Quote
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
           </Button>
-          <Button size="lg" variant="outline" asChild>
-            <Link to="/services">View Services →</Link>
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-12 border-white/30 bg-white/5 px-8 text-base text-white backdrop-blur-sm hover:bg-white/15 hover:text-white"
+            asChild
+          >
+            <Link to="/services">Explore Services</Link>
           </Button>
         </div>
       </div>

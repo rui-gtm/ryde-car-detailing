@@ -22,9 +22,9 @@ const GuideDetail = () => {
   const related = GUIDES.filter((g) => g.slug !== guide.slug).slice(0, 3);
 
   return (
-    <PageShell title={title} schema={buildGuidePageSchema(guide, url, title, breadcrumbs)} breadcrumbs={breadcrumbs}>
+    <PageShell title={title} schema={buildGuidePageSchema(guide, url, title, breadcrumbs)} breadcrumbs={breadcrumbs} hero={false}>
       <article className="py-16 md:py-20">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{guide.title}</h1>
             <p className="text-lg text-muted-foreground mb-10">{guide.excerpt}</p>
@@ -44,7 +44,7 @@ const GuideDetail = () => {
               ))}
             </div>
 
-            <div className="mt-12 p-6 bg-secondary/30 rounded-xl">
+            <div className="mt-12 p-6 bg-transparent rounded-xl">
               <BookCta
                 heading="Ready to book?"
                 description={`We come to you across ${BUSINESS.address.addressLocality} and surrounding suburbs.`}

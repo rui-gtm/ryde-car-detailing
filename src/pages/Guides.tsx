@@ -18,8 +18,8 @@ const Guides = () => {
         title="Car detailing guides for Ryde drivers"
         description="Practical answers on pricing, timing and what each service actually covers, no filler."
       />
-      <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4">
+      <section className="py-24">
+        <div className="container mx-auto px-4 lg:px-8">
           <GuideCardGrid />
         </div>
       </section>

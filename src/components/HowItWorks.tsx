@@ -1,27 +1,22 @@
 import { Link } from "react-router-dom";
-import { ClipboardList, Car, CalendarClock, Sparkles, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const steps = [
   {
-    icon: ClipboardList,
     title: "Choose your service",
     description: "Pick a package — from a basic wash to a full ceramic coating.",
   },
   {
-    icon: Car,
     title: "Tell us about your vehicle",
     description: "Vehicle type and a few details so we can confirm an accurate price.",
   },
   {
-    icon: CalendarClock,
     title: "Pick your date & time",
     description: "Choose a time that suits you and where you'd like us to come.",
   },
   {
-    icon: Sparkles,
     title: "We come to you",
-    description: "We arrive with everything needed and detail your car on-site.",
+    description: "We arrive at your address and detail your car on-site.",
   },
 ];
 
@@ -31,60 +26,25 @@ const steps = [
 const HowItWorks = ({ tone = "muted" }: { tone?: "muted" | "plain" }) => (
   <section
     id="how-it-works"
-    className={`py-20 scroll-mt-24 ${tone === "muted" ? "bg-secondary/30" : "bg-background"}`}
+    className={`py-24 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
   >
-    <div className="container mx-auto px-4">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">How It Works</h2>
-      </div>
-
-      {/* Mobile: vertical stack */}
-      <div className="max-w-5xl mx-auto flex flex-col lg:hidden">
-        {steps.map((step, index) => (
-          <div key={step.title} className="contents">
-            <div className="text-center pb-10">
-              <step.icon className="w-8 h-8 text-primary mx-auto mb-3" />
-              <h3 className="font-semibold text-foreground mb-1">{step.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
-            </div>
-            {index < steps.length - 1 && (
-              <div className="flex justify-center -mt-6 mb-4">
-                <ChevronRight className="w-5 h-5 text-muted-foreground/40 rotate-90" />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Desktop: icons and arrows share one row so their centers line up */}
-      <div
-        className="max-w-5xl mx-auto hidden lg:grid lg:items-center"
-        style={{ gridTemplateColumns: steps.map(() => "1fr").join(" auto ") }}
-      >
-        {steps.map((step, index) => (
-          <div key={step.title} className="contents">
-            <step.icon className="w-8 h-8 text-primary mx-auto" />
-            {index < steps.length - 1 && (
-              <ChevronRight className="w-5 h-5 text-muted-foreground/40" />
-            )}
-          </div>
-        ))}
-        {steps.map((step, index) => (
-          <div key={step.title} className="contents">
-            <div className="text-center pt-3">
-              <h3 className="font-semibold text-foreground mb-1">{step.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
-            </div>
-            {index < steps.length - 1 && <div />}
-          </div>
-        ))}
-      </div>
-
-      <div className="text-center mt-12">
+    <div className="container mx-auto px-4 lg:px-8">
+      <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <h2 className="max-w-xl text-3xl font-semibold text-foreground md:text-4xl">How it works</h2>
         <Button asChild size="lg">
-          <Link to="/book">Book Now</Link>
+          <Link to="/book">Book now</Link>
         </Button>
       </div>
+
+      <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        {steps.map((step, index) => (
+          <li key={step.title} className="border-t border-foreground/15 pt-6">
+            <span className="text-sm font-medium tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span>
+            <h3 className="mt-3 text-lg font-semibold text-foreground">{step.title}</h3>
+            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{step.description}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 );

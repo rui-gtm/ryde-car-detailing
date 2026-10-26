@@ -1,86 +1,116 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Clock, Users } from "lucide-react";
 import { serviceHref, type ServicePackage } from "@/data/services";
+import basicImage from "@/assets/exteriorImage-8.jpg";
+import fullImage from "@/assets/interiorImage-4.jpg";
+import ceramicImage from "@/assets/exteriorImage-7.jpg";
+
+// Real job photos for each package, keyed by packageValue.
+const PHOTOS: Record<string, { src: string; alt: string }> = {
+  basic: { src: basicImage, alt: "Audi covered in foam during a hand wash in a Ryde driveway" },
+  premium: { src: fullImage, alt: "Freshly detailed Porsche Macan interior with cleaned seats and floor mats" },
+  ceramic: { src: ceramicImage, alt: "Black Mercedes with a deep ceramic coating gloss at night" },
+};
 
 export type ServiceCardVariant = "compact" | "detailed";
 
 // One service package card. Used by ServiceCardGrid, which is itself reused
 // by both the homepage "Our Services" section and the /services page's
 // "What each service covers" section — same card, same data, two contexts.
+// The most popular package is inverted (dark card) so it reads as the
+// recommended option without a badge gimmick.
 const ServiceCard = ({
   service,
   variant = "compact",
-  index = 0,
 }: {
   service: ServicePackage;
   variant?: ServiceCardVariant;
   index?: number;
 }) => {
-  const isPopular = service.title === "Premium Full Detail";
+  const isPopular = service.title === "Full Detail";
   const detailed = variant === "detailed";
   const titleId = `${service.id}-title`;
   const href = serviceHref(service.id);
 
   return (
     <article id={service.id} aria-labelledby={titleId} className="h-full scroll-mt-28">
-      <Card
-        className={`relative overflow-visible transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary h-full flex flex-col${
-          isPopular ? " bg-sky-50" : ""
+      <div
+        className={`flex h-full flex-col rounded-xl border p-7 transition-colors duration-200 lg:p-8 ${
+          isPopular
+            ? "border-white/40 bg-white/10 text-white"
+            : "border-border bg-white/[0.06] text-card-foreground hover:border-white/40"
         }`}
-        style={{ animationDelay: `${index * 0.1}s` }}
       >
-        {isPopular && (
-          <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-sky-700 shadow-sm ring-1 ring-sky-200">
-            MOST POPULAR
-          </span>
+        {PHOTOS[service.packageValue] && (
+          <img
+            src={PHOTOS[service.packageValue].src}
+            alt={PHOTOS[service.packageValue].alt}
+            className="mb-6 aspect-[4/3] w-full rounded-lg object-cover object-[50%_60%]"
+            loading="lazy"
+            decoding="async"
+          />
         )}
-        <CardHeader className="relative flex flex-col px-6 pt-6 pb-4 gap-3">
-          <CardTitle id={titleId} className="text-lg font-semibold leading-snug text-foreground">
-            <Link to={href} className="hover:underline underline-offset-4">
+        <div className="flex items-start justify-between gap-3">
+          <h3 id={titleId} className="text-xl font-semibold leading-snug">
+            <Link to={href} className="underline-offset-4 hover:underline">
               {service.title}
             </Link>
-          </CardTitle>
-          <p className="text-sm leading-relaxed text-muted-foreground min-h-[56px]">{service.description}</p>
-          {detailed && (
-            <div className="flex flex-col gap-1.5 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-primary shrink-0" />
-                {service.duration}
-              </span>
-              <span className="flex items-start gap-1.5">
-                <Users className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
-                {service.bestFor}
-              </span>
-            </div>
+          </h3>
+          {isPopular && (
+            <span className="shrink-0 rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider text-white ring-1 ring-white/20">
+              Most popular
+            </span>
           )}
-        </CardHeader>
-        <CardContent className="flex-1 px-6 pt-0 pb-6">
-          <div className="border-t border-border/60 pt-1">
-            <p className="text-2xl font-bold text-primary mt-1">from ${service.price}</p>
+        </div>
+
+        <p className={`mt-4 min-h-[3.5rem] text-base leading-relaxed ${isPopular ? "text-white/70" : "text-muted-foreground"}`}>
+          {service.description}
+        </p>
+
+        {detailed && (
+          <div className={`mt-4 flex flex-col gap-1.5 text-xs ${isPopular ? "text-white/70" : "text-muted-foreground"}`}>
+            <span className="flex items-start gap-1.5">
+              <Users className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+              {service.bestFor}
+            </span>
           </div>
-          <ul className="space-y-2.5 mt-2.5">
-            {service.features.map((feature) => (
-              <li key={feature} className="flex items-start gap-2">
-                <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                <span className="text-sm leading-snug text-foreground">{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-        <CardFooter className="mt-auto flex flex-col gap-2 items-stretch">
-          <Button className="w-full" asChild>
-            <Link to={`/book?package=${service.packageValue}`}>Book Now</Link>
-          </Button>
-          <Link
-            to={href}
-            className="mt-2 inline-flex items-center justify-center gap-1 text-sm text-primary"
-          >
-            View Service →
-          </Link>
-        </CardFooter>
-      </Card>
+        )}
+
+        <div className="mt-6 flex items-end justify-between gap-4">
+          <div>
+            <p className="flex items-baseline gap-2">
+              <span className={`text-base ${isPopular ? "text-white/70" : "text-muted-foreground"}`}>From</span>{" "}
+              <span className="text-6xl font-bold leading-none tracking-tight">${service.price}</span>
+            </p>
+            <p className={`mt-2 text-sm ${isPopular ? "text-white/60" : "text-muted-foreground"}`}>per service</p>
+          </div>
+          <span className="mb-1 inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white">
+            <Clock className="h-3.5 w-3.5" />
+            {service.duration}
+          </span>
+        </div>
+
+        <Button size="lg" className="mt-6 h-12 w-full text-base" asChild>
+          <Link to={`/book?package=${service.packageValue}`}>Book now</Link>
+        </Button>
+
+        <ul className={`mt-8 flex-1 space-y-4 border-t pt-8 ${isPopular ? "border-white/20" : "border-border"}`}>
+          {service.features.map((feature) => (
+            <li key={feature} className="flex items-start gap-2.5">
+              <Check className="mt-1 h-5 w-5 shrink-0 text-white" />
+              <span className={`text-base leading-snug ${isPopular ? "text-white/90" : "text-foreground"}`}>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <Link
+          to={href}
+          className={`mt-8 text-center text-sm font-medium ${isPopular ? "text-white/80 hover:text-white" : "text-primary"}`}
+        >
+          View details
+        </Link>
+      </div>
     </article>
   );
 };

@@ -20,7 +20,7 @@ export const SUBURBS: Suburb[] = AREA_SERVED.map((name) => ({
   slug: slugify(name),
   name,
   // TODO (content): replace with real, suburb-specific detail — see §4.
-  intro: `We regularly detail cars for homes, apartments and workplaces in ${name}. We bring our own equipment, so a driveway, basement car park or office car park all work the same way.`,
+  intro: `We regularly detail cars for homes, apartments and workplaces in ${name}. The car stays where it is, so a driveway, basement car park or office car park all work, as long as there is access to water and power.`,
 }));
 
 export const findSuburb = (slug: string) => SUBURBS.find((s) => s.slug === slug);

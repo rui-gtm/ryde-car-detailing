@@ -1,33 +1,40 @@
 import type { ReactNode } from "react";
+import { useBreadcrumbs } from "@/components/PageShell";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
-// The compact "centered H1 + paragraph [+ CTA]" header block repeated at the
-// top of every secondary page (Services, Areas, Guides, About) — extracted
-// here instead of each page re-writing the same container/heading markup.
+// The title block at the top of every secondary page. Dark, like the homepage
+// hero, so the transparent header and the footer/CTA bands all belong to one
+// system. Left-aligned with the breadcrumb trail inside it.
 //
-// Deliberately NOT the same component as the homepage's Hero.tsx: that one
-// is full-viewport with a background photo and a "Why Choose Us" checklist —
-// a genuinely different design for the one page that needs to make a first
-// impression, not a variant of this lighter, title-only page header.
+// Deliberately NOT the same component as the homepage's Hero.tsx: that one is
+// full-viewport with the animated photo — a one-off for the first impression.
 const PageHero = ({
   title,
   description,
   children,
-  tone = "muted",
 }: {
   title: ReactNode;
   description?: ReactNode;
   children?: ReactNode;
+  /** @deprecated kept so existing call sites compile; the hero is always dark now. */
   tone?: "muted" | "plain";
-}) => (
-  <section className={`py-16 md:py-20 ${tone === "muted" ? "bg-secondary/30" : "bg-background"}`}>
-    <div className="container mx-auto px-4">
-      <div className="text-center max-w-2xl mx-auto">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">{title}</h1>
-        {description && <p className="text-muted-foreground text-lg">{description}</p>}
+}) => {
+  const crumbs = useBreadcrumbs();
+  return (
+    <section className="relative overflow-hidden text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_90%_at_85%_0%,hsl(var(--primary)/0.22),transparent_60%)]" />
+      <div className="container relative mx-auto px-4 lg:px-8 pb-16 pt-36 md:pb-20 md:pt-44">
+        {crumbs.length > 1 && (
+          <div className="mb-8">
+            <Breadcrumbs items={crumbs} onDark />
+          </div>
+        )}
+        <h1 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
+        {description && <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">{description}</p>}
         {children && <div className="mt-8">{children}</div>}
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default PageHero;

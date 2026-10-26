@@ -1,3 +1,5 @@
+@import '@fontsource-variable/geist';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,37 +46,42 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 215 25% 15%;
+    /* Three colours only: black-navy, the logo blue, and white.
+       The page background is a gradient from the first to the second. */
+    --background: 216 70% 5%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card: 214 50% 14%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover: 216 60% 8%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 199 89% 48%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 216 70% 6%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 215 25% 15%;
+    --secondary: 214 45% 16%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 214 45% 16%;
+    --muted-foreground: 214 25% 80%;
 
-    --accent: 199 89% 48%;
+    --accent: 214 45% 20%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 199 89% 48%;
+    --border: 214 35% 42%;
+    --input: 214 35% 44%;
+    --ring: 0 0% 100%;
 
-    --radius: 0.5rem;
+    --ink: 216 70% 5%;
+    --brand: 214 90% 44%;
 
-    --hero-overlay: 0 0% 100% / 0.85;
+    --radius: 0.375rem;
+
+    --hero-overlay: 216 70% 5% / 0.85;
   }
 
   .dark {
@@ -119,9 +126,28 @@
     scroll-behavior: smooth;
   }
 
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+
+  html {
+    background-color: hsl(var(--ink));
+    /* Slightly under the browser default so the site sits comfortably at 100% zoom. */
+    font-size: 15px;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+    @apply text-foreground font-sans antialiased;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--ink)) 0%,
+      hsl(var(--ink)) 30%,
+      hsl(214 88% 34%) 50%,
+      hsl(216 78% 9%) 68%,
+      hsl(214 88% 34%) 86%,
+      hsl(var(--brand)) 100%
+    );
+    font-family: 'Geist Variable', 'Inter', sans-serif;
   }
 }
 
@@ -169,5 +195,34 @@
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+
+/* Darkens the standard OpenStreetMap tiles (no API key needed) for the service area map. */
+.dark-map-tiles {
+  filter: invert(1) hue-rotate(180deg) grayscale(0.85) brightness(0.9) contrast(0.85);
+}
+
+/* Content uses most of the screen: up to 1760px wide. */
+.container {
+  max-width: 1760px !important;
+}
+
+/* Countdown bar under the before/after slider: fills over the auto-advance time. */
+@keyframes baTimer {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.ba-timer {
+  animation-name: baTimer;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ba-timer {
+    animation: none;
+    transform: scaleX(0);
   }
 }

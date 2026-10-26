@@ -9,7 +9,7 @@ export const BUSINESS = {
   name: "Ryde Car Detailing",
   url: SITE_URL,
   description:
-    "Professional mobile car wash and detailing service in Ryde, NSW. We come to your home or office with everything needed, mobile car wash, interior deep clean, full detail, and ceramic coating.",
+    "Professional mobile car wash and detailing service in Ryde, NSW. We come to your home or office. Services include mobile car wash, full detail, and ceramic coating.",
   keywords: "mobile car wash, mobile car detailing, car wash Ryde, car detailing Ryde NSW, mobile detailing Sydney",
   phoneDisplay: "0411 666 174",
   phoneE164: "+61411666174",
@@ -30,6 +30,9 @@ export const BUSINESS = {
     latitude: -33.8138256,
     longitude: 151.106138,
   },
+  // Full Instagram profile URL, e.g. "https://www.instagram.com/yourhandle". Leave empty to hide the
+  // Instagram buttons in the header and footer.
+  instagramUrl: "" as string,
   googleMapsUrl: "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA",
   ogImageUrl: `${SITE_URL}/og-image.jpg`,
   openingHours: ["Mo-Su 00:00-23:59"],
@@ -41,10 +44,16 @@ export const AREA_SERVED = ["Ryde", "North Ryde", "Meadowbank", "Gladesville", "
 
 export const AREA_SERVED_TEXT = AREA_SERVED.join(", ");
 
-// Google review summary shown in Testimonial.tsx. Update the count here as
-// reviews come in — this used to also be hardcoded (and stale) in the unused
-// GoogleRatingSection.tsx, which is why the two disagreed.
+// Outcall fee for the Red Zone on the service area map (the Green Zone has
+// none). Shown on the map, its legend and the homepage pricing copy — change
+// it once, here.
+export const RED_ZONE_OUTCALL_FEE = 30;
+
+// Google review summary shown in the Hero, Testimonial.tsx and the JSON-LD
+// aggregateRating. Update the rating and count here as reviews come in — this
+// used to also be hardcoded (and stale) in the unused GoogleRatingSection.tsx,
+// which is why the two disagreed. Last checked against Google: 2026-10-26.
 export const GOOGLE_REVIEWS = {
-  rating: 5,
-  count: 51,
+  rating: 4.9,
+  count: 59,
 } as const;

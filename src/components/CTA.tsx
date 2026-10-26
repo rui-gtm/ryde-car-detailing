@@ -1,39 +1,38 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Calendar, Award, ThumbsUp } from "lucide-react";
-
-const benefits = [
-  { icon: Calendar, text: "Flexible scheduling options" },
-  { icon: Award, text: "Premium service guarantee" },
-  { icon: ThumbsUp, text: "100% satisfaction guaranteed" },
-];
+import { BUSINESS } from "@/data/business";
 
 const CTA = ({
-  heading = "Ready to Experience the Detailing Difference?",
+  heading = "Ready for a proper detail?",
   bookHref = "/book",
-  bookLabel = "Book Your Detail Today",
+  bookLabel = "Book your detail",
 }: {
   heading?: string;
   bookHref?: string;
   bookLabel?: string;
 }) => {
   return (
-    <section id="book" className="py-20 bg-primary scroll-mt-24">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-8">{heading}</h2>
-
-        <div className="flex flex-wrap justify-center gap-8 mb-10">
-          {benefits.map((benefit) => (
-            <div key={benefit.text} className="flex items-center gap-3 text-primary-foreground">
-              <benefit.icon className="w-6 h-6" />
-              <span className="font-medium">{benefit.text}</span>
-            </div>
-          ))}
+    <section id="book" className="scroll-mt-24 border-t border-white/10 py-24 text-white">
+      <div className="container mx-auto flex flex-col gap-10 px-4 md:flex-row md:items-center md:justify-between lg:px-8">
+        <div className="max-w-2xl">
+          <h2 className="text-3xl font-semibold md:text-4xl">{heading}</h2>
+          <p className="mt-4 text-lg text-white/70">
+            Clear starting prices, flexible scheduling and a 24-hour satisfaction guarantee.
+          </p>
         </div>
-
-        <Button size="lg" variant="secondary" className="text-lg px-8" asChild>
-          <Link to={bookHref}>{bookLabel}</Link>
-        </Button>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Button size="lg" className="h-12 px-8 text-base" asChild>
+            <Link to={bookHref}>{bookLabel}</Link>
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-12 border-white/25 bg-transparent px-8 text-base text-white hover:bg-white/10 hover:text-white"
+            asChild
+          >
+            <a href={BUSINESS.phoneHref}>Call {BUSINESS.phoneDisplay}</a>
+          </Button>
+        </div>
       </div>
     </section>
   );
