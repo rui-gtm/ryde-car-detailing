@@ -79,7 +79,7 @@ const ServiceArea = () => {
             </div>
 
             {/* Zone legend */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
               <div className="flex items-start gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
                 <div className="mt-1 w-4 h-4 rounded-full bg-green-500 shrink-0" />
                 <div>
