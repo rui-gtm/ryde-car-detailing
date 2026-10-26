@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Instagram } from "lucide-react";
-import logo from "@/assets/logo-new.png";
+import logo from "@/assets/logo-new.webp";
 import { Button } from "@/components/ui/button";
 import { BUSINESS } from "@/data/business";
 import { SUBURBS } from "@/data/suburbs";

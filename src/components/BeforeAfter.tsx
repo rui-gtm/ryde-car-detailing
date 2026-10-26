@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { ChevronsLeftRight } from "lucide-react";
-import bmwWheelBefore from "@/assets/before-after/bmw-wheel-before.jpg";
-import bmwWheelAfter from "@/assets/before-after/bmw-wheel-after.jpg";
-import bmwExteriorBefore from "@/assets/before-after/bmw-exterior-before.jpg";
-import bmwExteriorAfter from "@/assets/before-after/bmw-exterior-after.jpg";
-import bmwInteriorBefore from "@/assets/before-after/bmw-interior-before.jpg";
-import bmwInteriorAfter from "@/assets/before-after/bmw-interior-after.jpg";
-import havalInteriorBefore from "@/assets/before-after/haval-interior-before.jpg";
-import havalInteriorAfter from "@/assets/before-after/haval-interior-after.jpg";
-import havalFootwellBefore from "@/assets/before-after/haval-footwell-before.jpg";
-import havalFootwellAfter from "@/assets/before-after/haval-footwell-after.jpg";
+import bmwWheelBefore from "@/assets/before-after/bmw-wheel-before.webp";
+import bmwWheelAfter from "@/assets/before-after/bmw-wheel-after.webp";
+import bmwExteriorBefore from "@/assets/before-after/bmw-exterior-before.webp";
+import bmwExteriorAfter from "@/assets/before-after/bmw-exterior-after.webp";
+import bmwInteriorBefore from "@/assets/before-after/bmw-interior-before.webp";
+import bmwInteriorAfter from "@/assets/before-after/bmw-interior-after.webp";
+import havalInteriorBefore from "@/assets/before-after/haval-interior-before.webp";
+import havalInteriorAfter from "@/assets/before-after/haval-interior-after.webp";
+import havalFootwellBefore from "@/assets/before-after/haval-footwell-before.webp";
+import havalFootwellAfter from "@/assets/before-after/haval-footwell-after.webp";
 
 // Each pair was shot by hand, so the "after" photo is aligned to the "before"
 // and both are cropped to the same frame — dragging the handle reveals the
@@ -177,23 +177,29 @@ const BeforeAfter = () => {
             After
           </span>
 
-          {/* Handle */}
+          {/* Handle. A full-size track is slid with transform (a % of the
+              track's own width = a % of the photo), rather than animating the
+              handle's `left`, which counted as layout shift (CLS). */}
           <div
-            role="slider"
-            tabIndex={0}
-            aria-label="Before and after comparison"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={Math.round(pos)}
-            onKeyDown={onKey}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            className="absolute inset-y-0 z-10 -ml-px w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.25)] outline-none focus-visible:shadow-[0_0_0_3px_rgba(255,255,255,0.6)]"
-            style={{ left: `${pos}%` }}
+            className="pointer-events-none absolute inset-0 z-10"
+            style={{ transform: `translateX(${pos}%)` }}
           >
-            <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-ink/80 text-white shadow-lg backdrop-blur-sm">
-              <ChevronsLeftRight className="h-5 w-5" />
-            </span>
+            <div
+              role="slider"
+              tabIndex={0}
+              aria-label="Before and after comparison"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(pos)}
+              onKeyDown={onKey}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              className="pointer-events-auto absolute inset-y-0 left-0 -ml-px w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.25)] outline-none focus-visible:shadow-[0_0_0_3px_rgba(255,255,255,0.6)]"
+            >
+              <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-ink/80 text-white shadow-lg backdrop-blur-sm">
+                <ChevronsLeftRight className="h-5 w-5" />
+              </span>
+            </div>
           </div>
         </div>
 

@@ -23,7 +23,7 @@ export const STATIC_ROUTES: SiteRoute[] = [
   {
     path: "/book",
     title: "Book Your Detail | Ryde Car Detailing",
-    description: "Book your mobile car detail in Ryde NSW. Fill out the form and we'll contact you to confirm your appointment.",
+    description: "Book your mobile car detail in Ryde NSW. Fill out the form and we'll call or email you within 24 hours to confirm your appointment.",
   },
   {
     path: "/terms",

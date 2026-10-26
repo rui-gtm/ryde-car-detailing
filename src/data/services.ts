@@ -23,8 +23,7 @@ export type ServicePackage = {
   description: string;
   price: number;
   features: string[];
-  // Rough estimate for the per-service detail page — TODO: confirm exact
-  // durations with the business (see ref/SEO-AEO-GEO-Audit.md §10).
+  // Typical time on site — confirmed with the business (2026-10-26).
   duration: string;
   // Who this package suits — shown on the per-service detail page.
   bestFor: string;
@@ -132,7 +131,7 @@ const raw: Omit<ServicePackage, "id">[] = [
     serviceType: "Mobile car detailing",
     description: "Elite paint protection with a superior gloss finish.",
     price: 599,
-    duration: "Half-day service",
+    duration: "Half a day",
     bestFor: "Owners who want long-term paint protection and a showroom-gloss finish that lasts.",
     features: [
       "Paint decontamination & professional surface prep",

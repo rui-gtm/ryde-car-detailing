@@ -1,0 +1,56 @@
+# Apache config for the prerendered static site (Vite copies this file from
+# public/ into dist/). Matches what the code already assumes:
+#   - preferred host: https://www.rydecardetailing.com  (canonical, sitemap)
+#   - URLs without a trailing slash: /book, /services/ceramic-coating
+#   - each page is dist/<path>/index.html; unknown URLs get dist/404.html
+#
+# BEFORE UPLOADING: if the host already has a .htaccess in the web root, keep
+# any hosting-specific lines from it (PHP handler, cPanel blocks, etc.) — this
+# file replaces it.
+
+Options -Indexes
+DirectoryIndex index.html
+
+# Serve the prerendered "Page not found" page with a real 404 status
+# (unknown URLs currently return HTTP 500).
+ErrorDocument 404 /404.html
+
+# Don't let Apache append "/" to directory URLs (/book -> /book/); the rewrite
+# rules below serve /book from /book/index.html instead.
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. One permanent redirect to https://www. (covers http://, http://www.
+  #    and https:// without www). If the host terminates HTTPS on a proxy and
+  #    this loops, swap the HTTPS condition for:
+  #      RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^www\.rydecardetailing\.com$ [NC]
+  RewriteRule ^ https://www.rydecardetailing.com%{REQUEST_URI} [R=301,L]
+
+  # 2. /index.html -> /  and  /book/index.html -> /book  (no duplicate URLs).
+  #    THE_REQUEST is what the browser asked for, so the internal rewrite in
+  #    rule 4 doesn't trigger this.
+  RewriteCond %{THE_REQUEST} \s/+(.*?)/?index\.html[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L,NE]
+
+  # 3. /book/ -> /book. The root "/" never matches (its path here is empty).
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+  # 4. Serve /book from /book/index.html without changing the URL.
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.+)$ /$1/index.html [L]
+</IfModule>
+
+# Hashed build assets never change, so browsers can cache them for a year.
+# HTML is left to the host's default so new deploys show up quickly.
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/assets/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+</IfModule>

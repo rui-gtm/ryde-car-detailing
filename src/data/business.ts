@@ -49,6 +49,16 @@ export const AREA_SERVED_TEXT = AREA_SERVED.join(", ");
 // it once, here.
 export const RED_ZONE_OUTCALL_FEE = 30;
 
+// Which suburbs fall in each zone (confirmed by the business, 2026-10-26).
+// The Green Zone list is complete; the Red Zone list is examples — the map
+// shows the full zone. Bookings outside the Red Zone aren't taken.
+export const GREEN_ZONE_SUBURBS = ["Ryde", "North Ryde", "East Ryde", "West Ryde", "Denistone East"] as const;
+export const RED_ZONE_EXAMPLES = ["Macquarie Park", "Chatswood", "Epping", "Hunters Hill", "Sydney Olympic Park"] as const;
+
+/** "A, B and C" */
+export const listText = (items: readonly string[]) =>
+  items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+
 // Google review summary shown in the Hero, Testimonial.tsx and the JSON-LD
 // aggregateRating. Update the rating and count here as reviews come in — this
 // used to also be hardcoded (and stale) in the unused GoogleRatingSection.tsx,

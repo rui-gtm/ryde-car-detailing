@@ -27,8 +27,19 @@ const createTransporter = () => {
   return nodemailer.createTransport(transportConfig);
 };
 
-// Format email HTML content
-const formatEmailContent = (data) => {
+const escapeHtml = (value) =>
+  String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+// Format email HTML content. Every field comes straight from the public quote
+// form, so it's escaped before going into the HTML — otherwise anyone could
+// inject links or markup into the business's inbox.
+const formatEmailContent = (raw) => {
+  const data = Object.fromEntries(Object.entries(raw).map(([key, value]) => [key, escapeHtml(value)]));
   return `
     <!DOCTYPE html>
     <html>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { CheckCircle2, Phone } from "lucide-react";
 import Header from "@/components/Header";
@@ -40,7 +40,14 @@ const checklist = [
 
 const Book = () => {
   const [searchParams] = useSearchParams();
-  const defaultPackage = searchParams.get("package") ?? undefined;
+  // The prerendered /book page has no query string, so the first client render
+  // must match it (nothing pre-selected); ?package= is applied right after
+  // mount instead. Reading it during render made hydration fail on every
+  // "Book now" link.
+  const [defaultPackage, setDefaultPackage] = useState<string>();
+  useEffect(() => {
+    setDefaultPackage(searchParams.get("package") ?? undefined);
+  }, [searchParams]);
 
   useEffect(() => {
     document.title = "Book Your Detail | Ryde Car Detailing";
@@ -56,7 +63,7 @@ const Book = () => {
             <div className="max-w-2xl mb-10 md:mb-14">
               <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-4">Book Your Detail</h1>
               <p className="text-muted-foreground text-lg">
-                Fill out the form below and we'll contact you to confirm your appointment.
+                Fill out the form below and we'll call or email you within 24 hours to confirm your appointment.
               </p>
             </div>
 

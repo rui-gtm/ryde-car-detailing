@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
-import interiorImage from "@/assets/interiorImage-5.jpg";
-import exteriorImage from "@/assets/exteriorImage-3.jpg";
+import interiorImage from "@/assets/interiorImage-5.webp";
+import exteriorImage from "@/assets/exteriorImage-3.webp";
 
 const POINTS = [
   "Two-bucket hand washing — never automatic brushes",

@@ -4,7 +4,7 @@
 // editing a price, FAQ answer or suburb meant remembering to change it in two
 // places, and they drifted apart. Now there is exactly one place to edit each
 // fact; this file just re-shapes it into schema.org form.
-import { BUSINESS, AREA_SERVED, GOOGLE_REVIEWS, SITE_URL } from "@/data/business";
+import { BUSINESS, AREA_SERVED, GREEN_ZONE_SUBURBS, RED_ZONE_EXAMPLES, GOOGLE_REVIEWS, SITE_URL } from "@/data/business";
 import { SERVICES, type ServicePackage } from "@/data/services";
 import { EXTRA_SERVICES } from "@/data/extraServices";
 import { FAQS, type Faq } from "@/data/faqs";
@@ -24,7 +24,11 @@ const breadcrumbNode = (items: Crumb[]) => ({
   })),
 });
 
-const areaServedNodes = AREA_SERVED.map((name) => ({ "@type": "City", name }));
+// Suburb pages plus every suburb named in the service-area zones (shown in
+// the zone legend and the "What areas do you service?" FAQ).
+const areaServedNodes = [...new Set<string>([...AREA_SERVED, ...GREEN_ZONE_SUBURBS, ...RED_ZONE_EXAMPLES])].map(
+  (name) => ({ "@type": "City", name }),
+);
 
 // Only reviews sourced verbatim from Google Maps are declared as Review
 // structured data — declaring the placeholder testimonials too would be
