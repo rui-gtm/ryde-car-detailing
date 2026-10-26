@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, Clock, Users } from "lucide-react";
 import { serviceHref, type ServicePackage } from "@/data/services";
-import basicImage from "@/assets/exteriorImage-8.jpg";
-import fullImage from "@/assets/interiorImage-4.jpg";
-import ceramicImage from "@/assets/exteriorImage-7.jpg";
+import basicImage from "@/assets/exteriorImage-8.webp";
+import fullImage from "@/assets/interiorImage-4.webp";
+import ceramicImage from "@/assets/exteriorImage-7.webp";
 
 // Real job photos for each package, keyed by packageValue.
 const PHOTOS: Record<string, { src: string; alt: string }> = {

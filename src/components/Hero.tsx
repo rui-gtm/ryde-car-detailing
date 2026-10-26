@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Star } from "lucide-react";
-import heroImage from "@/assets/hero-bmw-interior.jpg";
+import heroImage from "@/assets/hero-bmw-interior.webp";
 import { BUSINESS, GOOGLE_REVIEWS } from "@/data/business";
 import GoogleG from "@/components/GoogleG";
 import "@/hero.css";

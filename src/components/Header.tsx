@@ -2,7 +2,7 @@ import { useState, useEffect, type MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, ArrowUpRight, Instagram } from "lucide-react";
-import logo from "@/assets/logo-new.png";
+import logo from "@/assets/logo-new.webp";
 import { SERVICES, serviceHref } from "@/data/services";
 import { BUSINESS } from "@/data/business";
 
