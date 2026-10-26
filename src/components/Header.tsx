@@ -167,12 +167,15 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
 
       {/* Full-screen mobile menu */}
       <div
-        className={`fixed inset-0 z-[55] flex flex-col bg-ink px-6 pb-10 pt-28 text-white transition-all duration-500 ease-out lg:hidden ${
+        className={`fixed inset-0 z-[55] flex flex-col bg-ink px-6 pb-10 pt-24 text-white transition-all duration-500 ease-out lg:hidden ${
           menuOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
         aria-hidden={!menuOpen}
       >
-        <nav className="flex flex-1 flex-col justify-center gap-4" aria-label="Mobile">
+        {/* Top-aligned under the header (it used to be vertically centred,
+            which left a big gap above "Home"); scrolls if it ever outgrows
+            a short screen. */}
+        <nav className="flex flex-1 flex-col gap-4 overflow-y-auto pt-6" aria-label="Mobile">
           {[
             { label: "Home", to: "/", active: location.pathname === "/" },
             {
