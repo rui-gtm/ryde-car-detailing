@@ -44,10 +44,11 @@ export const AREA_SERVED = ["Ryde", "North Ryde", "Meadowbank", "Gladesville", "
 
 export const AREA_SERVED_TEXT = AREA_SERVED.join(", ");
 
-// Google review summary shown in Testimonial.tsx. Update the count here as
-// reviews come in — this used to also be hardcoded (and stale) in the unused
-// GoogleRatingSection.tsx, which is why the two disagreed.
+// Google review summary shown in the Hero, Testimonial.tsx and the JSON-LD
+// aggregateRating. Update the rating and count here as reviews come in — this
+// used to also be hardcoded (and stale) in the unused GoogleRatingSection.tsx,
+// which is why the two disagreed. Last checked against Google: 2026-10-26.
 export const GOOGLE_REVIEWS = {
-  rating: 5,
-  count: 50,
+  rating: 4.9,
+  count: 59,
 } as const;

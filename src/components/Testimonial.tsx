@@ -14,8 +14,8 @@ const avatarColor = (name: string) => {
   return AVATAR_COLORS[hash % AVATAR_COLORS.length];
 };
 
-const Stars = ({ className = "h-4 w-4" }: { className?: string }) => (
-  <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+const Stars = ({ className = "h-4 w-4", rating = 5 }: { className?: string; rating?: number }) => (
+  <div className="flex gap-0.5" aria-label={`${rating} out of 5 stars`}>
     {[...Array(5)].map((_, i) => (
       <Star key={i} className={`${className} fill-yellow-400 text-yellow-400`} />
     ))}
@@ -33,7 +33,7 @@ const Testimonial = () => (
             <div>
               <p className="text-5xl font-bold leading-none">{GOOGLE_REVIEWS.rating.toFixed(1)}</p>
               <div className="mt-2">
-                <Stars />
+                <Stars rating={GOOGLE_REVIEWS.rating} />
               </div>
               <p className="mt-1 text-sm text-white/60">{GOOGLE_REVIEWS.count} Google reviews</p>
             </div>
