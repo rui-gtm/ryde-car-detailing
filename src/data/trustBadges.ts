@@ -17,8 +17,8 @@ export const TRUST_BADGES: TrustBadge[] = [
   },
   {
     icon: Users,
-    text: "Professional Detailers",
-    description: "Trained, experienced detailers who take pride in the work.",
+    text: "Professional Detailer",
+    description: "A trained, experienced detailer who takes pride in the work.",
   },
   {
     icon: Leaf,
@@ -27,7 +27,9 @@ export const TRUST_BADGES: TrustBadge[] = [
   },
   {
     icon: ThumbsUp,
-    text: "100% Satisfaction Guarantee",
-    description: "Not happy with the result? Let us know within 24 hours and we'll make it right.",
+    // Matches Terms §15: tell us within 24 hours; remedy at our discretion.
+    text: "24-Hour Satisfaction Guarantee",
+    description:
+      "Not happy with the result? Tell us within 24 hours and we'll inspect it and offer a reasonable fix, such as redoing that part of the job.",
   },
 ];
