@@ -9,6 +9,11 @@ import { BUSINESS } from "@/data/business";
 // Minimal nav: logo, four links, one button — shown from lg (1024px) up;
 // phones and tablets get the full-screen menu. Areas, Guides and Terms stay
 // reachable from the footer.
+
+// Areas / Guides links at the bottom of the mobile menu — hidden for now;
+// set to true to show them again.
+const SHOW_AREAS_AND_GUIDES_IN_MENU = false;
+
 const isPathActive = (to: string, pathname: string) =>
   to === "/" ? pathname === "/" : pathname === to || pathname.startsWith(`${to}/`);
 
@@ -167,33 +172,67 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
         }`}
         aria-hidden={!menuOpen}
       >
-        <nav className="flex flex-1 flex-col justify-center gap-2" aria-label="Mobile">
+        <nav className="flex flex-1 flex-col justify-center gap-4" aria-label="Mobile">
           {[
-            { label: "Home", to: "/" },
-            { label: "Car Detailing", to: "/services" },
-            { label: "Ceramic Coating", to: ceramicHref },
-            { label: "About", to: "/about" },
-          ].map((item, i) => {
-            const style = {
-              transitionDelay: menuOpen ? `${150 + i * 70}ms` : "0ms",
-            };
-            const cls = `block py-1.5 text-4xl font-medium tracking-tight transition-all duration-500 ${
-              menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-            }`;
-            return (
-              <Link key={item.label} to={item.to} onClick={closeMenu} className={cls} style={style} tabIndex={menuOpen ? 0 : -1}>
+            { label: "Home", to: "/", active: location.pathname === "/" },
+            {
+              label: "Car Detailing",
+              to: "/services",
+              active: detailingActive,
+              // Same sub-items as the desktop dropdown.
+              children: detailing.map((service) => ({
+                label: service.title,
+                to: serviceHref(service.id),
+                active: isPathActive(serviceHref(service.id), location.pathname),
+              })),
+            },
+            { label: "Ceramic Coating", to: ceramicHref, active: ceramicActive },
+            { label: "About", to: "/about", active: aboutActive },
+          ].map((item, i) => (
+            <div
+              key={item.label}
+              className={`transition-all duration-500 ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
+              style={{ transitionDelay: menuOpen ? `${150 + i * 70}ms` : "0ms" }}
+            >
+              <Link
+                to={item.to}
+                onClick={closeMenu}
+                tabIndex={menuOpen ? 0 : -1}
+                aria-current={item.active ? "page" : undefined}
+                className={`inline-block py-1 text-2xl font-medium tracking-tight ${
+                  item.active ? "underline decoration-2 underline-offset-8" : "text-white/90"
+                }`}
+              >
                 {item.label}
               </Link>
-            );
-          })}
-          <div className="mt-6 flex gap-6 text-base text-white/60">
-            <Link to="/areas" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
-              Areas
-            </Link>
-            <Link to="/guides" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
-              Guides
-            </Link>
-          </div>
+              {item.children && (
+                <div className="mt-2 flex flex-col gap-2 border-l border-white/20 pl-4">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.to}
+                      to={child.to}
+                      onClick={closeMenu}
+                      tabIndex={menuOpen ? 0 : -1}
+                      aria-current={child.active ? "page" : undefined}
+                      className={`text-base ${child.active ? "text-white underline underline-offset-4" : "text-white/70"}`}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          {SHOW_AREAS_AND_GUIDES_IN_MENU && (
+            <div className="mt-4 flex gap-6 text-base text-white/60">
+              <Link to="/areas" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+                Areas
+              </Link>
+              <Link to="/guides" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+                Guides
+              </Link>
+            </div>
+          )}
         </nav>
 
         <div className="space-y-4">
