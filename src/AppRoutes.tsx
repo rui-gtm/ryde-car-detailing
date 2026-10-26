@@ -11,6 +11,7 @@ import AreaDetail from "@/pages/AreaDetail";
 import Guides from "@/pages/Guides";
 import GuideDetail from "@/pages/GuideDetail";
 import NotFound from "@/pages/NotFound";
+import MobileActionBar from "@/components/MobileActionBar";
 
 declare global {
   interface Window {
@@ -52,19 +53,22 @@ const AppRoutes = () => {
   }, [location.pathname, location.state, location.hash]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/book" element={<Book />} />
-      <Route path="/terms" element={<Terms />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/services" element={<ServicesOverview />} />
-      <Route path="/services/:slug" element={<ServiceDetail />} />
-      <Route path="/areas" element={<Areas />} />
-      <Route path="/areas/:slug" element={<AreaDetail />} />
-      <Route path="/guides" element={<Guides />} />
-      <Route path="/guides/:slug" element={<GuideDetail />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/book" element={<Book />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<ServicesOverview />} />
+        <Route path="/services/:slug" element={<ServiceDetail />} />
+        <Route path="/areas" element={<Areas />} />
+        <Route path="/areas/:slug" element={<AreaDetail />} />
+        <Route path="/guides" element={<Guides />} />
+        <Route path="/guides/:slug" element={<GuideDetail />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <MobileActionBar />
+    </>
   );
 };
 
