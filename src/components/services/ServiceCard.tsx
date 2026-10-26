@@ -108,7 +108,7 @@ const ServiceCard = ({
           to={href}
           className={`mt-8 text-center text-sm font-medium ${isPopular ? "text-white/80 hover:text-white" : "text-primary"}`}
         >
-          View details
+          View details<span className="sr-only"> about {service.title}</span>
         </Link>
       </div>
     </article>

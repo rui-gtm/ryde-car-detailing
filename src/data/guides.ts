@@ -20,11 +20,19 @@ export type Guide = {
   title: string;
   excerpt: string;
   sections: GuideSection[];
+  /** YYYY-MM-DD — used for the Article schema and sitemap lastmod. */
+  published: string;
+  /** YYYY-MM-DD — bump this whenever the guide's content changes. */
+  updated: string;
 };
+
+// The guides go live with the first deploy of the redesigned site. Give a
+// guide its own `published`/`updated` in `raw` below to override these.
+const FIRST_PUBLISHED = "2026-10-26";
 
 const priceFor = (title: string) => SERVICES.find((s) => s.title === title)?.price;
 
-const raw: Omit<Guide, "slug">[] = [
+const raw: (Omit<Guide, "slug" | "published" | "updated"> & Partial<Pick<Guide, "published" | "updated">>)[] = [
   {
     title: "Car Wash vs Car Detailing: What's the Difference?",
     excerpt:
@@ -112,7 +120,12 @@ const raw: Omit<Guide, "slug">[] = [
   },
 ];
 
-export const GUIDES: Guide[] = raw.map((g) => ({ slug: slugify(g.title), ...g }));
+export const GUIDES: Guide[] = raw.map((g) => ({
+  slug: slugify(g.title),
+  published: FIRST_PUBLISHED,
+  updated: FIRST_PUBLISHED,
+  ...g,
+}));
 
 export const findGuide = (slug: string) => GUIDES.find((g) => g.slug === slug);
 export const guideHref = (slug: string) => `/guides/${slug}`;

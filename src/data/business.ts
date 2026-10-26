@@ -35,6 +35,9 @@ export const BUSINESS = {
   instagramUrl: "" as string,
   googleMapsUrl: "https://maps.app.goo.gl/AVe32BtBi5oWsNBDA",
   ogImageUrl: `${SITE_URL}/og-image.jpg`,
+  // Stable (unhashed) logo URL for the JSON-LD `logo` — public/logo.png is
+  // generated from src/assets/logo-new.png by scripts/optimize-images.mjs.
+  logoUrl: `${SITE_URL}/logo.png`,
   openingHours: ["Mo-Su 00:00-23:59"],
 } as const;
 

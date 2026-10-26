@@ -30,7 +30,17 @@ const images = [
     .map((f) => ({ src: `before-after/${f}`, width: 1100, quality: 78 })),
 ];
 
+// The JSON-LD `logo` needs a stable URL (bundled assets get a hashed name), so
+// the logo is also written to public/ as a PNG.
+const publicLogo = { src: "logo-new.png", out: "../../public/logo.png", width: 600 };
+
 const run = async () => {
+  {
+    const input = path.join(assets, publicLogo.src);
+    const output = path.resolve(assets, publicLogo.out);
+    await sharp(input).resize({ width: publicLogo.width }).png({ compressionLevel: 9, palette: true }).toFile(output);
+    console.log(`${publicLogo.src} -> public/logo.png ${Math.round(fs.statSync(output).size / 1024)}KB`);
+  }
   for (const { src, width, quality } of images) {
     const input = path.join(assets, src);
     const output = input.replace(/\.(jpe?g|png)$/i, ".webp");

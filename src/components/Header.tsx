@@ -90,6 +90,8 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
             >
               <img
                 src={logo}
+                width={600}
+                height={233}
                 alt="Ryde Car Detailing logo"
                 className={`h-14 w-auto object-contain md:h-[4.5rem] lg:h-24`}
                 loading="eager"

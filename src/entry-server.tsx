@@ -7,6 +7,7 @@ import AppRoutes from "@/AppRoutes";
 // and sitemap.xml from the exact same route list AppRoutes.tsx renders from,
 // instead of a separately hand-maintained list (see src/lib/siteRoutes.ts).
 export { ALL_ROUTES } from "@/lib/siteRoutes";
+export { buildLlmsTxt } from "@/lib/llms";
 
 export const render = (url: string) => {
   const html = renderToString(

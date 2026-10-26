@@ -3,6 +3,7 @@ import PageShell from "@/components/PageShell";
 import NotFound from "@/pages/NotFound";
 import BookCta from "@/components/BookCta";
 import { buildGuidePageSchema } from "@/lib/schema";
+import { withBrand } from "@/lib/siteRoutes";
 import { GUIDES, findGuide, guideHref } from "@/data/guides";
 import { BUSINESS } from "@/data/business";
 
@@ -13,7 +14,7 @@ const GuideDetail = () => {
   if (!guide) return <NotFound />;
 
   const url = guideHref(guide.slug);
-  const title = `${guide.title} | ${BUSINESS.name}`;
+  const title = withBrand(guide.title);
   const breadcrumbs = [
     { name: "Home", url: "/" },
     { name: "Guides", url: "/guides" },

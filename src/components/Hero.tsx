@@ -53,6 +53,8 @@ const Hero = () => {
       <div className="hero-photo absolute inset-0">
         <img
           src={heroImage}
+          width={2048}
+          height={1152}
           alt=""
           aria-hidden="true"
           className="hero-dull absolute inset-0 h-full w-full object-cover object-[50%_12%]"
@@ -66,6 +68,8 @@ const Hero = () => {
         <div className="hero-clean absolute inset-0">
           <img
             src={heroImage}
+            width={2048}
+            height={1152}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover object-[50%_12%]"

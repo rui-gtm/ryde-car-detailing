@@ -18,6 +18,8 @@ const Footer = () => {
             <Link to="/" className="flex items-center gap-3" aria-label="Ryde Car Detailing home">
               <img
                 src={logo}
+                width={600}
+                height={233}
                 alt="Ryde Car Detailing logo"
                 className="h-16 w-auto object-contain"
                 loading="lazy"
