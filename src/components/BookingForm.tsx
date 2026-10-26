@@ -178,6 +178,12 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
 
   const agreeToTerms = form.watch("agreeToTerms");
 
+  // Pre-select the package from ?package= once Book.tsx knows it (after
+  // mount), unless one is already chosen (e.g. restored from the draft).
+  useEffect(() => {
+    if (defaultPackage && !form.getValues("package")) form.setValue("package", defaultPackage);
+  }, [defaultPackage, form]);
+
   useEffect(() => {
     const subscription = form.watch((values) => {
       bookingFormDraft = values as BookingFormValues;
