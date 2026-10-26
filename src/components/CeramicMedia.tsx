@@ -22,36 +22,48 @@ const VideoSlot = ({ video }: { video: CeramicVideo }) => (
   </figure>
 );
 
-// "Ceramic coating in action": a photo of a finished car plus the videos.
-// Hidden entirely until at least one video has been added.
+// "Ceramic coating in action": a photo of a finished car, plus the videos once
+// any have been added. Until then the photo is shown on its own.
 const CeramicMedia = () => {
-  if (videos.length === 0) return null;
+  const hasVideos = videos.length > 0;
+
+  const photo = (
+    <img
+      src={garagePhoto}
+      alt="White Porsche Macan with a deep gloss finish, reflecting the hexagon lights in a detailing garage"
+      loading="lazy"
+      decoding="async"
+      className="aspect-[3/4] w-full rounded-xl border border-border object-cover lg:h-full"
+    />
+  );
 
   return (
     <section className="bg-transparent py-24" aria-labelledby="ceramic-media-title">
       <div className="container mx-auto px-4 lg:px-8">
         <SectionHeading
           title="Ceramic Coating in Action"
-          description="See how the coating goes on and the finish it leaves behind."
+          description={
+            hasVideos
+              ? "See how the coating goes on and the finish it leaves behind."
+              : "The deep, glossy finish a ceramic coating leaves behind."
+          }
         />
         <span id="ceramic-media-title" className="sr-only">
-          Ceramic coating photo and videos
+          {hasVideos ? "Ceramic coating photo and videos" : "Ceramic coating photo"}
         </span>
 
-        <div className="grid gap-8 lg:grid-cols-[2fr_3fr] lg:gap-12">
-          <img
-            src={garagePhoto}
-            alt="White Porsche Macan with a deep gloss finish, reflecting the hexagon lights in a detailing garage"
-            loading="lazy"
-            decoding="async"
-            className="aspect-[3/4] w-full rounded-xl border border-border object-cover lg:h-full"
-          />
-          <div className="grid content-start gap-8">
-            {videos.map((video) => (
-              <VideoSlot key={video.title} video={video} />
-            ))}
+        {hasVideos ? (
+          <div className="grid gap-8 lg:grid-cols-[2fr_3fr] lg:gap-12">
+            {photo}
+            <div className="grid content-start gap-8">
+              {videos.map((video) => (
+                <VideoSlot key={video.title} video={video} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="max-w-md">{photo}</div>
+        )}
       </div>
     </section>
   );
