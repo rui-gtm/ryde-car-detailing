@@ -132,7 +132,7 @@ const raw: Omit<ServicePackage, "id">[] = [
     serviceType: "Mobile car detailing",
     description: "Elite paint protection with a superior gloss finish.",
     price: 599,
-    duration: "Half-day service",
+    duration: "Half a day",
     bestFor: "Owners who want long-term paint protection and a showroom-gloss finish that lasts.",
     features: [
       "Paint decontamination & professional surface prep",

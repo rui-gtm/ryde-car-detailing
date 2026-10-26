@@ -5,6 +5,7 @@
 //
 // NOTE: customers supply water and power (see Terms §5) — keep every answer
 // here consistent with that.
+import { SERVICES } from "@/data/services";
 
 export type Faq = {
   q: string;
@@ -18,7 +19,11 @@ export const FAQS: Faq[] = [
   },
   {
     q: "How long does a detail take?",
-    a: "Between 1–3 hours depending on the package and car condition.",
+    // Built from each package's `duration` so it can't drift from the service
+    // pages (it used to say "1–3 hours" while Ceramic Coating takes half a day).
+    a: `It depends on the package and the car's condition. ${SERVICES.map(
+      (s) => `${s.title}: ${s.duration.toLowerCase()}`,
+    ).join("; ")}.`,
   },
   {
     q: "Do I need to supply water or power?",
