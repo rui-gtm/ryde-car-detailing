@@ -4,14 +4,14 @@ import { DomEvent } from "leaflet";
 import type { LatLngTuple } from "leaflet";
 import { Maximize, Minimize, Minus, Plus } from "lucide-react";
 import "leaflet/dist/leaflet.css";
-import { BUSINESS } from "@/data/business";
+import { BUSINESS, RED_ZONE_OUTCALL_FEE } from "@/data/business";
 
 const CENTER: LatLngTuple = [BUSINESS.geo.latitude, BUSINESS.geo.longitude];
 
 // Zone reach in km from the business, every 30 degrees clockwise from north
 // (N, NNE, ENE, E, ESE, SSE, S, SSW, WSW, W, WNW, NNW). Values are smoothly
 // interpolated into an organic shape, so tweak a number to push that side of
-// the zone in or out. Green = no outcall fee, Red = $30 outcall fee.
+// the zone in or out. Green = no outcall fee, Red = RED_ZONE_OUTCALL_FEE (src/data/business.ts).
 const GREEN_REACH_KM = [4, 4.3, 4.3, 4, 3.5, 1.8, 1.6, 1.6, 1.8, 2.2, 3, 4];
 const RED_REACH_KM = [8, 9, 10, 10.5, 9.5, 8, 6.5, 6.5, 7.5, 8.5, 8.5, 8];
 
@@ -80,7 +80,7 @@ const MapOverlay = () => {
         </div>
         <div className="mt-2 flex items-center gap-2.5">
           <span className="h-3.5 w-3.5 rounded-sm" style={{ backgroundColor: RED }} />
-          $30 Outcall Fee
+          ${RED_ZONE_OUTCALL_FEE} Outcall Fee
         </div>
       </div>
 
@@ -125,7 +125,7 @@ const ServiceAreaMap = () => (
       positions={RED_ZONE}
       pathOptions={{ color: "#f87171", weight: 2, fillColor: RED, fillOpacity: 0.3 }}
     >
-      <Popup>Red Zone: $30 outcall fee</Popup>
+      <Popup>Red Zone: ${RED_ZONE_OUTCALL_FEE} outcall fee</Popup>
     </Polygon>
     <Polygon
       positions={GREEN_ZONE}

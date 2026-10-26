@@ -1,5 +1,5 @@
 import { Home, DollarSign, MapPin } from "lucide-react";
-import { BUSINESS } from "@/data/business";
+import { BUSINESS, RED_ZONE_OUTCALL_FEE } from "@/data/business";
 import SectionHeading from "@/components/SectionHeading";
 
 export const points = [
@@ -11,7 +11,7 @@ export const points = [
   {
     icon: DollarSign,
     title: "Priced up front",
-    description: "Every package has a clear starting price. No surprise call-out or booking fees.",
+    description: `Every package has a clear starting price. No outcall fee in the Green Zone, $${RED_ZONE_OUTCALL_FEE} in the Red Zone, and any extra charge for your car's condition is agreed before work starts.`,
   },
   {
     icon: MapPin,

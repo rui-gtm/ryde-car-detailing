@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageCircle } from "lucide-react";
 const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
-import { BUSINESS, AREA_SERVED_TEXT } from "@/data/business";
+import { BUSINESS, AREA_SERVED_TEXT, RED_ZONE_OUTCALL_FEE } from "@/data/business";
 import SectionHeading from "@/components/SectionHeading";
 
 const mapPlaceholder = <div className="h-[420px] md:h-[520px] w-full rounded-xl bg-muted animate-pulse" />;
@@ -84,7 +84,7 @@ const ServiceArea = () => {
                 <div className="w-4 h-4 rounded-full bg-red-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Red Zone</p>
-                  <p className="text-base text-muted-foreground mt-1">$30 outcall fee</p>
+                  <p className="text-base text-muted-foreground mt-1">${RED_ZONE_OUTCALL_FEE} outcall fee</p>
                 </div>
               </div>
             </div>
