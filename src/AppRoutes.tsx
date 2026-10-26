@@ -43,8 +43,8 @@ const AppRoutes = () => {
     trackPageView(location.pathname + location.search);
   }, [location.pathname, location.search]);
 
-  // New page = start at the top. (Links that ask to scroll to a section, such as
-  // the header's Portfolio link, pass `state.scrollTo` and handle it themselves.)
+  // New page = start at the top. (Links that ask to land on a section pass
+  // `state.scrollTo` or a #hash and handle the scroll themselves.)
   useEffect(() => {
     const state = location.state as { scrollTo?: string } | null;
     if (state?.scrollTo || location.hash) return;

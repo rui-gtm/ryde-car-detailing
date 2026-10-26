@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Star } from "lucide-react";
+import { ArrowUpRight, MapPin, Star } from "lucide-react";
 import heroImage from "@/assets/hero-bmw-interior.webp";
 import { BUSINESS, GOOGLE_REVIEWS } from "@/data/business";
 import GoogleG from "@/components/GoogleG";
@@ -85,7 +85,7 @@ const Hero = () => {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_62%,hsl(var(--ink)/0.75),transparent)]" />
 
       <div className="hero-glow pointer-events-none absolute inset-0" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/70 via-ink/30 to-transparent" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-ink/85 via-ink/45 to-transparent" aria-hidden="true" />
       <div className="container relative mx-auto flex flex-1 flex-col items-center justify-center px-4 pb-16 pt-44 text-center lg:px-8">
         <a
           href={BUSINESS.googleMapsUrl}
@@ -122,7 +122,15 @@ const Hero = () => {
           </span>
         </h1>
 
-        <p className="hero-fade mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/80" style={delay("0.5s")}>
+        <p
+          className="hero-fade mt-6 inline-flex items-center gap-2 text-xl font-medium text-sky-300 [text-shadow:0_2px_20px_rgba(0,0,0,0.6)] md:text-2xl"
+          style={delay("0.42s")}
+        >
+          <MapPin className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
+          We come to you
+        </p>
+
+        <p className="hero-fade mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/80" style={delay("0.5s")}>
           Hand washing, full interior and exterior details and ceramic coating at your home or workplace, quoted up
           front and fully insured.
         </p>

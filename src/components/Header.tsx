@@ -1,26 +1,32 @@
 import { useState, useEffect, type MouseEvent } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, ArrowUpRight, Instagram } from "lucide-react";
 import logo from "@/assets/logo-new.webp";
 import { SERVICES, serviceHref } from "@/data/services";
 import { BUSINESS } from "@/data/business";
 
-// Minimal nav: logo, four links (Home, Services, Portfolio, About), one button. Areas / Guides / Terms stay
-// reachable from the footer and the full-screen mobile menu.
+// Minimal nav: logo, four links, one button — shown from lg (1024px) up;
+// phones and tablets get the full-screen menu. Areas, Guides and Terms stay
+// reachable from the footer.
 const isPathActive = (to: string, pathname: string) =>
   to === "/" ? pathname === "/" : pathname === to || pathname.startsWith(`${to}/`);
 
-const linkClass = (active: boolean, onDark: boolean) =>
-  onDark
-    ? `text-sm font-medium transition-colors ${active ? "text-white" : "text-white/75 hover:text-white"}`
-    : `text-sm font-medium transition-colors ${active ? "text-primary" : "text-foreground/80 hover:text-foreground"}`;
+// Full-white links (the old 75% white got lost over the hero photo),
+// with a soft shadow while the header floats over the hero. The current page
+// gets a short underline.
+const linkClass = (active: boolean, overHero: boolean) =>
+  [
+    "relative whitespace-nowrap py-1 text-sm font-medium text-white transition-colors xl:text-base",
+    "after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:rounded-full after:bg-white after:transition-transform after:duration-200",
+    active ? "after:scale-x-100" : "after:scale-x-0 hover:text-white/80",
+    overHero ? "[text-shadow:0_1px_10px_rgba(0,0,0,0.85)]" : "",
+  ].join(" ");
 
 const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -47,17 +53,6 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
     }
   };
 
-  // "Portfolio" is the homepage gallery section, so it scrolls rather than routes.
-  const goToPortfolio = (e: MouseEvent) => {
-    e.preventDefault();
-    closeMenu();
-    if (location.pathname === "/") {
-      document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      navigate("/", { state: { scrollTo: "gallery" } });
-    }
-  };
-
   // Transparent over a dark hero until the page scrolls. Pages without a dark hero pass heroOverlay={false}.
   const overHero = (heroOverlay ?? location.pathname === "/") && !isScrolled && !menuOpen;
   const ceramic = SERVICES.find((s) => s.packageValue === "ceramic");
@@ -66,7 +61,6 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
   const detailingActive =
     isPathActive("/services", location.pathname) && !isPathActive(ceramicHref, location.pathname);
   const ceramicActive = isPathActive(ceramicHref, location.pathname);
-  const termsActive = isPathActive("/terms", location.pathname);
   const aboutActive = isPathActive("/about", location.pathname);
 
   return (
@@ -99,7 +93,7 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
               />
             </Link>
 
-            <nav className="hidden items-center gap-10 md:flex" aria-label="Main">
+            <nav className="hidden items-center gap-6 lg:flex xl:gap-10" aria-label="Main">
               <Link to="/" className={linkClass(location.pathname === "/", overHero)}>
                 Home
               </Link>
@@ -125,18 +119,12 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
               <Link to={ceramicHref} className={linkClass(ceramicActive, overHero)}>
                 Ceramic Coating
               </Link>
-              <a href="/#gallery" onClick={goToPortfolio} className={linkClass(false, overHero)}>
-                Portfolio
-              </a>
               <Link to="/about" className={linkClass(aboutActive, overHero)}>
                 About
               </Link>
-              <Link to="/terms" className={linkClass(termsActive, overHero)}>
-                T&amp;Cs
-              </Link>
             </nav>
 
-            <div className="hidden items-center gap-3 md:flex">
+            <div className="hidden items-center gap-3 lg:flex">
               {BUSINESS.instagramUrl && (
                 <a
                   href={BUSINESS.instagramUrl}
@@ -157,7 +145,7 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
             </div>
 
             <button
-              className="relative z-[60] p-2 md:hidden"
+              className="relative z-[60] p-2 lg:hidden"
               onClick={() => setMenuOpen((o) => !o)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -174,7 +162,7 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
 
       {/* Full-screen mobile menu */}
       <div
-        className={`fixed inset-0 z-[55] flex flex-col bg-ink px-6 pb-10 pt-28 text-white transition-all duration-500 ease-out md:hidden ${
+        className={`fixed inset-0 z-[55] flex flex-col bg-ink px-6 pb-10 pt-28 text-white transition-all duration-500 ease-out lg:hidden ${
           menuOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
         aria-hidden={!menuOpen}
@@ -184,9 +172,7 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
             { label: "Home", to: "/" },
             { label: "Car Detailing", to: "/services" },
             { label: "Ceramic Coating", to: ceramicHref },
-            { label: "Portfolio", to: "/#gallery", scroll: true },
             { label: "About", to: "/about" },
-            { label: "T&Cs", to: "/terms" },
           ].map((item, i) => {
             const style = {
               transitionDelay: menuOpen ? `${150 + i * 70}ms` : "0ms",
@@ -194,11 +180,7 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
             const cls = `block py-1.5 text-4xl font-medium tracking-tight transition-all duration-500 ${
               menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
             }`;
-            return item.scroll ? (
-              <a key={item.label} href={item.to} onClick={goToPortfolio} className={cls} style={style} tabIndex={menuOpen ? 0 : -1}>
-                {item.label}
-              </a>
-            ) : (
+            return (
               <Link key={item.label} to={item.to} onClick={closeMenu} className={cls} style={style} tabIndex={menuOpen ? 0 : -1}>
                 {item.label}
               </Link>

@@ -34,16 +34,25 @@ const Index = () => {
       <JsonLd data={buildHomepageSchema("Mobile Car Detailing Ryde NSW | Ryde Car Detailing")} />
       <Header />
       <main>
+        {/* Ordered by the questions a first-time customer asks, in order:
+            1. What is it, where, and can I trust it at a glance?  Hero
+            2. What can I book and what does it cost?              Services + add-ons
+            3. Do you come to me, and is there a travel fee?       Service area (completes the price)
+            4. Is the work any good?                               Before/after, then reviews
+            5. Why you, and what's it like to book?                Why us, how it works
+            6. Anything else I'm unsure about?                     FAQ
+            7. (Researchers) I want to read more first             Guides
+            8. Ready.                                              Final call to action */}
         <Hero />
         <Services fade />
-        <Gallery />
+        <ExtraServices attached />
         <ServiceArea />
-        <ExtraServices />
+        <Gallery />
         <Testimonial />
         <Standards />
         <HowItWorks tone="plain" />
+        <FAQ tone="plain" />
         <ReadingSection />
-        <FAQ tone="plain"/>
         <CTA />
       </main>
       <Footer />

@@ -77,7 +77,7 @@ const ServiceCard = ({
           </div>
         )}
 
-        <div className="mt-6 flex items-end justify-between gap-4">
+        <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="flex items-baseline gap-2">
               <span className={`text-base ${isPopular ? "text-white/70" : "text-muted-foreground"}`}>From</span>{" "}
