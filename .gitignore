@@ -29,3 +29,9 @@ dist-ssr
 *.sw?
 
 ref/
+
+# Personal AI-agent skills (installed per developer, e.g. `npx skills add ...`)
+.agents/
+agent/
+.claude/skills/
+skills-lock.json
