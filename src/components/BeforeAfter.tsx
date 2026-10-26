@@ -61,6 +61,8 @@ const BeforeAfter = () => {
   const [active, setActive] = useState(0);
   const [pos, setPos] = useState(50);
   const [paused, setPaused] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const held = paused || focused;
   const box = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const sweep = useRef(0);
@@ -90,10 +92,10 @@ const BeforeAfter = () => {
   // example changes (including by clicking a number) and holds while the slider
   // is being dragged or focused, so it never switches under someone's finger.
   useEffect(() => {
-    if (paused) return;
+    if (held) return;
     const id = window.setTimeout(() => setActive((i) => (i + 1) % PAIRS.length), AUTO_ADVANCE_MS);
     return () => window.clearTimeout(id);
-  }, [active, paused]);
+  }, [active, held]);
 
   const moveTo = (clientX: number) => {
     const el = box.current;
@@ -184,6 +186,8 @@ const BeforeAfter = () => {
             aria-valuemax={100}
             aria-valuenow={Math.round(pos)}
             onKeyDown={onKey}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
             className="absolute inset-y-0 z-10 -ml-px w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.25)] outline-none focus-visible:shadow-[0_0_0_3px_rgba(255,255,255,0.6)]"
             style={{ left: `${pos}%` }}
           >
@@ -196,9 +200,9 @@ const BeforeAfter = () => {
         {/* Countdown to the next example */}
         <div className="mt-6 h-0.5 w-full overflow-hidden rounded-full bg-white/15" aria-hidden="true">
           <div
-            key={`${active}-${paused}`}
+            key={`${active}-${held}`}
             className="ba-timer h-full origin-left bg-white/70"
-            style={{ animationDuration: `${AUTO_ADVANCE_MS}ms`, animationPlayState: paused ? "paused" : "running" }}
+            style={{ animationDuration: `${AUTO_ADVANCE_MS}ms`, animationPlayState: held ? "paused" : "running" }}
           />
         </div>
 

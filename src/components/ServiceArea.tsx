@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageCircle } from "lucide-react";
@@ -6,7 +6,37 @@ const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
 import { BUSINESS, AREA_SERVED_TEXT } from "@/data/business";
 import SectionHeading from "@/components/SectionHeading";
 
+const mapPlaceholder = <div className="h-[420px] md:h-[520px] w-full rounded-xl bg-muted animate-pulse" />;
+
 const ServiceArea = () => {
+  // The map (Leaflet + OpenStreetMap tiles, ~400 KB) only loads once the section
+  // is about to scroll into view. The prerendered HTML and the first client
+  // render both show the placeholder, so hydration matches (rendering the lazy
+  // map straight away made React report error #419) and the homepage's initial
+  // load stays light.
+  const [showMap, setShowMap] = useState(false);
+  const mapSlot = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = mapSlot.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      setShowMap(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShowMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="service-area" className="py-24 bg-transparent scroll-mt-24">
       <div className="container mx-auto px-4 lg:px-8">
@@ -21,9 +51,15 @@ const ServiceArea = () => {
         <div className="grid lg:grid-cols-2 gap-6 items-center">
 
           {/* Left — interactive map */}
-          <Suspense fallback={<div className="h-[420px] md:h-[520px] w-full rounded-xl bg-muted animate-pulse" />}>
-            <ServiceAreaMap />
-          </Suspense>
+          <div ref={mapSlot}>
+            {showMap ? (
+              <Suspense fallback={mapPlaceholder}>
+                <ServiceAreaMap />
+              </Suspense>
+            ) : (
+              mapPlaceholder
+            )}
+          </div>
 
           {/* Right — all cards */}
           <div className="space-y-6">

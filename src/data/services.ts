@@ -7,8 +7,10 @@ import type { Faq } from "@/data/faqs";
 import { EXTRA_SERVICES } from "@/data/extraServices";
 
 // The full detail used to be called "Premium Full Detail". It was renamed, but
-// its URL (/services/premium-full-detail) is already indexed, so the id — and
-// therefore the URL — keeps the old slug.
+// the id — and therefore the URL (/services/premium-full-detail) and the
+// schema @id — keeps the old slug. Note the service pages haven't been deployed
+// yet, so this URL isn't indexed; dropping this mapping before the first deploy
+// would give the cleaner /services/full-detail.
 const LEGACY_SLUGS: Record<string, string> = {
   "Full Detail": "Premium Full Detail",
 };
@@ -114,7 +116,7 @@ const raw: Omit<ServicePackage, "id">[] = [
     faqs: [
       {
         q: "What's included in the Full Detail?",
-        a: "Everything from the Interior Deep Clean and Basic Exterior Wash combined, plus tyre shine for a refined finish.",
+        a: "A full interior deep clean (vacuum, scrub, stain removal and decontamination) plus a complete exterior wash and wheel clean, streak-free windows inside and out, and tyre shine for a refined finish.",
       },
       {
         q: "How long does the Full Detail take?",

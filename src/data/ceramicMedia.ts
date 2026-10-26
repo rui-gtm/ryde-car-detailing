@@ -2,7 +2,8 @@
 //   1. Put the file in the project's `public/videos/` folder (create it if needed),
 //      e.g. public/videos/ceramic-1.mp4
 //   2. Set `src` below to "/videos/ceramic-1.mp4"
-// While `src` is empty the page shows a "coming soon" placeholder in that slot.
+// Entries with an empty `src` are skipped; the whole "Ceramic Coating in Action"
+// section stays hidden until at least one `src` is set.
 // MP4 (H.264) plays everywhere; keep each file under ~20 MB so the page stays fast.
 export type CeramicVideo = {
   title: string;

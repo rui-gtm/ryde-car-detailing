@@ -80,7 +80,7 @@ const ServiceCard = ({
         <div className="mt-6 flex items-end justify-between gap-4">
           <div>
             <p className="flex items-baseline gap-2">
-              <span className={`text-base ${isPopular ? "text-white/70" : "text-muted-foreground"}`}>From</span>
+              <span className={`text-base ${isPopular ? "text-white/70" : "text-muted-foreground"}`}>From</span>{" "}
               <span className="text-6xl font-bold leading-none tracking-tight">${service.price}</span>
             </p>
             <p className={`mt-2 text-sm ${isPopular ? "text-white/60" : "text-muted-foreground"}`}>per service</p>

@@ -73,11 +73,14 @@
   mix-blend-mode: soft-light;
 }
 
-/* The bright squeegee edge riding the front of the wipe. */
+/* The bright squeegee edge riding the front of the wipe. Moved with transform
+   (not `left`) so the animation doesn't count as layout shift (CLS). The edge
+   is 14% of the hero wide, so (wipe - 7)% of the hero = (wipe - 7) / 14 of
+   its own width. */
 .hero-edge {
-  left: calc(var(--wipe) * 1% - 7%);
+  left: 0;
   width: 14%;
-  transform: skewX(-10deg);
+  transform: translateX(calc((var(--wipe) - 7) / 14 * 100%)) skewX(-10deg);
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55) 50%, transparent);
   filter: blur(24px);
   opacity: calc(1 - max(var(--wipe) - 100, 0) / 12);
