@@ -30,7 +30,7 @@ const CeramicMedia = () => {
   const photo = (
     <img
       src={garagePhoto}
-      alt="White Porsche Macan with a deep gloss finish, reflecting the hexagon lights in a detailing garage"
+      alt="White Porsche Macan with a deep, glossy ceramic-coated finish reflecting overhead hexagon lights"
       loading="lazy"
       decoding="async"
       className="aspect-[3/4] w-full rounded-xl border border-border object-cover lg:h-full"
