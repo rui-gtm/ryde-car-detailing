@@ -25,7 +25,7 @@ const breadcrumbNode = (items: Crumb[]) => ({
 });
 
 // Suburb pages plus every suburb named in the service-area zones (shown in
-// the zone legend and the "What areas do you service?" FAQ).
+// the "What areas do you service?" FAQ).
 const areaServedNodes = [...new Set<string>([...AREA_SERVED, ...GREEN_ZONE_SUBURBS, ...RED_ZONE_EXAMPLES])].map(
   (name) => ({ "@type": "City", name }),
 );

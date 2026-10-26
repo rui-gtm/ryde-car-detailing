@@ -3,14 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageCircle } from "lucide-react";
 const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
-import {
-  BUSINESS,
-  AREA_SERVED_TEXT,
-  GREEN_ZONE_SUBURBS,
-  RED_ZONE_EXAMPLES,
-  RED_ZONE_OUTCALL_FEE,
-  listText,
-} from "@/data/business";
+import { BUSINESS, AREA_SERVED_TEXT, RED_ZONE_OUTCALL_FEE } from "@/data/business";
 import SectionHeading from "@/components/SectionHeading";
 
 const mapPlaceholder = <div className="h-[420px] md:h-[520px] w-full rounded-xl bg-muted animate-pulse" />;
@@ -78,22 +71,22 @@ const ServiceArea = () => {
               </p>
             </div>
 
-            {/* Zone legend */}
+            {/* Zone legend — what the map colours mean. Which suburb falls in
+                which zone is shown on the map itself and spelled out in the
+                "What areas do you service?" FAQ, not repeated here. */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-              <div className="flex items-start gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
-                <div className="mt-1 w-4 h-4 rounded-full bg-green-500 shrink-0" />
+              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
+                <div className="w-4 h-4 rounded-full bg-green-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Green Zone</p>
                   <p className="text-base text-muted-foreground mt-1">No outcall fee</p>
-                  <p className="text-sm text-muted-foreground mt-2">{listText(GREEN_ZONE_SUBURBS)}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
-                <div className="mt-1 w-4 h-4 rounded-full bg-red-500 shrink-0" />
+              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
+                <div className="w-4 h-4 rounded-full bg-red-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Red Zone</p>
                   <p className="text-base text-muted-foreground mt-1">${RED_ZONE_OUTCALL_FEE} outcall fee</p>
-                  <p className="text-sm text-muted-foreground mt-2">e.g. {listText(RED_ZONE_EXAMPLES)}</p>
                 </div>
               </div>
             </div>
