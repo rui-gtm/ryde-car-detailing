@@ -15,15 +15,16 @@ const Footer = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <div className="col-span-2 flex flex-col gap-5 md:col-span-1">
-            <Link to="/" className="flex items-center gap-3" aria-label="Ryde Car Detailing home">
+            <Link to="/" className="flex items-center" aria-label="Ryde Car Detailing home">
               <img
                 src={logo}
+                width={600}
+                height={233}
                 alt="Ryde Car Detailing logo"
                 className="h-16 w-auto object-contain"
                 loading="lazy"
                 decoding="async"
               />
-              <span className="font-semibold">{BUSINESS.name}</span>
             </Link>
 
             <div className="flex flex-col gap-3">

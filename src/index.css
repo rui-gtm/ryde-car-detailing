@@ -149,6 +149,14 @@
     );
     font-family: 'Geist Variable', 'Inter', sans-serif;
   }
+
+  /* Room for the fixed Call / Get a Quote bar (MobileActionBar, h-14) shown
+     on phones only (below md), so it never covers the end of the footer. */
+  @media (max-width: 767.98px) {
+    body {
+      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
+    }
+  }
 }
 
 @layer utilities {

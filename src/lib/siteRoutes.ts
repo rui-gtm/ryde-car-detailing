@@ -15,6 +15,21 @@ export type SiteRoute = {
   path: string;
   title: string;
   description: string;
+  /** Prerendered with robots "noindex,follow" and left out of sitemap.xml. */
+  noindex?: boolean;
+  /** og:type for the page (index.html's default is "website"). */
+  ogType?: "website" | "article";
+  /** Real last-content-change date (YYYY-MM-DD) for sitemap.xml. Routes
+   * without one get no <lastmod>: a build date on every URL is inaccurate,
+   * and search engines learn to ignore inaccurate lastmod values. */
+  lastmod?: string;
+};
+
+// Google shows roughly 60 characters of a title. Append the brand only when
+// the whole title still fits; og:site_name carries the brand either way.
+export const withBrand = (title: string) => {
+  const full = `${title} | ${BUSINESS.name}`;
+  return full.length <= 60 ? full : title;
 };
 
 // "/" is intentionally excluded — it uses index.html's own base <title>/meta
@@ -33,7 +48,7 @@ export const STATIC_ROUTES: SiteRoute[] = [
   {
     path: "/about",
     title: `About Us | ${BUSINESS.name}`,
-    description: `Meet the team behind ${BUSINESS.name}, a locally operated mobile detailing business serving Ryde NSW and surrounding suburbs.`,
+    description: `Meet the detailer behind ${BUSINESS.name}, a locally operated mobile detailing business serving Ryde NSW and surrounding suburbs.`,
   },
   {
     path: "/services",
@@ -55,19 +70,25 @@ export const STATIC_ROUTES: SiteRoute[] = [
 export const SERVICE_ROUTES: SiteRoute[] = SERVICES.map((s) => ({
   path: serviceHref(s.id),
   title: `${s.title} in Ryde NSW | ${BUSINESS.name}`,
-  description: s.description,
+  description: `${s.description} From $${s.price} (${s.duration.toLowerCase()}), done at your home or workplace across Ryde NSW.`,
 }));
 
 export const SUBURB_ROUTES: SiteRoute[] = SUBURBS.map((s) => ({
   path: `/areas/${s.slug}`,
   title: `Mobile Car Detailing in ${s.name} | ${BUSINESS.name}`,
   description: `Mobile car detailing in ${s.name}, NSW. We come to your home, apartment or workplace, so your car never has to move.`,
+  // Kept out of the index until each suburb page has its own content — today
+  // they're ~99% identical apart from the suburb name (see the business fact
+  // sheet backlog). Drop this once a page has real local detail.
+  noindex: true,
 }));
 
 export const GUIDE_ROUTES: SiteRoute[] = GUIDES.map((g) => ({
   path: guideHref(g.slug),
-  title: `${g.title} | ${BUSINESS.name}`,
+  title: withBrand(g.title),
   description: g.excerpt,
+  ogType: "article",
+  lastmod: g.updated,
 }));
 
 export const ALL_ROUTES: SiteRoute[] = [...STATIC_ROUTES, ...SERVICE_ROUTES, ...SUBURB_ROUTES, ...GUIDE_ROUTES];

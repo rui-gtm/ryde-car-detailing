@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { ExternalLink, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { BUSINESS, GOOGLE_REVIEWS } from "@/data/business";
 import { TESTIMONIALS } from "@/data/testimonials";
 import GoogleG from "@/components/GoogleG";
@@ -22,74 +24,100 @@ const Stars = ({ className = "h-4 w-4", rating = 5 }: { className?: string; rati
   </div>
 );
 
-const Testimonial = () => (
-  <section id="reviews" className="py-24 bg-transparent scroll-mt-24">
-    <div className="container mx-auto px-4 lg:px-8">
-      {/* Summary banner */}
-      <div className="rounded-xl border border-border bg-white/[0.06] px-6 py-8 text-white md:px-10">
-        <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
-          <div className="flex items-center gap-5">
-            <GoogleG className="h-14 w-14" />
-            <div>
-              <p className="text-5xl font-bold leading-none">{GOOGLE_REVIEWS.rating.toFixed(1)}</p>
-              <div className="mt-2">
-                <Stars rating={GOOGLE_REVIEWS.rating} />
-              </div>
-              <p className="mt-1 text-sm text-white/60">{GOOGLE_REVIEWS.count} Google reviews</p>
-            </div>
-          </div>
-          <a
-            href={BUSINESS.googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            View on Google
-            <ExternalLink className="h-4 w-4" />
-          </a>
-        </div>
-      </div>
+// On phones the cards stack into one column (~4 screens for 9 reviews), which
+// pushed "Why us" and "How it works" ~13 screens down. Phones show the first
+// few with a button for the rest; every review stays in the HTML (and in the
+// JSON-LD), so nothing is lost for search engines.
+const MOBILE_PREVIEW = 3;
 
-      {/* Heading */}
-      <SectionHeading
-        eyebrow="Reviews" title="What customers are saying"
-        description="Every review below is verified on Google."
-        className="mt-20 mb-0"
-      />
+const Testimonial = () => {
+  const [showAll, setShowAll] = useState(false);
 
-      {/* Review cards */}
-      <div className="mt-10 columns-1 gap-5 md:columns-2 lg:columns-3">
-        {googleReviews.map((review) => (
-          <article
-            key={review.name}
-            className="mb-5 break-inside-avoid rounded-xl border border-border bg-white/[0.06] p-6"
-          >
-            <div className="flex items-center justify-between">
-              <Stars />
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
-                <GoogleG className="h-3.5 w-3.5" />
-                Google
-              </span>
-            </div>
-            <blockquote className="mt-4 leading-relaxed text-foreground">“{review.quote}”</blockquote>
-            <div className="mt-5 flex items-center gap-3">
-              <span
-                className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-white"
-                style={{ backgroundColor: avatarColor(review.name) }}
-                aria-hidden="true"
-              >
-                {review.name.charAt(0)}
-              </span>
+  return (
+    <section id="reviews" className="py-24 bg-transparent scroll-mt-24">
+      <div className="container mx-auto px-4 lg:px-8">
+        {/* Summary banner */}
+        <div className="rounded-xl border border-border bg-white/[0.06] px-6 py-8 text-white md:px-10">
+          <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
+            <div className="flex items-center gap-5">
+              <GoogleG className="h-14 w-14" />
               <div>
-                <p className="font-semibold text-foreground">{review.name}</p>
-                {review.date && <p className="text-sm text-muted-foreground">{review.date}</p>}
+                <p className="text-5xl font-bold leading-none">{GOOGLE_REVIEWS.rating.toFixed(1)}</p>
+                <div className="mt-2">
+                  <Stars rating={GOOGLE_REVIEWS.rating} />
+                </div>
+                <p className="mt-1 text-sm text-white/60">{GOOGLE_REVIEWS.count} Google reviews</p>
               </div>
             </div>
-          </article>
-        ))}
+            <a
+              href={BUSINESS.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              View on Google
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+
+        {/* Heading */}
+        <SectionHeading
+          eyebrow="Reviews" title="What customers are saying"
+          description="Every review below is verified on Google."
+          className="mt-20 mb-0"
+        />
+
+        {/* Review cards */}
+        <div id="review-cards" className="mt-10 columns-1 gap-5 md:columns-2 lg:columns-3">
+          {googleReviews.map((review, i) => (
+            <article
+              key={review.name}
+              className={`mb-5 break-inside-avoid rounded-xl border border-border bg-white/[0.06] p-6 ${
+                !showAll && i >= MOBILE_PREVIEW ? "hidden md:block" : ""
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <Stars />
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
+                  <GoogleG className="h-3.5 w-3.5" />
+                  Google
+                </span>
+              </div>
+              <blockquote className="mt-4 leading-relaxed text-foreground">“{review.quote}”</blockquote>
+              <div className="mt-5 flex items-center gap-3">
+                <span
+                  className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-white"
+                  style={{ backgroundColor: avatarColor(review.name) }}
+                  aria-hidden="true"
+                >
+                  {review.name.charAt(0)}
+                </span>
+                <div>
+                  <p className="font-semibold text-foreground">{review.name}</p>
+                  {review.date && <p className="text-sm text-muted-foreground">{review.date}</p>}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {!showAll && googleReviews.length > MOBILE_PREVIEW && (
+          <div className="mt-2 flex justify-center md:hidden">
+            <Button
+              variant="outline"
+              className="h-11 px-6"
+              aria-expanded={false}
+              aria-controls="review-cards"
+              onClick={() => setShowAll(true)}
+            >
+              Show all {googleReviews.length} reviews
+            </Button>
+          </div>
+        )}
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Testimonial;

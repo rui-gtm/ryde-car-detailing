@@ -11,6 +11,7 @@ import AreaDetail from "@/pages/AreaDetail";
 import Guides from "@/pages/Guides";
 import GuideDetail from "@/pages/GuideDetail";
 import NotFound from "@/pages/NotFound";
+import MobileActionBar from "@/components/MobileActionBar";
 
 declare global {
   interface Window {
@@ -43,8 +44,8 @@ const AppRoutes = () => {
     trackPageView(location.pathname + location.search);
   }, [location.pathname, location.search]);
 
-  // New page = start at the top. (Links that ask to scroll to a section, such as
-  // the header's Portfolio link, pass `state.scrollTo` and handle it themselves.)
+  // New page = start at the top. (Links that ask to land on a section pass
+  // `state.scrollTo` or a #hash and handle the scroll themselves.)
   useEffect(() => {
     const state = location.state as { scrollTo?: string } | null;
     if (state?.scrollTo || location.hash) return;
@@ -52,19 +53,22 @@ const AppRoutes = () => {
   }, [location.pathname, location.state, location.hash]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/book" element={<Book />} />
-      <Route path="/terms" element={<Terms />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/services" element={<ServicesOverview />} />
-      <Route path="/services/:slug" element={<ServiceDetail />} />
-      <Route path="/areas" element={<Areas />} />
-      <Route path="/areas/:slug" element={<AreaDetail />} />
-      <Route path="/guides" element={<Guides />} />
-      <Route path="/guides/:slug" element={<GuideDetail />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/book" element={<Book />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<ServicesOverview />} />
+        <Route path="/services/:slug" element={<ServiceDetail />} />
+        <Route path="/areas" element={<Areas />} />
+        <Route path="/areas/:slug" element={<AreaDetail />} />
+        <Route path="/guides" element={<Guides />} />
+        <Route path="/guides/:slug" element={<GuideDetail />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <MobileActionBar />
+    </>
   );
 };
 

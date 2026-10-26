@@ -50,6 +50,8 @@ const routes = [
     outFile: path.resolve(distDir, r.path.replace(/^\//, ""), "index.html"),
     title: r.title,
     description: r.description,
+    noindex: r.noindex,
+    ogType: r.ogType,
   })),
   // Served by the web server for unknown URLs (Apache: `ErrorDocument 404
   // /404.html`). The app renders <NotFound /> for any unmatched path, so the
@@ -87,12 +89,17 @@ const applyMeta = (html, route) => {
       .replace(/(property="og:description"\s*\n?\s*content=")[^"]*(")/, (_, a, b) => `${a}${description}${b}`)
       .replace(/(name="twitter:description"\s*\n?\s*content=")[^"]*(")/, (_, a, b) => `${a}${description}${b}`);
   }
+  if (route.ogType) {
+    result = result.replace(/(property="og:type" content=")[^"]*(")/, (_, a, b) => `${a}${route.ogType}${b}`);
+  }
+  if (route.noindex || route.notFound) {
+    result = result.replace(/(name="robots"\s*\n?\s*content=")[^"]*(")/, (_, a, b) => `${a}noindex,follow${b}`);
+  }
   if (route.notFound) {
-    // A 404 page must not claim a canonical URL or be indexed.
+    // A 404 page must not claim a canonical URL either.
     return result
       .replace(/\s*<link rel="canonical"[^>]*>/, "")
-      .replace(/\s*<meta property="og:url"[^>]*>/, "")
-      .replace(/(name="robots"\s*\n?\s*content=")[^"]*(")/, (_, a, b) => `${a}noindex,follow${b}`);
+      .replace(/\s*<meta property="og:url"[^>]*>/, "");
   }
   const canonicalUrl = `https://www.rydecardetailing.com${route.url === "/" ? "/" : route.url}`;
   result = result
@@ -122,15 +129,25 @@ for (const route of routes) {
 // hand-maintained public/sitemap.xml (which only ever listed 3 URLs and
 // required a manual edit every time a page was added) — this overwrites the
 // static copy Vite already put in dist/ during the build.
-const today = new Date().toISOString().slice(0, 10);
-const sitemapUrls = ["/", ...siteRoutes.map((r) => r.path)];
+//
+// noindex routes are left out, and <lastmod> is only written where the route
+// has a real content date (SiteRoute.lastmod) — stamping every URL with the
+// build date made the values meaningless to search engines.
+const sitemapRoutes = [{ path: "/" }, ...siteRoutes.filter((r) => !r.noindex)];
 const sitemapXml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...sitemapUrls.map(
-    (u) => `  <url>\n    <loc>https://www.rydecardetailing.com${u}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`,
+  ...sitemapRoutes.map(
+    (r) =>
+      `  <url>\n    <loc>https://www.rydecardetailing.com${r.path}</loc>\n` +
+      (r.lastmod ? `    <lastmod>${r.lastmod}</lastmod>\n` : "") +
+      "  </url>",
   ),
   "</urlset>",
   "",
 ].join("\n");
 await fs.writeFile(path.resolve(distDir, "sitemap.xml"), sitemapXml, "utf8");
+
+// /llms.txt — Markdown summary of the business for AI assistants, built from
+// the same data as the pages (src/lib/llms.ts).
+await fs.writeFile(path.resolve(distDir, "llms.txt"), ssrModule.buildLlmsTxt(), "utf8");

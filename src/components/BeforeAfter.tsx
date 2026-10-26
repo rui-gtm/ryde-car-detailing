@@ -53,6 +53,10 @@ const PAIRS = [
   },
 ] as const;
 
+// Every pair is exported at 1100x1466 (scripts/optimize-images.mjs).
+const PHOTO_WIDTH = 1100;
+const PHOTO_HEIGHT = 1466;
+
 const clamp = (n: number) => Math.min(100, Math.max(0, n));
 const AUTO_ADVANCE_MS = 10000;
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -136,6 +140,8 @@ const BeforeAfter = () => {
         <img
           key={pair.id}
           src={pair.after}
+          width={PHOTO_WIDTH}
+          height={PHOTO_HEIGHT}
           alt=""
           className="h-full w-full scale-110 object-cover opacity-40 blur-[60px] animate-fade-in"
         />
@@ -154,6 +160,8 @@ const BeforeAfter = () => {
           <img
             key={`${pair.id}-after`}
             src={pair.after}
+            width={PHOTO_WIDTH}
+            height={PHOTO_HEIGHT}
             alt={`${pair.alt}, after`}
             draggable={false}
             decoding="async"
@@ -163,6 +171,8 @@ const BeforeAfter = () => {
           <img
             key={`${pair.id}-before`}
             src={pair.before}
+            width={PHOTO_WIDTH}
+            height={PHOTO_HEIGHT}
             alt={`${pair.alt}, before`}
             draggable={false}
             decoding="async"

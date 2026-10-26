@@ -25,7 +25,7 @@ const breadcrumbNode = (items: Crumb[]) => ({
 });
 
 // Suburb pages plus every suburb named in the service-area zones (shown in
-// the zone legend and the "What areas do you service?" FAQ).
+// the "What areas do you service?" FAQ).
 const areaServedNodes = [...new Set<string>([...AREA_SERVED, ...GREEN_ZONE_SUBURBS, ...RED_ZONE_EXAMPLES])].map(
   (name) => ({ "@type": "City", name }),
 );
@@ -60,6 +60,8 @@ const localBusinessNode = () => ({
   telephone: BUSINESS.phoneE164,
   priceRange: "$$",
   image: BUSINESS.ogImageUrl,
+  logo: BUSINESS.logoUrl,
+  hasMap: BUSINESS.googleMapsUrl,
   keywords: BUSINESS.keywords,
   sameAs: [BUSINESS.googleMapsUrl],
   openingHours: BUSINESS.openingHours,
@@ -228,6 +230,9 @@ export const buildGuidePageSchema = (guide: Guide, url: string, pageTitle: strin
       "@id": `${SITE_URL}${url}#article`,
       headline: guide.title,
       description: guide.excerpt,
+      datePublished: guide.published,
+      dateModified: guide.updated,
+      image: BUSINESS.ogImageUrl,
       author: { "@id": `${SITE_URL}/#localbusiness` },
       publisher: { "@id": `${SITE_URL}/#localbusiness` },
       mainEntityOfPage: { "@id": `${SITE_URL}${url}#webpage` },
