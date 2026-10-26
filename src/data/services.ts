@@ -23,8 +23,7 @@ export type ServicePackage = {
   description: string;
   price: number;
   features: string[];
-  // Rough estimate for the per-service detail page — TODO: confirm exact
-  // durations with the business (see ref/SEO-AEO-GEO-Audit.md §10).
+  // Typical time on site — confirmed with the business (2026-10-26).
   duration: string;
   // Who this package suits — shown on the per-service detail page.
   bestFor: string;

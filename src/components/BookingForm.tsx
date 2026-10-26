@@ -221,7 +221,7 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
 
       toast({
         title: "Booking Request Sent!",
-        description: "We'll get back to you shortly to confirm your appointment.",
+        description: "We'll call or email you within 24 hours to confirm your appointment.",
       });
       form.reset(emptyDefaultValues);
       bookingFormDraft = null;

@@ -56,7 +56,7 @@ const Book = () => {
             <div className="max-w-2xl mb-10 md:mb-14">
               <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-4">Book Your Detail</h1>
               <p className="text-muted-foreground text-lg">
-                Fill out the form below and we'll contact you to confirm your appointment.
+                Fill out the form below and we'll call or email you within 24 hours to confirm your appointment.
               </p>
             </div>
 
