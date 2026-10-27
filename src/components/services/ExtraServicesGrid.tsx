@@ -35,9 +35,9 @@ const extraServices = EXTRA_SERVICES.map((s) => ({ ...s, icon: EXTRA_SERVICE_ICO
 // Unpriced add-ons as a ruled list rather than a grid of icon cards —
 // reused by the homepage's ExtraServices section and the /services page.
 const ExtraServicesGrid = () => (
-  <ul className="grid grid-cols-1 border-t border-border sm:grid-cols-2 sm:gap-x-12 lg:grid-cols-3">
+  <ul className="grid grid-cols-1 border-t border-white/[0.06] sm:grid-cols-2 sm:gap-x-12 lg:grid-cols-3">
     {extraServices.map((service) => (
-      <li key={service.label} className="flex items-center gap-3 border-b border-border py-4">
+      <li key={service.label} className="flex items-center gap-3 border-b border-white/[0.06] py-4">
         <service.icon className="h-5 w-5 shrink-0 text-primary" strokeWidth={1.5} />
         <h3 className="text-[15px] font-medium text-foreground">{service.label}</h3>
       </li>

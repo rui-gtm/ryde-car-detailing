@@ -37,7 +37,7 @@ const Services = ({
           ? { background: "linear-gradient(180deg, hsl(214 80% 18%) 0%, hsl(var(--ink)) 92%)" }
           : undefined
       }
-      className={`py-24 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
+      className={`py-16 md:py-20 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <SectionHeading eyebrow="Services" title={heading} description={subheading} />

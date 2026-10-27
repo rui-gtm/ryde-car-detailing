@@ -47,7 +47,7 @@ const AreaDetail = () => {
       />
 
       {nearby.length > 0 && (
-        <section className="py-24 bg-transparent">
+        <section className="py-16 md:py-20 bg-transparent">
           <div className="container mx-auto px-4 lg:px-8">
             <div>
               <SectionHeading eyebrow="Nearby" title={`We also detail near ${suburb.name}`} className="mb-8" />

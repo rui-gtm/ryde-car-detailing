@@ -26,7 +26,7 @@ const steps = [
 const HowItWorks = ({ tone = "muted" }: { tone?: "muted" | "plain" }) => (
   <section
     id="how-it-works"
-    className={`py-24 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
+    className={`py-16 md:py-20 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
   >
     <div className="container mx-auto px-4 lg:px-8">
       <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -38,7 +38,7 @@ const HowItWorks = ({ tone = "muted" }: { tone?: "muted" | "plain" }) => (
 
       <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
         {steps.map((step, index) => (
-          <li key={step.title} className="border-t border-foreground/15 pt-6">
+          <li key={step.title}>
             <span className="text-sm font-medium tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span>
             <h3 className="mt-3 text-lg font-semibold text-foreground">{step.title}</h3>
             <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{step.description}</p>

@@ -33,7 +33,7 @@ const VideoSlot = ({ video, index }: { video: CeramicVideo; index: number }) => 
 
 // "Ceramic coating in action": a photo of a finished car plus two video slots.
 const CeramicMedia = () => (
-  <section className="bg-transparent py-24" aria-labelledby="ceramic-media-title">
+  <section className="bg-transparent py-16 md:py-20" aria-labelledby="ceramic-media-title">
     <div className="container mx-auto px-4 lg:px-8">
       <SectionHeading
         title="Ceramic Coating in Action"

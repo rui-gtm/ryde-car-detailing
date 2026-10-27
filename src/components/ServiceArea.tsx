@@ -38,7 +38,7 @@ const ServiceArea = () => {
   }, []);
 
   return (
-    <section id="service-area" className="py-24 bg-transparent scroll-mt-24">
+    <section id="service-area" className="py-16 md:py-20 bg-transparent scroll-mt-24">
       <div className="container mx-auto px-4 lg:px-8">
 
         {/* Header */}
@@ -65,7 +65,7 @@ const ServiceArea = () => {
           <div className="space-y-6">
 
             {/* Suburbs */}
-            <div className="mt-4 bg-white/[0.06] rounded-xl border border-border p-6">
+            <div className="mt-4 bg-white/[0.06] rounded-xl p-6">
               <p className="text-base text-muted-foreground leading-relaxed">
                 We proudly service {AREA_SERVED_TEXT}, and surrounding suburbs.
               </p>
@@ -75,14 +75,14 @@ const ServiceArea = () => {
                 which zone is shown on the map itself and spelled out in the
                 "What areas do you service?" FAQ, not repeated here. */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
+              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl">
                 <div className="w-4 h-4 rounded-full bg-green-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Green Zone</p>
                   <p className="text-base text-muted-foreground mt-1">No outcall fee</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl border border-border">
+              <div className="flex items-center gap-4 px-5 py-5 bg-white/[0.06] rounded-xl">
                 <div className="w-4 h-4 rounded-full bg-red-500 shrink-0" />
                 <div>
                   <p className="text-base font-semibold text-foreground">Red Zone</p>
@@ -92,7 +92,7 @@ const ServiceArea = () => {
             </div>
 
             {/* Contact */}
-            <div className="bg-white/[0.06] rounded-xl border border-border p-6 scroll-mt-28" id="contact">
+            <div className="bg-white/[0.06] rounded-xl p-6 scroll-mt-28" id="contact">
               <h3 className="text-xl font-bold text-foreground mb-2">Contact Us</h3>
               <p className="text-base text-muted-foreground mb-1">
                 Not sure if we serve your area? Give us a call! We're happy to answer any questions.

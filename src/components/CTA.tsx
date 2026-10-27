@@ -12,7 +12,7 @@ const CTA = ({
   bookLabel?: string;
 }) => {
   return (
-    <section id="book" className="scroll-mt-24 border-t border-white/10 py-24 text-white">
+    <section id="book" className="scroll-mt-24 py-16 text-white md:py-20">
       <div className="container mx-auto flex flex-col gap-10 px-4 md:flex-row md:items-center md:justify-between lg:px-8">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-semibold md:text-4xl">{heading}</h2>

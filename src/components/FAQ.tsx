@@ -26,7 +26,7 @@ const FAQ = ({
   return (
     <section
       id="faq"
-      className={`py-24 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
+      className={`py-16 md:py-20 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-20">
@@ -35,7 +35,7 @@ const FAQ = ({
             description={description}
             className="mb-0 lg:sticky lg:top-28 lg:self-start"
           />
-          <div className="divide-y divide-border border-y border-border">
+          <div className="divide-y divide-white/[0.06] border-b border-white/[0.06]">
             {faqs.map((item) => (
               <details key={item.q} className="group py-6">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-medium text-foreground marker:content-none [&::-webkit-details-marker]:hidden">

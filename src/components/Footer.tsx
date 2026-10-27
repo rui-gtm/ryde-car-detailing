@@ -11,7 +11,7 @@ const headingClass = "text-sm font-semibold text-white";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-white/15 py-14 text-white">
+    <footer className="pb-14 pt-16 text-white md:pt-20">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <div className="col-span-2 flex flex-col gap-5 md:col-span-1">

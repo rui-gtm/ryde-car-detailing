@@ -34,10 +34,10 @@ const Testimonial = () => {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <section id="reviews" className="py-24 bg-transparent scroll-mt-24">
+    <section id="reviews" className="py-16 md:py-20 bg-transparent scroll-mt-24">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Summary banner */}
-        <div className="rounded-xl border border-border bg-white/[0.06] px-6 py-8 text-white md:px-10">
+        <div className="rounded-xl bg-white/[0.06] px-6 py-8 text-white md:px-10">
           <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
             <div className="flex items-center gap-5">
               <GoogleG className="h-14 w-14" />
@@ -49,15 +49,12 @@ const Testimonial = () => {
                 <p className="mt-1 text-sm text-white/60">{GOOGLE_REVIEWS.count} Google reviews</p>
               </div>
             </div>
-            <a
-              href={BUSINESS.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              View on Google
-              <ExternalLink className="h-4 w-4" />
-            </a>
+            <Button size="lg" asChild>
+              <a href={BUSINESS.googleMapsUrl} target="_blank" rel="noopener noreferrer">
+                View on Google
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </Button>
           </div>
         </div>
 
@@ -73,7 +70,7 @@ const Testimonial = () => {
           {googleReviews.map((review, i) => (
             <article
               key={review.name}
-              className={`mb-5 break-inside-avoid rounded-xl border border-border bg-white/[0.06] p-6 ${
+              className={`mb-5 break-inside-avoid rounded-xl bg-white/[0.06] p-6 ${
                 !showAll && i >= MOBILE_PREVIEW ? "hidden md:block" : ""
               }`}
             >

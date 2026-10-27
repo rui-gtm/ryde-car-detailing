@@ -13,7 +13,7 @@ const items = [
 ];
 
 const Standards = () => (
-  <section id="why-us" className="scroll-mt-24 border-y border-white/10 py-24 text-white">
+  <section id="why-us" className="scroll-mt-24 py-16 text-white md:py-20">
     <div className="container mx-auto px-4 lg:px-8">
       <div className="grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
@@ -27,9 +27,9 @@ const Standards = () => (
           </Button>
         </div>
 
-        <ul className="border-t border-white/10">
+        <ul className="divide-y divide-white/[0.06]">
           {items.map((item) => (
-            <li key={item.title} className="flex gap-5 border-b border-white/10 py-6">
+            <li key={item.title} className="flex gap-5 py-6">
               <item.icon className="mt-0.5 h-6 w-6 shrink-0 text-sky-300" strokeWidth={1.5} />
               <div>
                 <h3 className="text-lg font-medium">{item.title}</h3>

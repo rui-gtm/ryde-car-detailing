@@ -6,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 // wanted back.
 const Gallery = () => {
   return (
-    <section id="gallery" className="relative overflow-hidden py-24 scroll-mt-24">
+    <section id="gallery" className="relative overflow-hidden py-16 md:py-20 scroll-mt-24">
       <div className="container mx-auto px-4 lg:px-8">
         <SectionHeading
           eyebrow="Portfolio"
