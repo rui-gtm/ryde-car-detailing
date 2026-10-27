@@ -29,7 +29,7 @@ const Areas = () => {
           <Link to="/book">Get a Quote →</Link>
         </Button>
       </PageHero>
-      <section className="py-24">
+      <section className="py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <SectionHeading
             eyebrow="Areas" title="Find your suburb"

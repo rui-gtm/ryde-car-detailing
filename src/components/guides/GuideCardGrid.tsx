@@ -11,7 +11,7 @@ const GuideCardGrid = ({ limit }: { limit?: number }) => {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {guides.map((guide) => (
         <Link key={guide.slug} to={guideHref(guide.slug)} className="block cursor-pointer">
-          <Card className="h-full transition-colors duration-200 hover:border-foreground/30">
+          <Card className="h-full border-0 transition-colors duration-200 hover:bg-white/[0.1]">
             <CardHeader>
               <CardTitle className="text-xl leading-snug">{guide.title}</CardTitle>
             </CardHeader>

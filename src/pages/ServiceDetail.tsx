@@ -53,7 +53,7 @@ const ServiceDetail = () => {
         </div>
       </PageHero>
 
-      <section className="py-24 bg-transparent" aria-labelledby="about-service-title">
+      <section className="py-16 md:py-20 bg-transparent" aria-labelledby="about-service-title">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[2fr_3fr] lg:gap-20">
             <SectionHeading eyebrow="Overview" title="About this service" className="mb-0" />
@@ -69,7 +69,7 @@ const ServiceDetail = () => {
       </section>
 
       {service.inclusionGroups && (
-        <section className="py-24 bg-transparent scroll-mt-24" aria-labelledby="inclusions-title">
+        <section className="py-16 md:py-20 bg-transparent scroll-mt-24" aria-labelledby="inclusions-title">
           <div className="container mx-auto px-4 lg:px-8">
             <div>
               <SectionHeading eyebrow="Included" title={`What the ${service.title} includes`} />
@@ -99,7 +99,7 @@ const ServiceDetail = () => {
 
       <section
         id="pricing"
-        className={`py-24 scroll-mt-24 ${hasInclusions ? "bg-transparent" : "bg-transparent"}`}
+        className={`py-16 md:py-20 scroll-mt-24 ${hasInclusions ? "bg-transparent" : "bg-transparent"}`}
         aria-labelledby="pricing-title"
       >
         <div className="container mx-auto px-4 lg:px-8">

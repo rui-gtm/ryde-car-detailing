@@ -5,7 +5,7 @@ import SectionHeading from "@/components/SectionHeading";
 // Homepage teaser for the guides — reuses GuideCardGrid (same card the
 // /guides page uses), limited to the first 3, with a link to the full list.
 const ReadingSection = () => (
-  <section className="py-24 bg-transparent">
+  <section className="py-16 md:py-20 bg-transparent">
     <div className="container mx-auto px-4 lg:px-8">
       <SectionHeading
         eyebrow="Guides" title="Worth a Read"

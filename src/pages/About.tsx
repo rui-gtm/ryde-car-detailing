@@ -27,7 +27,7 @@ const About = () => {
     <PageShell title={title} schema={buildPageSchema("/about", title, breadcrumbs)} breadcrumbs={breadcrumbs}>
       <PageHero title="Your local Ryde detailer" description={BUSINESS.description} />
 
-      <section className="bg-transparent py-24">
+      <section className="bg-transparent py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           {/* TODO (content): replace with the real detailer's name, a photo,
               and 1-2 sentences of real bio — see ref/SEO-AEO-GEO-Audit.md §13.
@@ -43,7 +43,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="bg-transparent py-24">
+      <section className="bg-transparent py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <SectionHeading eyebrow="Why us" title="Why choose us" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -58,7 +58,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="bg-transparent py-24">
+      <section className="bg-transparent py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <SectionHeading eyebrow="Pricing" title="Services, priced up front" />
           <div className="grid gap-6 md:grid-cols-3">
@@ -78,7 +78,7 @@ const About = () => {
       </section>
 
       {scopeSection && (
-        <section className="bg-transparent py-24">
+        <section className="bg-transparent py-16 md:py-20">
           <div className="container mx-auto px-4 lg:px-8">
             <SectionHeading
               eyebrow="Scope" title="What detailing can, and can't, do"
@@ -117,7 +117,7 @@ const About = () => {
         </section>
       )}
 
-      <section className="bg-transparent py-24">
+      <section className="bg-transparent py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading

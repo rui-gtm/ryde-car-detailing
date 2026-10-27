@@ -45,7 +45,7 @@ const Index = () => {
             8. Ready.                                              Final call to action */}
         <Hero />
         <Services fade />
-        <ExtraServices attached />
+        <ExtraServices />
         <ServiceArea />
         <Gallery />
         <Testimonial />

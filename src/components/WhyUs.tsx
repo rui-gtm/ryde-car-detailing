@@ -8,7 +8,7 @@ import SectionHeading from "@/components/SectionHeading";
 // one detailed version here, and About.tsx reuses the same TRUST_BADGES data
 // for its own compact row instead of retyping the four facts.
 const WhyUs = () => (
-  <section id="why-us" className="py-24 bg-transparent scroll-mt-24">
+  <section id="why-us" className="py-16 md:py-20 bg-transparent scroll-mt-24">
     <div className="container mx-auto px-4 lg:px-8">
       <SectionHeading eyebrow="Why us" title="Why Choose Us" description="What sets our mobile detailing apart." />
 
