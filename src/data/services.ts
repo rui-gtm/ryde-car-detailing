@@ -7,8 +7,8 @@ import type { Faq } from "@/data/faqs";
 import { EXTRA_SERVICES } from "@/data/extraServices";
 
 // The full detail used to be called "Premium Full Detail". It was renamed, but
-// its URL (/services/premium-full-detail) is already indexed, so the id — and
-// therefore the URL — keeps the old slug.
+// the id — and therefore the URL (/services/premium-full-detail) and the
+// schema @id — deliberately keeps the old slug (decided 2026-10-26).
 const LEGACY_SLUGS: Record<string, string> = {
   "Full Detail": "Premium Full Detail",
 };

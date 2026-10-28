@@ -110,7 +110,7 @@ const Hero = () => {
         <h1 className="mx-auto max-w-[48rem] [text-shadow:0_2px_40px_rgba(0,0,0,0.5)]">
           <span className="hero-line block text-5xl font-medium leading-[1.02] tracking-tighter md:text-6xl">
             <span style={delay("0.2s")}>Mobile Car Detailing</span>
-          </span>
+          </span>{" "}
           <span className="hero-line block text-5xl font-medium leading-[1.02] tracking-tighter md:text-6xl">
             <span className="hero-gleam" style={delay("0.32s")}>
               in Ryde, NSW

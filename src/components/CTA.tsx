@@ -17,7 +17,7 @@ const CTA = ({
         <div className="max-w-2xl">
           <h2 className="text-3xl font-semibold md:text-4xl">{heading}</h2>
           <p className="mt-4 text-lg text-white/70">
-            Fixed pricing, flexible scheduling and a 24-hour satisfaction guarantee.
+            Clear starting prices, flexible scheduling and a 24-hour satisfaction guarantee.
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">

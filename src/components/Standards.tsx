@@ -4,8 +4,9 @@ import { TRUST_BADGES } from "@/data/trustBadges";
 import { points } from "@/components/MobileConvenience";
 
 // Homepage "why us" section. Replaces the separate WhyUs + MobileConvenience
-// icon rows (same facts, same data) with one ruled list beside a headline —
-// WhyUs/MobileConvenience themselves are still used on /services and /about.
+// icon rows (same facts, same data) with one ruled list beside a headline.
+// Only MobileConvenience's `points` are still used; the WhyUs and
+// MobileConvenience components themselves aren't rendered on any page.
 const items = [
   ...TRUST_BADGES.map((b) => ({ icon: b.icon, title: b.text, description: b.description })),
   ...points,
