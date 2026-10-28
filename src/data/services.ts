@@ -57,7 +57,7 @@ const raw: Omit<ServicePackage, "id">[] = [
       "Dirt, grime & brake-dust removal",
       "Wheel & tyre cleanse",
       "Streak-free exterior windows",
-      "Quick-dry, polished finish",
+      "Quick-dry, spotless finish",
     ],
     recommendedExtras: ["Clay Bar Treatment", "Headlight Restoration", "Exterior Plastics Restoration"],
     faqs: [
@@ -85,7 +85,9 @@ const raw: Omit<ServicePackage, "id">[] = [
     bestFor: "A full inside-and-out refresh — our most popular package for a like-new result.",
     features: [
       "Full interior deep clean",
+      "Steam clean throughout the interior",
       "Complete exterior wash + wheel clean",
+      "3 month ceramic sealant on the exterior",
       "Streak-free interior & exterior windows",
       "Interior scrub, stain removal & decontamination",
       "Tyre shine for a refined finish",
@@ -96,6 +98,7 @@ const raw: Omit<ServicePackage, "id">[] = [
         label: "Interior",
         items: [
           "Full interior deep clean",
+          "Steam clean throughout the interior",
           "Interior scrub, stain removal & decontamination",
           "Full-vehicle vacuum throughout",
           "Streak-free interior windows",
@@ -105,6 +108,7 @@ const raw: Omit<ServicePackage, "id">[] = [
         label: "Exterior",
         items: [
           "Complete exterior wash + wheel clean",
+          "3 month ceramic sealant on the exterior",
           "Tyre shine for a refined finish",
           "Streak-free exterior windows",
         ],
@@ -114,7 +118,7 @@ const raw: Omit<ServicePackage, "id">[] = [
     faqs: [
       {
         q: "What's included in the Full Detail?",
-        a: "Everything from the Interior Deep Clean and Basic Exterior Wash combined, plus tyre shine for a refined finish.",
+        a: "A full interior deep clean with a steam clean, a complete exterior wash with wheels, a 3 month ceramic sealant on the exterior, and tyre shine for a refined finish.",
       },
       {
         q: "How long does the Full Detail take?",
@@ -131,30 +135,30 @@ const raw: Omit<ServicePackage, "id">[] = [
     packageValue: "ceramic",
     serviceType: "Mobile car detailing",
     description: "Elite paint protection with a superior gloss finish.",
-    price: 599,
+    price: 699,
     duration: "Half-day service",
     bestFor: "Owners who want long-term paint protection and a showroom-gloss finish that lasts.",
     features: [
-      "Paint decontamination & professional surface prep",
-      "High-gloss, mirror-like finish",
-      "UV & chemical resistance",
-      "Hydrophobic water-beading performance",
-      "10H hardness formula for long-term durability",
-      "1-year or 7-year protection kit options",
+      "Full paint clean and prep before the coating goes on",
+      "Deep, mirror-like gloss",
+      "Protects against UV and harsh chemicals",
+      "Water beads up and rolls off the paint",
+      "10H hard coating for lasting durability",
+      "Multiple year protection options",
     ],
     inclusionGroups: [
       {
         label: "Preparation",
-        items: ["Paint decontamination", "Professional surface prep"],
+        items: ["Full paint clean", "Professional surface prep"],
       },
       {
         label: "Protection",
         items: [
-          "High-gloss, mirror-like finish",
-          "UV & chemical resistance",
-          "Hydrophobic water-beading performance",
-          "10H hardness formula for long-term durability",
-          "1-year or 7-year protection kit options",
+          "Deep, mirror-like gloss",
+          "Protects against UV and harsh chemicals",
+          "Water beads up and rolls off the paint",
+          "10H hard coating for lasting durability",
+          "Multiple year protection options",
         ],
       },
     ],
@@ -162,7 +166,7 @@ const raw: Omit<ServicePackage, "id">[] = [
     faqs: [
       {
         q: "How long does Ceramic Coating protection last?",
-        a: "You can choose between a 1-year or 7-year protection kit, depending on how long you want the coating to last.",
+        a: "There are multiple year options, depending on how long you want the coating to last. Get in touch and we will help you choose the right one for your car.",
       },
       {
         q: "How long does the Ceramic Coating service take?",

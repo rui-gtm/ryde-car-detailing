@@ -52,7 +52,7 @@ const services = [
       "UV & chemical resistance",
       "Hydrophobic water-beading performance",
       "10H hardness formula for long-term durability",
-      "1-year or 7-year protection kit options",
+      "Multiple year protection options",
     ],
   },
 ];

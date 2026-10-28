@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 import NotFound from "@/pages/NotFound";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Clock, Users } from "lucide-react";
+import { Check } from "lucide-react";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Services from "@/components/Services";
@@ -15,6 +15,19 @@ import { SERVICES, serviceSlug, serviceHref } from "@/data/services";
 import { BUSINESS } from "@/data/business";
 import SectionHeading from "@/components/SectionHeading";
 import CeramicMedia from "@/components/CeramicMedia";
+import CeramicPricing from "@/components/CeramicPricing";
+import foamPhoto from "@/assets/exterior-foam.jpg";
+import interiorPhoto from "@/assets/interiorImage-4.jpg";
+import exteriorPhoto from "@/assets/before-after/bmw-exterior-after.jpg";
+
+// Photos for the non-ceramic service pages: one beside the overview, and one on top of each inclusion card.
+const ABOUT_PHOTOS: Record<string, { src: string; alt: string }> = {
+  basic: { src: foamPhoto, alt: "BMW covered in thick foam during a hand wash" },
+};
+const GROUP_PHOTOS: Record<string, { src: string; alt: string }> = {
+  Interior: { src: interiorPhoto, alt: "Freshly detailed Porsche Macan interior with cleaned seats and floor mats" },
+  Exterior: { src: exteriorPhoto, alt: "BMW with a clean, glossy exterior after a hand wash" },
+};
 
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -31,39 +44,58 @@ const ServiceDetail = () => {
   ];
   const otherServices = SERVICES.filter((s) => s.id !== service.id);
   const hasInclusions = !!service.inclusionGroups;
+  const isCeramic = service.packageValue === "ceramic";
+  const aboutText = `${service.title} is a ${service.serviceType.toLowerCase()} service carried out entirely at your home, apartment car park or workplace across ${BUSINESS.address.addressLocality} and nearby suburbs. There's no workshop and no drop-off. You provide access to mains water and a power outlet, and the car doesn't need to move. It typically takes ${service.duration.toLowerCase()} and is best suited to ${service.bestFor.charAt(0).toLowerCase()}${service.bestFor.slice(1)}`;
 
   return (
-    <PageShell title={title} schema={buildServicePageSchema(service, url, title, breadcrumbs)} breadcrumbs={breadcrumbs}>
-      <PageHero title={service.title} description={service.description}>
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-2 mb-8 text-base text-white/70">
-          <span className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-sky-300" /> {service.duration}
-          </span>
-          <span className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-sky-300" /> {service.bestFor}
-          </span>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Button size="lg" asChild>
-            <Link to={`/book?package=${service.packageValue}`}>Book Now →</Link>
-          </Button>
-          <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white" asChild>
-            <a href="#pricing">See Pricing</a>
-          </Button>
-        </div>
-      </PageHero>
+    <PageShell
+      title={title}
+      schema={buildServicePageSchema(service, url, title, breadcrumbs)}
+      breadcrumbs={breadcrumbs}
+      hero={!isCeramic}
+    >
+      {isCeramic ? (
+        // The ceramic page opens straight on the price; the heading is kept for screen readers and search.
+        <h1 className="sr-only">{service.title}</h1>
+      ) : (
+        <PageHero title={service.title} description={service.description} />
+      )}
 
+      {isCeramic ? (
+        <>
+          <CeramicPricing service={service} />
+          <CeramicMedia />
+        </>
+      ) : (
+        <>
       <section className="py-24 bg-transparent" aria-labelledby="about-service-title">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[2fr_3fr] lg:gap-20">
-            <SectionHeading eyebrow="Overview" title="About this service" className="mb-0" />
-            <p id="about-service-title" className="text-xl leading-relaxed text-muted-foreground">
-              {service.title} is a {service.serviceType.toLowerCase()} carried out entirely at your home,
-              apartment car park or workplace across {BUSINESS.address.addressLocality} and nearby suburbs. There's
-              no workshop and no drop-off. You provide access to mains water and a power outlet, and
-              the car doesn't need to move. It typically takes {service.duration.toLowerCase()}, and suits{" "}
-              {service.bestFor.toLowerCase()}
-            </p>
+          <div
+            className={`grid gap-10 lg:gap-20 ${
+              ABOUT_PHOTOS[service.packageValue] ? "lg:grid-cols-2 lg:items-center" : "lg:grid-cols-[2fr_3fr]"
+            }`}
+          >
+            <div>
+              <SectionHeading eyebrow="Overview" title="About this service" className={ABOUT_PHOTOS[service.packageValue] ? "" : "mb-0"} />
+              {ABOUT_PHOTOS[service.packageValue] && (
+                <p id="about-service-title" className="text-xl leading-relaxed text-muted-foreground">
+                  {aboutText}
+                </p>
+              )}
+            </div>
+            {ABOUT_PHOTOS[service.packageValue] ? (
+              <img
+                src={ABOUT_PHOTOS[service.packageValue].src}
+                alt={ABOUT_PHOTOS[service.packageValue].alt}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full rounded-xl border border-border object-cover"
+              />
+            ) : (
+              <p id="about-service-title" className="text-xl leading-relaxed text-muted-foreground">
+                {aboutText}
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -76,6 +108,15 @@ const ServiceDetail = () => {
               <div className="grid sm:grid-cols-2 gap-6">
                 {service.inclusionGroups.map((group) => (
                   <Card key={group.label}>
+                    {GROUP_PHOTOS[group.label] && (
+                      <img
+                        src={GROUP_PHOTOS[group.label].src}
+                        alt={GROUP_PHOTOS[group.label].alt}
+                        loading="lazy"
+                        decoding="async"
+                        className="aspect-[4/3] w-full rounded-t-lg object-cover"
+                      />
+                    )}
                     <CardHeader>
                       <CardTitle>{group.label}</CardTitle>
                     </CardHeader>
@@ -142,7 +183,8 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {service.packageValue === "ceramic" && <CeramicMedia />}
+        </>
+      )}
 
       <Services
         sectionId="other-services"

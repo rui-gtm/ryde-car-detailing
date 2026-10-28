@@ -46,7 +46,7 @@ const About = () => {
       <section className="bg-transparent py-24">
         <div className="container mx-auto px-4 lg:px-8">
           <SectionHeading eyebrow="Why us" title="Why choose us" />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {TRUST_BADGES.map((badge) => (
               <div key={badge.text} className="rounded-xl border border-border bg-white/[0.06] p-8">
                 <badge.icon className="mb-4 h-8 w-8 text-primary" strokeWidth={1.5} />

@@ -1,17 +1,30 @@
-// Videos shown on the Ceramic Coating page. To add one:
-//   1. Put the file in the project's `public/videos/` folder (create it if needed),
-//      e.g. public/videos/ceramic-1.mp4
-//   2. Set `src` below to "/videos/ceramic-1.mp4"
-// While `src` is empty the page shows a "coming soon" placeholder in that slot.
-// MP4 (H.264) plays everywhere; keep each file under ~20 MB so the page stays fast.
-export type CeramicVideo = {
-  title: string;
-  src: string;
-  /** Optional still image shown before the video plays, e.g. "/videos/ceramic-1.jpg". */
+// Media shown on the Ceramic Coating page, in order, after the photo.
+// To swap or add one, drop the file in src/assets/ceramic/ and edit this list.
+// An animated image works like any image; for a longer clip use an MP4 in `public/videos/`
+// and set `video` to "/videos/your-file.mp4" instead of `image`.
+import windowSpray from "@/assets/ceramic/window-spray.webp";
+import waterRunoff from "@/assets/ceramic/water-runoff.webp";
+
+export type CeramicClip = {
+  caption: string;
+  alt: string;
+  /** An image or animated image (GIF / WebP). */
+  image?: string;
+  /** An MP4 in public/videos/, e.g. "/videos/window-spray.mp4". Plays silently on a loop, like a GIF. */
+  video?: string;
+  /** Optional still shown while the MP4 loads, e.g. "/videos/window-spray.jpg". */
   poster?: string;
 };
 
-export const CERAMIC_VIDEOS: CeramicVideo[] = [
-  { title: "Ceramic coating demonstration 1", src: "" },
-  { title: "Ceramic coating demonstration 2", src: "" },
+export const CERAMIC_CLIPS: CeramicClip[] = [
+  {
+    caption: "Water beading and sheeting off a coated window",
+    alt: "Water sprayed over the rear window and door of a white car, beading and running off",
+    video: "/videos/mobileceramiccoatingnorthryde.mp4",
+  },
+  {
+    caption: "Water running straight off a coated bonnet",
+    alt: "Water running off the bonnet and headlight of a coated BMW",
+    video: "/videos/mobileceramiccoatingbmwnorthryde.mp4",
+  },
 ];

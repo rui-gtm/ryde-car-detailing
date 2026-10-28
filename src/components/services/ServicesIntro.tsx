@@ -3,9 +3,9 @@ import interiorImage from "@/assets/interiorImage-5.jpg";
 import exteriorImage from "@/assets/exteriorImage-3.jpg";
 
 const POINTS = [
-  "Two-bucket hand washing — never automatic brushes",
-  "Machine polishing on the Full Detail and Ceramic Coating packages",
+  "Hand washing only — never automatic brushes",
   "Wheels and tyres included in every service",
+  "Steam clean and a 3 month ceramic sealant included in the Full Detail",
   "Prices fixed by package, not quoted on arrival",
 ];
 

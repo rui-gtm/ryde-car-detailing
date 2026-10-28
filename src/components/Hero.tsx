@@ -120,7 +120,7 @@ const Hero = () => {
 
         <p className="hero-fade mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/80" style={delay("0.5s")}>
           Hand washing, full interior and exterior details and ceramic coating at your home or workplace, quoted up
-          front and fully insured.
+          front.
         </p>
 
         <div className="hero-fade mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row" style={delay("0.62s")}>

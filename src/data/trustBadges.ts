@@ -1,4 +1,4 @@
-import { Shield, Users, Leaf, ThumbsUp, type LucideIcon } from "lucide-react";
+import { Users, Leaf, ThumbsUp, type LucideIcon } from "lucide-react";
 
 // Single source for the "why trust us" points — previously defined
 // identically in both Testimonial.tsx and About.tsx. Now imported by
@@ -10,11 +10,6 @@ export type TrustBadge = {
 };
 
 export const TRUST_BADGES: TrustBadge[] = [
-  {
-    icon: Shield,
-    text: "Fully Insured",
-    description: "Complete peace of mind on every job, every time.",
-  },
   {
     icon: Users,
     text: "Professional Detailers",

@@ -12,7 +12,7 @@ const WhyUs = () => (
     <div className="container mx-auto px-4 lg:px-8">
       <SectionHeading eyebrow="Why us" title="Why Choose Us" description="What sets our mobile detailing apart." />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {TRUST_BADGES.map((badge) => (
           <Card
             key={badge.text}

@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, Clock, Users } from "lucide-react";
 import { serviceHref, type ServicePackage } from "@/data/services";
-import basicImage from "@/assets/exteriorImage-8.jpg";
+import basicImage from "@/assets/exterior-foam.jpg";
 import fullImage from "@/assets/interiorImage-4.jpg";
-import ceramicImage from "@/assets/exteriorImage-7.jpg";
+import ceramicImage from "@/assets/ceramic-garage.jpg";
 
 // Real job photos for each package, keyed by packageValue.
 const PHOTOS: Record<string, { src: string; alt: string }> = {
-  basic: { src: basicImage, alt: "Audi covered in foam during a hand wash in a Ryde driveway" },
+  basic: { src: basicImage, alt: "BMW covered in thick foam during a hand wash" },
   premium: { src: fullImage, alt: "Freshly detailed Porsche Macan interior with cleaned seats and floor mats" },
-  ceramic: { src: ceramicImage, alt: "Black Mercedes with a deep ceramic coating gloss at night" },
+  ceramic: { src: ceramicImage, alt: "White Porsche Macan with a deep gloss finish in a detailing garage" },
 };
 
 export type ServiceCardVariant = "compact" | "detailed";
