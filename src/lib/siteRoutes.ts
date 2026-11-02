@@ -7,7 +7,7 @@
 // (prerender.mjs and the sitemap generator import it via the compiled SSR
 // bundle — see src/entry-server.tsx).
 import { BUSINESS } from "@/data/business";
-import { SERVICES, serviceHref } from "@/data/services";
+import { ALL_SERVICES, serviceHref } from "@/data/services";
 import { SUBURBS } from "@/data/suburbs";
 import { GUIDES, guideHref } from "@/data/guides";
 
@@ -52,7 +52,7 @@ export const STATIC_ROUTES: SiteRoute[] = [
   },
 ];
 
-export const SERVICE_ROUTES: SiteRoute[] = SERVICES.map((s) => ({
+export const SERVICE_ROUTES: SiteRoute[] = ALL_SERVICES.map((s) => ({
   path: serviceHref(s.id),
   title: `${s.title} in Ryde NSW | ${BUSINESS.name}`,
   description: s.description,

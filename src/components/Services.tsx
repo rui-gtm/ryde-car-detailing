@@ -18,6 +18,7 @@ const Services = ({
   fade = false,
   services,
   footer,
+  headless = false,
 }: {
   heading?: string;
   subheading?: string;
@@ -28,6 +29,8 @@ const Services = ({
   fade?: boolean;
   services?: ServicePackage[];
   footer?: ReactNode;
+  /** Cards only, no heading, and no top padding so it sits directly under the section above. */
+  headless?: boolean;
 }) => {
   return (
     <section
@@ -37,10 +40,10 @@ const Services = ({
           ? { background: "linear-gradient(180deg, hsl(214 80% 18%) 0%, hsl(var(--ink)) 92%)" }
           : undefined
       }
-      className={`py-24 scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
+      className={`${headless ? "pb-24 pt-0" : "py-24"} scroll-mt-24 ${tone === "muted" ? "bg-transparent" : "bg-transparent"}`}
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <SectionHeading eyebrow="Services" title={heading} description={subheading} />
+        {!headless && <SectionHeading eyebrow="Services" title={heading} description={subheading} />}
 
         <ServiceCardGrid variant={variant} services={services} />
 

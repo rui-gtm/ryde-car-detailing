@@ -133,7 +133,7 @@
   html {
     background-color: hsl(var(--ink));
     /* Slightly under the browser default so the site sits comfortably at 100% zoom. */
-    font-size: 15px;
+    font-size: 14px;
   }
 
   body {
@@ -143,9 +143,9 @@
       hsl(var(--ink)) 0%,
       hsl(var(--ink)) 30%,
       hsl(214 88% 34%) 50%,
-      hsl(216 78% 9%) 68%,
-      hsl(214 88% 34%) 86%,
-      hsl(var(--brand)) 100%
+      hsl(216 78% 9%) 66%,
+      hsl(214 86% 26%) 84%,
+      hsl(216 80% 8%) 100%
     );
     font-family: 'Geist Variable', 'Inter', sans-serif;
   }

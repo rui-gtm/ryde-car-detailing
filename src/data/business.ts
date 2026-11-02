@@ -54,6 +54,6 @@ export const RED_ZONE_OUTCALL_FEE = 30;
 // used to also be hardcoded (and stale) in the unused GoogleRatingSection.tsx,
 // which is why the two disagreed. Last checked against Google: 2026-10-26.
 export const GOOGLE_REVIEWS = {
-  rating: 4.9,
-  count: 59,
+  rating: 5,
+  count: 61,
 } as const;

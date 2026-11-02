@@ -11,6 +11,7 @@ import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import { buildPageSchema } from "@/lib/schema";
 import { BUSINESS } from "@/data/business";
+import { RESTORATION_SERVICES } from "@/data/services";
 
 const ServicesOverview = () => {
   const title = `Mobile Car Detailing Services & Prices | ${BUSINESS.name}`;
@@ -42,6 +43,13 @@ const ServicesOverview = () => {
         variant="detailed"
         sectionId="four-services"
         tone="muted"
+      />
+      <Services
+        headless
+        variant="detailed"
+        sectionId="restoration"
+        tone="muted"
+        services={RESTORATION_SERVICES}
       />
       <ExtraServices />
       <ServiceComparison />

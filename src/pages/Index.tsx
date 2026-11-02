@@ -15,6 +15,7 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import { buildHomepageSchema } from "@/lib/schema";
+import { RESTORATION_SERVICES } from "@/data/services";
 
 const Index = () => {
   const location = useLocation();
@@ -36,6 +37,11 @@ const Index = () => {
       <main>
         <Hero />
         <Services fade />
+        <Services
+          headless
+          sectionId="restoration"
+          services={RESTORATION_SERVICES}
+        />
         <Gallery />
         <ServiceArea />
         <ExtraServices />

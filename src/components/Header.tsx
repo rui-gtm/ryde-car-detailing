@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, ArrowUpRight, Instagram } from "lucide-react";
 import logo from "@/assets/logo-new.png";
-import { SERVICES, serviceHref } from "@/data/services";
+import { SERVICES, RESTORATION_SERVICES, serviceHref } from "@/data/services";
 import { BUSINESS } from "@/data/business";
 
 // Minimal nav: logo, four links (Home, Services, Portfolio, About), one button. Areas / Guides / Terms stay
@@ -61,7 +61,7 @@ const Header = ({ heroOverlay }: { heroOverlay?: boolean }) => {
   // Transparent over a dark hero until the page scrolls. Pages without a dark hero pass heroOverlay={false}.
   const overHero = (heroOverlay ?? location.pathname === "/") && !isScrolled && !menuOpen;
   const ceramic = SERVICES.find((s) => s.packageValue === "ceramic");
-  const detailing = SERVICES.filter((s) => s.packageValue !== "ceramic");
+  const detailing = [...SERVICES.filter((s) => s.packageValue !== "ceramic"), ...RESTORATION_SERVICES];
   const ceramicHref = ceramic ? serviceHref(ceramic.id) : "/services";
   const detailingActive =
     isPathActive("/services", location.pathname) && !isPathActive(ceramicHref, location.pathname);

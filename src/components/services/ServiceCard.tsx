@@ -5,11 +5,13 @@ import { serviceHref, type ServicePackage } from "@/data/services";
 import basicImage from "@/assets/exterior-foam.jpg";
 import fullImage from "@/assets/interiorImage-4.jpg";
 import ceramicImage from "@/assets/ceramic-garage.jpg";
+import headlightImage from "@/assets/headlight-before-after.jpg";
 
 // Real job photos for each package, keyed by packageValue.
 const PHOTOS: Record<string, { src: string; alt: string }> = {
   basic: { src: basicImage, alt: "BMW covered in thick foam during a hand wash" },
   premium: { src: fullImage, alt: "Freshly detailed Porsche Macan interior with cleaned seats and floor mats" },
+  headlight: { src: headlightImage, alt: "Headlight before and after restoration: yellowed and cloudy above, clear below" },
   ceramic: { src: ceramicImage, alt: "White Porsche Macan with a deep gloss finish in a detailing garage" },
 };
 

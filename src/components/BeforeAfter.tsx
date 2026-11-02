@@ -141,7 +141,7 @@ const BeforeAfter = () => {
         />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[34rem]">
+      <div className="relative mx-auto w-full max-w-[44rem]">
         <div
           ref={box}
           onPointerDown={onDown}

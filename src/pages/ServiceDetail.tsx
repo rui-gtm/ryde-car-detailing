@@ -11,18 +11,20 @@ import Services from "@/components/Services";
 import HowItWorks from "@/components/HowItWorks";
 import { EXTRA_SERVICE_ICONS } from "@/components/services/ExtraServicesGrid";
 import { buildServicePageSchema } from "@/lib/schema";
-import { SERVICES, serviceSlug, serviceHref } from "@/data/services";
+import { SERVICES, ALL_SERVICES, serviceSlug, serviceHref } from "@/data/services";
 import { BUSINESS } from "@/data/business";
 import SectionHeading from "@/components/SectionHeading";
 import CeramicMedia from "@/components/CeramicMedia";
 import CeramicPricing from "@/components/CeramicPricing";
 import foamPhoto from "@/assets/exterior-foam.jpg";
+import headlightPhoto from "@/assets/headlight-before-after.jpg";
 import interiorPhoto from "@/assets/interiorImage-4.jpg";
 import exteriorPhoto from "@/assets/before-after/bmw-exterior-after.jpg";
 
 // Photos for the non-ceramic service pages: one beside the overview, and one on top of each inclusion card.
 const ABOUT_PHOTOS: Record<string, { src: string; alt: string }> = {
   basic: { src: foamPhoto, alt: "BMW covered in thick foam during a hand wash" },
+  headlight: { src: headlightPhoto, alt: "Headlight before and after restoration: yellowed and cloudy above, clear below" },
 };
 const GROUP_PHOTOS: Record<string, { src: string; alt: string }> = {
   Interior: { src: interiorPhoto, alt: "Freshly detailed Porsche Macan interior with cleaned seats and floor mats" },
@@ -31,7 +33,7 @@ const GROUP_PHOTOS: Record<string, { src: string; alt: string }> = {
 
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const service = SERVICES.find((s) => serviceSlug(s.id) === slug);
+  const service = ALL_SERVICES.find((s) => serviceSlug(s.id) === slug);
 
   if (!service) return <NotFound />;
 

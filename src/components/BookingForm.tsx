@@ -351,6 +351,7 @@ const BookingForm = ({ defaultPackage, onSuccess, confirmChecklist, contactPhone
                     <SelectItem value="basic">Basic Exterior Wash</SelectItem>
                     <SelectItem value="premium">Full Detail</SelectItem>
                     <SelectItem value="ceramic">Ceramic Coating</SelectItem>
+                    <SelectItem value="headlight">Headlight Restoration</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

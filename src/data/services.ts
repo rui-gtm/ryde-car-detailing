@@ -182,6 +182,46 @@ const raw: Omit<ServicePackage, "id">[] = [
 
 export const SERVICES: ServicePackage[] = raw.map((s) => ({ id: slugify(s.title), ...s }));
 
+// Single-purpose restoration jobs. Shown in their own section on /services (same card as the
+// core packages above), and each has its own detail page and booking option.
+const restorationRaw: Omit<ServicePackage, "id">[] = [
+  {
+    title: "Headlight Restoration",
+    packageValue: "headlight",
+    serviceType: "Mobile headlight restoration",
+    description: "Cloudy, yellowed headlights restored to a clear finish.",
+    price: 100,
+    duration: "1–2 hours",
+    bestFor: "Cars with foggy, yellowed or oxidised headlight lenses.",
+    features: [
+      "Deep clean of both headlight lenses",
+      "Sanding and polishing to remove haze and oxidation",
+      "Clearer, brighter-looking lenses",
+      "Protective finish applied once restored",
+    ],
+    recommendedExtras: ["Clay Bar Treatment", "Exterior Plastics Restoration", "Step 1 Paint Correction"],
+    faqs: [
+      {
+        q: "How long does headlight restoration take?",
+        a: "Usually 1–2 hours, depending on how cloudy or yellowed the lenses are.",
+      },
+      {
+        q: "Can you fix cracked headlights or moisture inside the housing?",
+        a: "No. Restoration improves cloudy, yellowed or oxidised lenses on the outside. It can't repair cracks or moisture inside the headlight.",
+      },
+      {
+        q: "Do I need to supply water or power?",
+        a: "Yes. We need access to a standard mains water supply and a power outlet close to the car. If that isn’t possible, contact us before booking.",
+      },
+    ],
+  },
+];
+
+export const RESTORATION_SERVICES: ServicePackage[] = restorationRaw.map((s) => ({ id: slugify(s.title), ...s }));
+
+// Every service that has its own detail page.
+export const ALL_SERVICES: ServicePackage[] = [...SERVICES, ...RESTORATION_SERVICES];
+
 // Every page/component that links to a service detail page derives the URL
 // slug from `service.id` (which is prefixed "service-" for schema @id use) —
 // this used to be a `(id) => id.replace(/^service-/, "")` redefined in 6

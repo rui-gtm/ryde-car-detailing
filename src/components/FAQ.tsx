@@ -42,7 +42,7 @@ const FAQ = ({
                   {item.q}
                   <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180" />
                 </summary>
-                <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{item.a}</p>
+                <p className="mt-3 max-w-2xl whitespace-pre-line text-base leading-relaxed text-muted-foreground">{item.a}</p>
               </details>
             ))}
           </div>

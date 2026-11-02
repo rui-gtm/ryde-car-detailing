@@ -4,7 +4,7 @@ import logo from "@/assets/logo-new.png";
 import { Button } from "@/components/ui/button";
 import { BUSINESS } from "@/data/business";
 import { SUBURBS } from "@/data/suburbs";
-import { SERVICES, serviceHref } from "@/data/services";
+import { SERVICES, RESTORATION_SERVICES, serviceHref } from "@/data/services";
 
 const linkClass = "text-sm text-white/60 transition-colors hover:text-white";
 const headingClass = "text-sm font-semibold text-white";
@@ -85,7 +85,7 @@ const Footer = () => {
 
           <div className="flex flex-col gap-3">
             <span className={headingClass}>Services</span>
-            {SERVICES.map((service) => (
+            {[...SERVICES, ...RESTORATION_SERVICES].map((service) => (
               <Link key={service.id} to={serviceHref(service.id)} className={linkClass}>
                 {service.title}
               </Link>
